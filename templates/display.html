@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Display</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<body>
+	<button onclick="switchControlMode()">Switch Control</button>
+	<button onclick="cutBase()">Cut Base</button>
+	<!-- <button onclick="csgSubtract()">Cut Base</button> -->
+	<!-- <button onclick="simplify()">Simplify Mesh</button> -->
+	<button onclick="exportToJson()">Export</button>
+	
+	
+	<script src="//cdn.rawgit.com/mrdoob/three.js/master/build/three.min.js"></script>
+	<script src="{{ url_for('static', filename='js/PLYLoader.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/Detector.js') }}"></script>
+	<!-- <script src="{{ url_for('static', filename='js/stats.min.js')}}"></script> -->
+	<script src="{{ url_for('static', filename='js/TrackballControls.js')}}"></script>
+	<script src="{{ url_for('static', filename='js/TransformControls.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/csg.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/ThreeCSG.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/SimplifyModifier.js') }}"></script>
+
+
+	<script type="text/javascript">
+		if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
+		var camera, scene, renderer, tfControl, tbControl;
+		var geometry, material, mesh;
+		var floorGeometry, floorMaterial, floorMesh;
+		var clicking = true;
+		var isTranslate = false;;
+	// $( document ).ready(function() {
+		init();
+		render();
+		animate();
+	// });
+
+
+	function init() {
+		container = document.createElement('div');
+		document.body.appendChild(container);
+
+	    //Renderer
+	    renderer = new THREE.WebGLRenderer( { antialias: true } );
+	    renderer.setSize( window.innerWidth, window.innerHeight );
+	    container.appendChild( renderer.domElement );	
+
+	    //Scene
+	    scene = new THREE.Scene();
+	    scene.background = new THREE.Color( 0x72645b );
+	    scene.add( new THREE.GridHelper( 25, 20 ) );
+
+	    //Floor
+	    floorGeometry = new THREE.BoxGeometry(20,100,20);
+	    floorMaterial = new THREE.MeshBasicMaterial( {color: 0x00ff00, opacity : 0.5, transparent: true, depthWrite:false} );
+	    floorMesh = new THREE.Mesh(floorGeometry, floorMaterial);
+	    floorMesh.position.set(0,-50,0);
+	    scene.add(floorMesh);
+
+	    //Camera
+	    camera = new THREE.PerspectiveCamera(60 , window.innerWidth / window.innerHeight, 1, 1000 );
+	    camera.position.set(0, 10, 10 );
+	    camera.lookAt(scene.position);
+
+	    //Controls
+	    tbControl = new THREE.TrackballControls( camera );
+	    tbControl.rotateSpeed = 0;
+	    tbControl.zoomSpeed = 1.2;
+	    tbControl.panSpeed = 0.8;
+	    tbControl.noZoom = false;
+	    tbControl.noPan = false;
+	    tbControl.staticMoving = true;
+	    tbControl.dynamicDampingFactor = 0.3;
+	    tbControl.keys = [ 65, 83, 68 ];
+	    tbControl.addEventListener( 'change', render );
+
+		tfControl = new THREE.TransformControls( camera, renderer.domElement );
+		tfControl.addEventListener( 'change', render );
+
+		//PLY file
+		{% if name %}
+
+		var loader = new THREE.PLYLoader();
+		loader.load( "{{ url_for('static', filename='model/' + name + '.ply')}}", function ( geometry ) {
+			console.log(geometry);
+			geometry.computeVertexNormals();
+			var meshCenter = geometry.boundingSphere.center;
+			var meshRadius = geometry.boundingSphere.radius;
+			var s = (meshRadius === 0 ? 1 : 1.0 / meshRadius) * 10;
+			var m = new THREE.Matrix4().set(
+ 			s, 0, 0, -s*meshCenter.x,
+ 			0, s , 0, -s*meshCenter.y,
+ 			0, 0, s, -s*meshCenter.z,
+ 			0, 0, 0, 1);
+			geometry.applyMatrix(m);
+
+			geometry = new THREE.Geometry().fromBufferGeometry( geometry );
+			material = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors} );
+			mesh = new THREE.Mesh( geometry, material );
+			scene.add( mesh );
+			tfControl.attach(mesh);
+			scene.add(tfControl);
+			tfControl.setMode("rotate");
+			tfControl.setSpace( tfControl.space = "local");
+		});
+
+		{% endif %}
+
+	    //Lights
+		var light = new THREE.DirectionalLight( 0xffffff, 1.5 );
+		light.position.set( 1, 1, 1 );
+		scene.add( light );
+		var light = new THREE.DirectionalLight( 0x002288 );
+		light.position.set( -1, -1, -1 );
+		scene.add( light );
+		var light = new THREE.AmbientLight( 0x222222 );
+		scene.add( light );
+
+	    document.addEventListener( 'mousedown', onMouseDown );
+	}
+
+	function animate() {
+
+		requestAnimationFrame(animate);
+		tbControl.update();
+	}
+
+
+	function render() {
+		tfControl.update();
+		renderer.render( scene, camera );
+	}
+
+	function onMouseDown(event){
+		event.preventDefault();
+		var mouse3D = new THREE.Vector3( ( event.clientX / window.innerWidth ) * 2 - 1,  -( event.clientY / window.innerHeight ) * 2 + 1,  0.5 ); 
+		var raycaster =  new THREE.Raycaster();                                        
+		raycaster.setFromCamera( mouse3D, camera );
+		var intersects = raycaster.intersectObjects(scene.children);
+		for ( var i = 0; i < intersects.length; i++ ) {
+			if(intersects[i].object.uuid == mesh.uuid){
+				if(clicking){
+					intersects[ i ].object.material.color.set( 0x96C0B7 );
+					clicking = !clicking;
+				}
+				else{
+					intersects[ i ].object.material.color.set( 0xff0000 );
+					clicking = !clicking;
+				}
+			}
+		}
+		render();
+		console.log(intersects);
+	}
+
+	function switchControlMode(){
+		isTranslate = !isTranslate;
+		if(isTranslate){
+			tfControl.setMode("translate");
+		}
+		else{
+			tfControl.setMode("rotate");
+		}
+	}
+
+	function csgSubtract(){
+		backGeometry(mesh);
+		backGeometry(floorMesh);
+
+		var mesh_bsp = new ThreeBSP(mesh);
+		var floorMesh_bsp = new ThreeBSP(floorMesh);
+		var result = mesh_bsp.subtract(floorMesh_bsp).toMesh();
+		mesh.geometry = result.geometry;
+		render();
+	}
+
+	function simplify(){
+		var modifer = new THREE.SimplifyModifier();
+		var simplified = modifer.modify( mesh.geometry, mesh.geometry.vertices.length * 0.5 | 0 );
+		console.log(mesh.geometry.vertices.length);
+		mesh.geometry = simplified;
+		console.log(mesh.geometry.vertices.length);
+		render();
+	}
+
+	function backGeometry(mesh){
+		mesh.updateMatrix();
+		mesh.geometry.applyMatrix( mesh.matrix );
+		mesh.matrix.identity();
+		mesh.position.set( 0, 0, 0 );
+		mesh.rotation.set( 0, 0, 0 );
+		mesh.scale.set( 1, 1, 1 );
+	}
+
+	function cutBase(){
+		// console.log(mesh.geometry);
+		backGeometry(mesh);
+		var vertices = mesh.geometry.vertices;
+		var vToDelete = [];
+		var collapsePoint=-1;
+		var min = 10000;
+		for (var i = 0; i <vertices.length; i++) {
+
+			if(vertices[i].y < 0){
+				vToDelete.push(i);
+			}
+			else {
+				if(collapsePoint == -1){
+					collapsePoint = i;
+					min = vertices[i].y-0;
+				}
+				else{
+					var current = vertices[i].y-0;
+					if(current < min){
+						collapsePoint = i;
+						min = current;
+					}
+				}
+			}
+		}
+		console.log(collapsePoint);
+		console.log(vToDelete);
+
+		if(collapsePoint!=-1){
+			vToDelete.forEach(function(element){
+				vertices[element] = vertices[collapsePoint]
+			});
+		}
+
+		// var faces = mesh.geometry.faces;
+		// var fToDelete = [];
+		// for (var i = 0; i <faces.length; i++) {
+		// 	if(contains(vToDelete, faces['a']) || contains(vToDelete, faces['b']) || contains(vToDelete, faces['c'])){
+		// 		fToDelete.push(i);
+		// 	}
+		// }
+
+		// for (var i = 0; i <vToDelete.length;i++){
+		// 	delete mesh.geometry.vertices[vToDelete[i]];
+		// }
+		// for (var i = 0; i <fToDelete.length;i++){
+		// 	delete mesh.geometry.faces[fToDelete[i]];
+		// }
+		// mesh.geometry.faces = mesh.geometry.faces.filter( function(a){ return a!== undefined });
+		// mesh.geometry.vertices = mesh.geometry.vertices.filter( function(a){ return a!== undefined });
+		mesh.geometry.elementsNeedUpdate = true;
+		render();
+	}
+
+	function exportToJson(){
+		backGeometry(mesh);
+		var json = mesh.geometry.toJSON();
+		console.log(json);
+	}
+
+	function contains(arr, element) {
+	    for (var i = 0; i < arr.length; i++) {
+	        if (arr[i] === element) {
+	            return true;
+	        }
+	    }
+	    return false;
+	}
+</script>
+
+</body>
+</html>
+
