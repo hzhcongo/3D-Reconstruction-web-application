@@ -4,15 +4,6 @@
 	<title>Display</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-</head>
-<body>
-	<button onclick="switchControlMode()">Switch Control</button>
-	<button onclick="cutBase()">Cut Base</button>
-	<!-- <button onclick="csgSubtract()">Cut Base</button> -->
-	<!-- <button onclick="simplify()">Simplify Mesh</button> -->
-	<button onclick="exportToJson()">Export</button>
-	
-	
 	<script src="//cdn.rawgit.com/mrdoob/three.js/master/build/three.min.js"></script>
 	<script src="{{ url_for('static', filename='js/PLYLoader.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/Detector.js') }}"></script>
@@ -22,7 +13,13 @@
 	<script src="{{ url_for('static', filename='js/csg.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/ThreeCSG.js') }}"></script>
 	<script src="{{ url_for('static', filename='js/SimplifyModifier.js') }}"></script>
-
+</head>
+<body>
+	<button onclick="switchControlMode()">Switch Control</button>
+	<button onclick="cutBase()">Cut Base</button>
+	<!-- <button onclick="csgSubtract()">Cut Base</button> -->
+	<!-- <button onclick="simplify()">Simplify Mesh</button> -->
+	<button onclick="exportToJson()">Export</button>
 
 	<script type="text/javascript">
 		if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
@@ -46,7 +43,7 @@
 	    //Renderer
 	    renderer = new THREE.WebGLRenderer( { antialias: true } );
 	    renderer.setSize( window.innerWidth, window.innerHeight );
-	    container.appendChild( renderer.domElement );	
+	    container.appendChild( renderer.domElement );
 
 	    //Scene
 	    scene = new THREE.Scene();
@@ -136,8 +133,8 @@
 
 	function onMouseDown(event){
 		event.preventDefault();
-		var mouse3D = new THREE.Vector3( ( event.clientX / window.innerWidth ) * 2 - 1,  -( event.clientY / window.innerHeight ) * 2 + 1,  0.5 ); 
-		var raycaster =  new THREE.Raycaster();                                        
+		var mouse3D = new THREE.Vector3( ( event.clientX / window.innerWidth ) * 2 - 1,  -( event.clientY / window.innerHeight ) * 2 + 1,  0.5 );
+		var raycaster =  new THREE.Raycaster();
 		raycaster.setFromCamera( mouse3D, camera );
 		var intersects = raycaster.intersectObjects(scene.children);
 		for ( var i = 0; i < intersects.length; i++ ) {
@@ -268,4 +265,3 @@
 
 </body>
 </html>
-

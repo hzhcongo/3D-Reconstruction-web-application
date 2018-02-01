@@ -1,0 +1,309 @@
+
+(base) C:\Users\faceb>d:
+
+(base) D:\>cd D:\FYP\3D_Virtualisation
+
+(base) D:\FYP\3D_Virtualisation>python -m SimpleHTTPServer
+Serving HTTP on 0.0.0.0 port 8000 ...
+127.0.0.1 - - [01/Feb/2018 15:04:59] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 15:04:59] code 404, message File not found
+127.0.0.1 - - [01/Feb/2018 15:04:59] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [01/Feb/2018 15:05:02] "GET /app.py HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 15:05:06] "GET /templates/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 15:05:08] "GET /templates/home.html HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 15:05:16] "GET /static/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 15:05:19] "GET /static/model/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 15:05:20] "GET /static/model/dolphins.ply HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 15:05:24] "GET /static/js/ HTTP/1.1" 200 -
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda2\lib\runpy.py", line 174, in _run_module_as_main
+    "__main__", fname, loader, pkg_name)
+
+
+(base) D:\FYP\3D_Virtualisation>conda install scikit-learn
+Solving environment: -Exception in thread Thread-1:
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda2\lib\threading.py", line 801, in __bootstrap_inner
+    self.run()
+  File "C:\ProgramData\Anaconda2\lib\threading.py", line 754, in run
+    self.__target(*self.__args, **self.__kwargs)
+  File "C:\ProgramData\Anaconda2\lib\site-packages\conda\common\io.py", line 292, in _start_spinning
+    self.fh.write('\b' * self._indicator_length)
+  File "C:\ProgramData\Anaconda2\lib\site-packages\colorama\ansitowin32.py", line 40, in write
+    self.__convertor.write(text)
+  File "C:\ProgramData\Anaconda2\lib\site-packages\colorama\ansitowin32.py", line 141, in write
+    self.write_and_convert(text)
+  File "C:\ProgramData\Anaconda2\lib\site-packages\colorama\ansitowin32.py", line 169, in write_and_convert
+    self.write_plain_text(text, cursor, len(text))
+  File "C:\ProgramData\Anaconda2\lib\site-packages\colorama\ansitowin32.py", line 174, in write_plain_text
+    self.wrapped.write(text[start:end])
+IOError: [Errno 0] Error
+
+done
+
+# All requested packages already installed.
+
+
+(base) D:\FYP\3D_Virtualisation>pip install -U scikit-learn
+Requirement already up-to-date: scikit-learn in c:\programdata\anaconda2\lib\site-packages
+
+(base) D:\FYP\3D_Virtualisation>pip search scikit-learn
+scikit-ci-addons (0.20.0)       - scikit-ci-addons is a command line tool and
+                                  a set of scripts useful to help drive the CI
+                                  of projects leveraging services like
+                                  Appveyor, CircleCI, or TravisCI.
+scikit-aero (0.1)               - Aeronautical engineering calculations in
+                                  Python.
+scikit-allel (1.1.9)            - A Python package for exploring and analysing
+                                  genetic variation data.
+AMLT-learn (0.2.9)              - Python classes for the AMLT course of the
+                                  Master in Artificial Intelligence (UPC)
+draw-and-learn (0.2)            - UNKNOWN
+scikit-beam (0.0.12)            - Data analysis tools for X-ray science
+scikit-bio (0.5.1)              - Data structures, algorithms and educational
+                                  resources for bioinformatics.
+scikit-build (0.6.1)            - Improved build system generator for Python C
+                                  extensions
+scikit-chainer (0.4.2)          - scikit-learn like interface for chainer
+scikit-chem (0.0.6)             - A set of python modules for cheminformatics
+scikit-ci (0.15.0)              - scikit-ci enables a centralized and simpler
+                                  CI configuration for Python extensions.
+scikit-cmeans (0.1)             - Flexible, extensible fuzzy c-means
+                                  clustering in python.
+scikit-dsp-comm (0.0.4)         - DSP and Comm package.
+scikit-commpy (0.3.0)           - Digital Communication Algorithms with Python
+scikit-credit (0.0.23)          - scikit-credit for qudian
+scikit-criteria (0.2.9)         - Scikit-Criteria is a collections of
+                                  algorithms, methods and
+scikit-cuda (0.5.1)             - Python interface to GPU-powered libraries
+scikit-data (0.1.3)             - The propose of this library is to allow the
+                                  data analysis process more easy and
+                                  automatic.
+scikit-dataaccess (1.9.10)      - Scikit Data Access Package for accessing
+                                  scientific data sets.
+scikit-datasets (0.1.8)         - Scikit-learn-compatible datasets
+scikit-discovery (0.9.9.post3)  - A package for Computer-Aided Discovery
+scikit-dsdp (0.0.1)             - Python interface to DSDP semidefinite
+                                  programming library
+scikit-small-ensemble (0.0.2)   - scikit-small-ensemble is a library to make
+                                  your ensemble models(Random Forest
+                                  Classifier, etc) have a small memory
+                                  footprint/usage.
+scikit-ext (0.1.9)              - Various scikit-learn extensions
+scikit-fem (0.1.3)              - Simple finite element assemblers
+scikit-fmm (0.0.9)              - An extension module implementing the fast
+                                  marching method
+scikit-fusion (0.2.1)           - A Python module for data fusion built on top
+                                  of factorized models.
+scikit-fuzzy (0.3.1)            - Fuzzy logic toolkit for SciPy
+scikit-garden (0.1.3)           - A garden of scikit-learn compatible trees
+scikit-geodesic (1.1)           - A SciPy tool for computing geodesics in an
+                                  isotropic Riemannian manifold of arbitrary
+                                  dimension. It implements the Birkhoff curve
+                                  shortening algorithm for finding global
+                                  geodesics.
+geospatial-learn (0.129)        - geospatial-learn is a Python module for
+                                  using scikit-learn andxgb models with geo-
+                                  spatial data, chiefly raster and
+                                  vectorformats.
+scikit-gof (0.1.3)              - Variations on goodness of fit tests for
+                                  SciPy.
+scikit-gpuppy (0.9.3)           - Gaussian Process Uncertainty Propagation
+                                  with PYthon
+scikit-graph (0.1a0)            - A collection of tools and algorithms to
+                                  augment those found in Scipy's csgraph
+                                  module
+scikit-groups (0.8)             - An package for constructing finite abelian
+                                  groups
+scikit-gstat (0.1.6)            - Geostatistical expansion in the scipy style
+scikit-hep (0.1.1)              - Toolset of interfaces and tools for Particle
+                                  Physics.
+scikit-image (0.13.1)           - Image processing routines for SciPy
+  INSTALLED: 0.13.0
+  LATEST:    0.13.1
+imbalanced-learn (0.3.2)        - Toolbox for imbalanced dataset in machine
+                                  learning.
+scikit-intervals (0.1.2)        - handling intervals calculation in python
+scikit-keras (0.1.3)            - Scikit-learn-compatible Keras models
+scikit-kinematics (0.7.3)       - Python utilites for movements in 3d space
+learn (1.0.0)                   - A simple printer of nested lines
+Learn-Tibetan (0.0.1.dev1)      - Quiz for learn tibetan
+metric-learn (0.3.0)            - Python implementations of metric learning
+                                  algorithms
+sparkit-learn (0.2.6)           - Scikit-learn on PySpark
+umap-learn (0.2.0)              - Uniform Manifold Approximation and
+                                  Projection
+scikit-learn (0.19.1)           - A set of python modules for machine learning
+                                  and data mining
+  INSTALLED: 0.19.1 (latest)
+scikit-learn_runnr (0.18.dev1)  - A set of python modules for machine learning
+                                  and data mining
+scikit-luc (1.9)                - Science-Kit developed by Luc Giffon for Luc
+                                  Giffon during his PhD thesis.
+scikit-MDR (0.4.4)              - Multifactor Dimensionality Reduction (MDR)
+scikit-metrics (0.1.0)          - Scikit-learn-compatible metrics
+scikit-misc (0.1.1)             - Miscellaneous tools for scientific
+                                  computing.
+scikit-moletools (0.1)          - Scientific tools for developing, rapid-
+                                  prototyping, and analyzing molecular models
+                                  from structures to simulations.
+scikit-monaco (0.2.1)           - Python modules for Monte Carlo integration
+scikit-multilearn (0.0.5)       - A set of python modules for multi-label
+                                  classification
+scikit-nano (0.3.21)            - Python toolkit for generating and analyzing
+                                  nanostructure data
+nester_learn_1 (1.0.0)          - A simple printer of nested lists
+scikit-neuralnetwork (0.7)      - Deep neural networks without the learning
+                                  cliff! A wrapper library compatible with
+                                  scikit-learn.
+scikit-optimize (0.5)           - Sequential model-based optimization toolbox.
+scikit-otree (0.5)              - oTree integration to the scientific Python
+                                  Stack
+scikit-plot (0.3.3)             - An intuitive library to add plotting
+                                  functionality to scikit-learn objects.
+scikit-posthocs (0.3.3)         - Statistical post-hoc analysis and outlier
+                                  detection algorithms
+scikit-procrustes (0.1)         - Package of solvers for the Orthogonal
+                                  Procrustes Problem
+Scikit-Qfit (0.1.4)             - Fit gradient orthogonal Q-polynomials to 2D
+                                  data
+scikit-reflectometry (0.1)      - Scikit Reflectometry package
+scikit-rf (0.14.5)              - Object Oriented Microwave Engineering
+scikit-ribo (0.2.4b1)           - A scikit framework for joint analysis of
+                                  Riboseq and RNAseq data
+scikit-stack (3.0)              - skstack for combining pattern classifiers
+scikit-tensor (0.1)             - Python module for multilinear algebra and
+                                  tensor factorizations
+scikit-viz (0.1)                - Convenient plot templates for scikit learn
+scikit-vi (0.1)                 - Scikit providing Virtual Instruments
+scikit-splearn (1.0.1)          - Python module for spectral learning of
+                                  weighted automata
+scikit-xray (0.0.5.post0)       - Data analysis tools for X-ray science
+scikit-surprise (1.0.5)         - An easy-to-use library for recommender
+                                  systems.
+scikit-video (1.1.10)           - Video Processing in Python
+scikit-survival (0.5)           - Survival analysis built on top of scikit-
+                                  learn
+scikit-visualizations (0.1.5)   - Scikit-learn-compatible visualizations
+scikit-sparse (0.4.3)           - Scikits sparse matrix package
+scikit-umfpack (0.3.1)          - Python interface to UMFPACK sparse direct
+                                  solver.
+scikit-traveltime (0.0.7)       - Traveltime computation based on the fast
+                                  marching method for solving the eikonal
+                                  equation
+scikit-ued (0.5.0)              - Collection of algorithms and functions for
+                                  ultrafast electron diffraction
+scikit-spectra (0.3.2.2)        - Spectroscopy in Python built on Pandas.
+scikit-sound (0.1.8)            - Python utilites for working with sound
+                                  signals
+scikit-sos (0.1.10)             - A scikit-learn compatible implementation of
+                                  Stochastic Outlier Selection (SOS) for
+                                  detecting outliers.
+scikit-vis (0.0.2.dev12)        - stunning, one-line visualizations for
+                                  scikit-learn
+tictactoe_learn (0.0.1)         - A learning program that plays with the users
+                                  and depends on their inputs to learn optimal
+                                  strategy in the classic game of tic-tac-toe.
+v_learn_nester (1.4.0)          - A simple printer of nested lists
+
+(base) D:\FYP\3D_Virtualisation>import sklearn
+'import' is not recognized as an internal or external command,
+operable program or batch file.
+
+(base) D:\FYP\3D_Virtualisation>conda app.py
+usage: conda [-h] [-V] command ...
+conda: error: argument command: invalid choice: u'app.py' (choose from u'clean', u'config', u'create', u'help', u'info', u'install', u'list', u'package', u'remove', u'uninstall', u'search', u'update', u'upgrade')
+
+(base) D:\FYP\3D_Virtualisation>conda create --name environmentName python=3 pandas numpy
+Solving environment: failed
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda2\Scripts\conda-script.py", line 10, in <module>
+    sys.exit(main())
+  File "C:\ProgramData\Anaconda2\lib\site-packages\conda\cli\main.py", line 126, in main
+    return conda_exception_handler(_main, *args)
+  File "C:\ProgramData\Anaconda2\lib\site-packages\conda\exceptions.py", line 1008, in conda_exception_handler
+    return_value = exception_handler(func, *args, **kwargs)
+  File "C:\ProgramData\Anaconda2\lib\site-packages\conda\exceptions.py", line 775, in __call__
+    return self.handle_exception(exc_val, exc_tb)
+  File "C:\ProgramData\Anaconda2\lib\site-packages\conda\exceptions.py", line 811, in handle_exception
+    self._print_conda_exception(CondaError("KeyboardInterrupt"), _format_exc())
+  File "C:\ProgramData\Anaconda2\lib\site-packages\conda\exceptions.py", line 762, in _format_exc
+    formatted_exception = format_exception(exc_type, exc_val, exc_tb)
+  File "C:\ProgramData\Anaconda2\lib\traceback.py", line 141, in format_exception
+    list = list + format_tb(tb, limit)
+  File "C:\ProgramData\Anaconda2\lib\traceback.py", line 76, in format_tb
+    return format_list(extract_tb(tb, limit))
+  File "C:\ProgramData\Anaconda2\lib\traceback.py", line 101, in extract_tb
+    line = linecache.getline(filename, lineno, f.f_globals)
+  File "C:\ProgramData\Anaconda2\lib\linecache.py", line 14, in getline
+    lines = getlines(filename, module_globals)
+  File "C:\ProgramData\Anaconda2\lib\linecache.py", line 41, in getlines
+    return updatecache(filename, module_globals)
+  File "C:\ProgramData\Anaconda2\lib\linecache.py", line 131, in updatecache
+    with open(fullname, 'rU') as fp:
+KeyboardInterrupt
+Terminate batch job (Y/N)? dn
+Terminate batch job (Y/N)? n
+
+(base) D:\FYP\3D_Virtualisation>
+
+(base) D:\FYP\3D_Virtualisation>
+
+(base) D:\FYP\3D_Virtualisation>source activate base
+'source' is not recognized as an internal or external command,
+operable program or batch file.
+
+(base) D:\FYP\3D_Virtualisation>activate base
+
+(base) D:\FYP\3D_Virtualisation>python app.py
+Traceback (most recent call last):
+  File "app.py", line 2, in <module>
+    from flask_bootstrap import Bootstrap
+ImportError: No module named flask_bootstrap
+
+(base) D:\FYP\3D_Virtualisation>pip install flask_bootstrap
+Collecting flask_bootstrap
+Requirement already satisfied: Flask>=0.8 in c:\programdata\anaconda2\lib\site-packages (from flask_bootstrap)
+Collecting dominate (from flask_bootstrap)
+Collecting visitor (from flask_bootstrap)
+Requirement already satisfied: Werkzeug>=0.7 in c:\programdata\anaconda2\lib\site-packages (from Flask>=0.8->flask_bootstrap)
+Requirement already satisfied: Jinja2>=2.4 in c:\programdata\anaconda2\lib\site-packages (from Flask>=0.8->flask_bootstrap)
+Requirement already satisfied: itsdangerous>=0.21 in c:\programdata\anaconda2\lib\site-packages (from Flask>=0.8->flask_bootstrap)
+Requirement already satisfied: click>=2.0 in c:\programdata\anaconda2\lib\site-packages (from Flask>=0.8->flask_bootstrap)
+Requirement already satisfied: MarkupSafe>=0.23 in c:\programdata\anaconda2\lib\site-packages (from Jinja2>=2.4->Flask>=0.8->flask_bootstrap)
+Installing collected packages: dominate, visitor, flask-bootstrap
+Successfully installed dominate-2.3.1 flask-bootstrap-3.3.7.1 visitor-0.1.3
+
+(base) D:\FYP\3D_Virtualisation>python app.py
+Traceback (most recent call last):
+  File "app.py", line 8, in <module>
+    import osmbundler
+  File "D:\FYP\3D_Virtualisation\osmbundler\__init__.py", line 5, in <module>
+    from PIL import Image
+  File "C:\ProgramData\Anaconda2\lib\site-packages\PIL\Image.py", line 56, in <module>
+    from . import _imaging as core
+ImportError: DLL load failed: The specified module could not be found.
+
+(base) D:\FYP\3D_Virtualisation>python -m SimpleHTTPServer
+Serving HTTP on 0.0.0.0 port 8000 ...
+127.0.0.1 - - [01/Feb/2018 15:32:49] "GET /templates/home.html HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 15:32:49] code 404, message File not found
+127.0.0.1 - - [01/Feb/2018 15:32:49] "GET /favicon.ico HTTP/1.1" 404 -
+Traceback (most recent call last):
+  File "C:\ProgramData\Anaconda2\lib\runpy.py", line 174, in _run_module_as_main
+    "__main__", fname, loader, pkg_name)
+  File "C:\ProgramData\Anaconda2\lib\runpy.py", line 72, in _run_code
+    exec code in run_globals
+  File "C:\ProgramData\Anaconda2\lib\SimpleHTTPServer.py", line 235, in <module>
+    test()
+  File "C:\ProgramData\Anaconda2\lib\SimpleHTTPServer.py", line 231, in test
+    BaseHTTPServer.test(HandlerClass, ServerClass)
+  File "C:\ProgramData\Anaconda2\lib\BaseHTTPServer.py", line 610, in test
+    httpd.serve_forever()
+  File "C:\ProgramData\Anaconda2\lib\SocketServer.py", line 231, in serve_forever
+    poll_interval)
+  File "C:\ProgramData\Anaconda2\lib\SocketServer.py", line 150, in _eintr_retry
+    return func(*args)
+KeyboardInterrupt
+
+(base) D:\FYP\3D_Virtualisation>

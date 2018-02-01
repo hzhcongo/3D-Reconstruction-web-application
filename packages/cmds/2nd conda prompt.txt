@@ -1,0 +1,251 @@
+(C:\ProgramData\Anaconda2) C:\Users\faceb\OneDrive - Nanyang Technological University\FYP\3d-recon\packages>conda install --file exported_packages
+Fetching package metadata .............
+
+PackageNotFoundError: Packages missing in current channels:
+
+  - flask-bootstrap 3.2.0.2 py27_0
+
+We have searched for the packages in the following channels:
+
+  - https://repo.continuum.io/pkgs/main/win-64
+  - https://repo.continuum.io/pkgs/main/noarch
+  - https://repo.continuum.io/pkgs/free/win-64
+  - https://repo.continuum.io/pkgs/free/noarch
+  - https://repo.continuum.io/pkgs/r/win-64
+  - https://repo.continuum.io/pkgs/r/noarch
+  - https://repo.continuum.io/pkgs/pro/win-64
+  - https://repo.continuum.io/pkgs/pro/noarch
+  - https://repo.continuum.io/pkgs/msys2/win-64
+  - https://repo.continuum.io/pkgs/msys2/noarch
+
+
+
+(C:\ProgramData\Anaconda2) C:\Users\faceb\OneDrive - Nanyang Technological University\FYP\3d-recon\packages>conda install --file exported_packages
+Fetching package metadata .............
+
+PackageNotFoundError: Packages missing in current channels:
+
+  - flask-bootstrap 3.2.0.2 py27_0
+
+We have searched for the packages in the following channels:
+
+  - https://repo.continuum.io/pkgs/main/win-64
+  - https://repo.continuum.io/pkgs/main/noarch
+  - https://repo.continuum.io/pkgs/free/win-64
+  - https://repo.continuum.io/pkgs/free/noarch
+  - https://repo.continuum.io/pkgs/r/win-64
+  - https://repo.continuum.io/pkgs/r/noarch
+  - https://repo.continuum.io/pkgs/pro/win-64
+  - https://repo.continuum.io/pkgs/pro/noarch
+  - https://repo.continuum.io/pkgs/msys2/win-64
+  - https://repo.continuum.io/pkgs/msys2/noarch
+
+
+
+(C:\ProgramData\Anaconda2) C:\Users\faceb\OneDrive - Nanyang Technological University\FYP\3d-recon\packages>install -r requirements.txt
+'install' is not recognized as an internal or external command,
+operable program or batch file.
+
+(C:\ProgramData\Anaconda2) C:\Users\faceb\OneDrive - Nanyang Technological University\FYP\3d-recon\packages>env1/bin/pip freeze > requirements.txt
+'env1' is not recognized as an internal or external command,
+operable program or batch file.
+
+(C:\ProgramData\Anaconda2) C:\Users\faceb\OneDrive - Nanyang Technological University\FYP\3d-recon\packages>pip freeze > requirements.txt
+
+(C:\ProgramData\Anaconda2) C:\Users\faceb\OneDrive - Nanyang Technological University\FYP\3d-recon\packages>pip install -r requirements.txt
+Requirement already satisfied: alabaster==0.7.10 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 1))
+Requirement already satisfied: anaconda-client==1.6.5 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 2))
+Requirement already satisfied: anaconda-navigator==1.6.9 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 3))
+Requirement already satisfied: anaconda-project==0.8.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 4))
+Requirement already satisfied: asn1crypto==0.22.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 5))
+Requirement already satisfied: astroid==1.5.3 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 6))
+Requirement already satisfied: astropy==2.0.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 7))
+Requirement already satisfied: babel==2.5.0 in c:\programdata\anaconda2\lib\site-packages\babel-2.5.0-py2.7.egg (from -r requirements.txt (line 8))
+Requirement already satisfied: backports-abc==0.5 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 9))
+Requirement already satisfied: backports.functools-lru-cache==1.4 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 10))
+Requirement already satisfied: backports.shutil-get-terminal-size==1.0.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 11))
+Requirement already satisfied: backports.ssl-match-hostname==3.5.0.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 12))
+Requirement already satisfied: beautifulsoup4==4.6.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 13))
+Requirement already satisfied: bitarray==0.8.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 14))
+Requirement already satisfied: bkcharts==0.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 15))
+Requirement already satisfied: blaze==0.11.3 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 16))
+Requirement already satisfied: bleach==2.0.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 17))
+Requirement already satisfied: bokeh==0.12.10 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 18))
+Requirement already satisfied: boto==2.48.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 19))
+Requirement already satisfied: Bottleneck==1.2.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 20))
+Requirement already satisfied: CacheControl==0.12.3 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 21))
+Requirement already satisfied: cdecimal==2.3 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 22))
+Requirement already satisfied: certifi==2017.7.27.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 23))
+Requirement already satisfied: cffi==1.10.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 24))
+Requirement already satisfied: chardet==3.0.4 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 25))
+Requirement already satisfied: click==6.7 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 26))
+Requirement already satisfied: cloudpickle==0.4.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 27))
+Requirement already satisfied: clyent==1.2.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 28))
+Requirement already satisfied: colorama==0.3.9 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 29))
+Requirement already satisfied: comtypes==1.1.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 30))
+Requirement already satisfied: conda==4.3.30 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 31))
+Requirement already satisfied: conda-build==3.0.27 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 32))
+Requirement already satisfied: conda-verify==2.0.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 33))
+Requirement already satisfied: configparser==3.5.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 34))
+Requirement already satisfied: contextlib2==0.5.5 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 35))
+Requirement already satisfied: cryptography==2.0.3 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 36))
+Requirement already satisfied: cycler==0.10.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 37))
+Requirement already satisfied: Cython==0.26.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 38))
+Requirement already satisfied: cytoolz==0.8.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 39))
+Requirement already satisfied: dask==0.15.3 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 40))
+Requirement already satisfied: datashape==0.5.4 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 41))
+Requirement already satisfied: decorator==4.1.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 42))
+Requirement already satisfied: distlib==0.2.5 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 43))
+Requirement already satisfied: distributed==1.19.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 44))
+Requirement already satisfied: docutils==0.14 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 45))
+Requirement already satisfied: entrypoints==0.2.3 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 46))
+Requirement already satisfied: enum34==1.1.6 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 47))
+Requirement already satisfied: et-xmlfile==1.0.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 48))
+Requirement already satisfied: fastcache==1.0.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 49))
+Requirement already satisfied: filelock==2.0.12 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 50))
+Requirement already satisfied: Flask==0.12.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 51))
+Requirement already satisfied: Flask-Cors==3.0.3 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 52))
+Requirement already satisfied: funcsigs==1.0.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 53))
+Requirement already satisfied: functools32==3.2.3.post2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 54))
+Requirement already satisfied: futures==3.1.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 55))
+Requirement already satisfied: gevent==1.2.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 56))
+Requirement already satisfied: glob2==0.5 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 57))
+Requirement already satisfied: greenlet==0.4.12 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 58))
+Requirement already satisfied: grin==1.2.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 59))
+Requirement already satisfied: h5py==2.7.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 60))
+Requirement already satisfied: heapdict==1.0.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 61))
+Requirement already satisfied: html5lib==0.999999999 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 62))
+Requirement already satisfied: idna==2.6 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 63))
+Requirement already satisfied: imageio==2.2.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 64))
+Requirement already satisfied: imagesize==0.7.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 65))
+Requirement already satisfied: ipaddress==1.0.18 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 66))
+Requirement already satisfied: ipykernel==4.6.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 67))
+Requirement already satisfied: ipython==5.4.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 68))
+Requirement already satisfied: ipython-genutils==0.2.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 69))
+Requirement already satisfied: ipywidgets==7.0.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 70))
+Requirement already satisfied: isort==4.2.15 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 71))
+Requirement already satisfied: itsdangerous==0.24 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 72))
+Requirement already satisfied: jdcal==1.3 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 73))
+Requirement already satisfied: jedi==0.10.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 74))
+Requirement already satisfied: Jinja2==2.9.6 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 75))
+Requirement already satisfied: jsonschema==2.6.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 76))
+Requirement already satisfied: jupyter-client==5.1.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 77))
+Requirement already satisfied: jupyter-console==5.2.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 78))
+Requirement already satisfied: jupyter-core==4.3.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 79))
+Requirement already satisfied: jupyterlab==0.27.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 80))
+Requirement already satisfied: jupyterlab-launcher==0.4.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 81))
+Requirement already satisfied: lazy-object-proxy==1.3.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 82))
+Requirement already satisfied: llvmlite==0.20.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 83))
+Requirement already satisfied: locket==0.2.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 84))
+Requirement already satisfied: lockfile==0.12.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 85))
+Requirement already satisfied: lxml==4.1.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 86))
+Requirement already satisfied: MarkupSafe==1.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 87))
+Requirement already satisfied: matplotlib==2.1.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 88))
+Requirement already satisfied: mccabe==0.6.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 89))
+Requirement already satisfied: menuinst==1.4.10 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 90))
+Requirement already satisfied: mistune==0.7.4 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 91))
+Requirement already satisfied: mpmath==0.19 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 92))
+Requirement already satisfied: msgpack-python==0.4.8 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 93))
+Requirement already satisfied: multipledispatch==0.4.9 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 94))
+Requirement already satisfied: navigator-updater==0.1.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 95))
+Requirement already satisfied: nbconvert==5.3.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 96))
+Requirement already satisfied: nbformat==4.4.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 97))
+Requirement already satisfied: networkx==2.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 98))
+Requirement already satisfied: nltk==3.2.4 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 99))
+Requirement already satisfied: nose==1.3.7 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 100))
+Requirement already satisfied: notebook==5.0.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 101))
+Requirement already satisfied: numba==0.35.0+10.g143f70e.dirty in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 102))
+Requirement already satisfied: numexpr==2.6.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 103))
+Requirement already satisfied: numpy==1.13.3 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 104))
+Requirement already satisfied: numpydoc==0.7.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 105))
+Requirement already satisfied: odo==0.5.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 106))
+Requirement already satisfied: olefile==0.44 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 107))
+Requirement already satisfied: openpyxl==2.4.8 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 108))
+Requirement already satisfied: packaging==16.8 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 109))
+Requirement already satisfied: pandas==0.20.3 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 110))
+Requirement already satisfied: pandocfilters==1.4.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 111))
+Requirement already satisfied: partd==0.3.8 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 112))
+Requirement already satisfied: path.py==10.3.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 113))
+Requirement already satisfied: pathlib2==2.3.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 114))
+Requirement already satisfied: patsy==0.4.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 115))
+Requirement already satisfied: pep8==1.7.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 116))
+Requirement already satisfied: pickleshare==0.7.4 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 117))
+Requirement already satisfied: Pillow==4.2.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 118))
+Requirement already satisfied: pkginfo==1.4.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 119))
+Requirement already satisfied: ply==3.10 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 120))
+Requirement already satisfied: progress==1.3 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 121))
+Requirement already satisfied: prompt-toolkit==1.0.15 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 122))
+Requirement already satisfied: psutil==5.4.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 123))
+Requirement already satisfied: py==1.4.34 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 124))
+Requirement already satisfied: pycodestyle==2.3.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 125))
+Requirement already satisfied: pycosat==0.6.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 126))
+Requirement already satisfied: pycparser==2.18 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 127))
+Requirement already satisfied: pycrypto==2.6.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 128))
+Requirement already satisfied: pycurl==7.43.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 129))
+Requirement already satisfied: pyflakes==1.6.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 130))
+Requirement already satisfied: Pygments==2.2.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 131))
+Requirement already satisfied: pylint==1.7.4 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 132))
+Requirement already satisfied: pyodbc==4.0.17 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 133))
+Requirement already satisfied: pyOpenSSL==17.2.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 134))
+Requirement already satisfied: pyparsing==2.2.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 135))
+Requirement already satisfied: PySocks==1.6.7 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 136))
+Requirement already satisfied: pytest==3.2.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 137))
+Requirement already satisfied: python-dateutil==2.6.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 138))
+Requirement already satisfied: pytz==2017.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 139))
+Requirement already satisfied: PyWavelets==0.5.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 140))
+Requirement already satisfied: pywin32==221 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 141))
+Requirement already satisfied: PyYAML==3.12 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 142))
+Requirement already satisfied: pyzmq==16.0.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 143))
+Requirement already satisfied: QtAwesome==0.4.4 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 144))
+Requirement already satisfied: qtconsole==4.3.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 145))
+Requirement already satisfied: QtPy==1.3.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 146))
+Requirement already satisfied: requests==2.18.4 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 147))
+Requirement already satisfied: rope==0.10.5 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 148))
+Requirement already satisfied: ruamel-yaml==0.11.14 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 149))
+Requirement already satisfied: scandir==1.6 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 150))
+Requirement already satisfied: scikit-image==0.13.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 151))
+Requirement already satisfied: scikit-learn==0.19.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 152))
+Requirement already satisfied: scipy==0.19.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 153))
+Requirement already satisfied: seaborn==0.8 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 154))
+Requirement already satisfied: simplegeneric==0.8.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 155))
+Requirement already satisfied: singledispatch==3.4.0.3 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 156))
+Requirement already satisfied: six==1.11.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 157))
+Requirement already satisfied: snowballstemmer==1.2.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 158))
+Requirement already satisfied: sortedcollections==0.5.3 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 159))
+Requirement already satisfied: sortedcontainers==1.5.7 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 160))
+Requirement already satisfied: Sphinx==1.6.3 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 161))
+Requirement already satisfied: sphinxcontrib-websupport==1.0.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 162))
+Requirement already satisfied: spyder==3.2.4 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 163))
+Requirement already satisfied: SQLAlchemy==1.1.13 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 164))
+Requirement already satisfied: statsmodels==0.8.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 165))
+Requirement already satisfied: subprocess32==3.2.7 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 166))
+Requirement already satisfied: sympy==1.1.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 167))
+Requirement already satisfied: tables==3.4.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 168))
+Requirement already satisfied: tblib==1.3.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 169))
+Requirement already satisfied: testpath==0.3.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 170))
+Requirement already satisfied: toolz==0.8.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 171))
+Requirement already satisfied: tornado==4.5.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 172))
+Requirement already satisfied: traitlets==4.3.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 173))
+Requirement already satisfied: typing==3.6.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 174))
+Requirement already satisfied: unicodecsv==0.14.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 175))
+Requirement already satisfied: urllib3==1.22 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 176))
+Requirement already satisfied: wcwidth==0.1.7 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 177))
+Requirement already satisfied: webencodings==0.5.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 178))
+Requirement already satisfied: Werkzeug==0.12.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 179))
+Requirement already satisfied: widgetsnbextension==3.0.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 180))
+Requirement already satisfied: win-inet-pton==1.0.1 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 181))
+Requirement already satisfied: win-unicode-console==0.5 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 182))
+Requirement already satisfied: wincertstore==0.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 183))
+Requirement already satisfied: wrapt==1.10.11 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 184))
+Requirement already satisfied: xlrd==1.1.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 185))
+Requirement already satisfied: XlsxWriter==1.0.2 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 186))
+Requirement already satisfied: xlwings==0.11.4 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 187))
+Requirement already satisfied: xlwt==1.3.0 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 188))
+Requirement already satisfied: zict==0.1.3 in c:\programdata\anaconda2\lib\site-packages (from -r requirements.txt (line 189))
+Collecting argparse>=1.1 (from grin==1.2.1->-r requirements.txt (line 59))
+  Downloading argparse-1.4.0-py2.py3-none-any.whl
+Requirement already satisfied: setuptools>=18.5 in c:\programdata\anaconda2\lib\site-packages (from html5lib==0.999999999->-r requirements.txt (line 62))
+Installing collected packages: argparse
+Successfully installed argparse-1.4.0
+
+numba==0.35.0+0.ge79330a.dirty

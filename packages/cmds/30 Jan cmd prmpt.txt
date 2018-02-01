@@ -1,0 +1,110 @@
+Microsoft Windows [Version 10.0.16299.192]
+(c) 2017 Microsoft Corporation. All rights reserved.
+
+C:\Users\faceb>pip install Flask
+Requirement already satisfied: Flask in c:\python27\lib\site-packages
+Requirement already satisfied: click>=2.0 in c:\python27\lib\site-packages (from Flask)
+Requirement already satisfied: Werkzeug>=0.7 in c:\python27\lib\site-packages (from Flask)
+Requirement already satisfied: Jinja2>=2.4 in c:\python27\lib\site-packages (from Flask)
+Requirement already satisfied: itsdangerous>=0.21 in c:\python27\lib\site-packages (from Flask)
+Requirement already satisfied: MarkupSafe>=0.23 in c:\python27\lib\site-packages (from Jinja2>=2.4->Flask)
+
+C:\Users\faceb>cd C:\Users\faceb\OneDrive - Nanyang Technological University\FYP\3d-recon
+
+C:\Users\faceb\OneDrive - Nanyang Technological University\FYP\3d-recon>app.py
+Traceback (most recent call last):
+  File "C:\Users\faceb\OneDrive - Nanyang Technological University\FYP\3d-recon\app.py", line 2, in <module>
+    from flask_bootstrap import Bootstrap
+ImportError: No module named flask_bootstrap
+
+C:\Users\faceb\OneDrive - Nanyang Technological University\FYP\3d-recon>pip install flask-bootstrap
+Collecting flask-bootstrap
+  Downloading Flask-Bootstrap-3.3.7.1.tar.gz (456kB)
+    100% |################################| 460kB 673kB/s
+Requirement already satisfied: Flask>=0.8 in c:\python27\lib\site-packages (from flask-bootstrap)
+Collecting dominate (from flask-bootstrap)
+  Downloading dominate-2.3.1.tar.gz
+Collecting visitor (from flask-bootstrap)
+  Downloading visitor-0.1.3.tar.gz
+Requirement already satisfied: click>=2.0 in c:\python27\lib\site-packages (from Flask>=0.8->flask-bootstrap)
+Requirement already satisfied: Werkzeug>=0.7 in c:\python27\lib\site-packages (from Flask>=0.8->flask-bootstrap)
+Requirement already satisfied: Jinja2>=2.4 in c:\python27\lib\site-packages (from Flask>=0.8->flask-bootstrap)
+Requirement already satisfied: itsdangerous>=0.21 in c:\python27\lib\site-packages (from Flask>=0.8->flask-bootstrap)
+Requirement already satisfied: MarkupSafe>=0.23 in c:\python27\lib\site-packages (from Jinja2>=2.4->Flask>=0.8->flask-bootstrap)
+Building wheels for collected packages: flask-bootstrap, dominate, visitor
+  Running setup.py bdist_wheel for flask-bootstrap ... done
+  Stored in directory: C:\Users\faceb\AppData\Local\pip\Cache\wheels\45\79\97\ec72a7807d2055114e1291529719be2e00571b1c27167209d7
+  Running setup.py bdist_wheel for dominate ... done
+  Stored in directory: C:\Users\faceb\AppData\Local\pip\Cache\wheels\cc\fa\98\d9406331e9f3128e30238191eb899169a69a5a24b43d4d08e3
+  Running setup.py bdist_wheel for visitor ... done
+  Stored in directory: C:\Users\faceb\AppData\Local\pip\Cache\wheels\8e\5e\41\c0f515d39b38d492db6d7c12fc4d027385a76fb01aebc9c2b3
+Successfully built flask-bootstrap dominate visitor
+Installing collected packages: dominate, visitor, flask-bootstrap
+Successfully installed dominate-2.3.1 flask-bootstrap-3.3.7.1 visitor-0.1.3
+
+C:\Users\faceb\OneDrive - Nanyang Technological University\FYP\3d-recon>app.py
+Traceback (most recent call last):
+  File "C:\Users\faceb\OneDrive - Nanyang Technological University\FYP\3d-recon\app.py", line 8, in <module>
+    import osmbundler
+  File "C:\Users\faceb\OneDrive - Nanyang Technological University\FYP\3d-recon\osmbundler\__init__.py", line 5, in <module>
+    from PIL import Image
+ImportError: No module named PIL
+
+C:\Users\faceb\OneDrive - Nanyang Technological University\FYP\3d-recon>python -V
+Python 2.7.13
+
+C:\Users\faceb\OneDrive - Nanyang Technological University\FYP\3d-recon>python -m SimpleHTTPServer
+Serving HTTP on 0.0.0.0 port 8000 ...
+127.0.0.1 - - [30/Jan/2018 13:23:12] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2018 13:23:13] code 404, message File not found
+127.0.0.1 - - [30/Jan/2018 13:23:13] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [30/Jan/2018 13:23:29] code 404, message File not found
+127.0.0.1 - - [30/Jan/2018 13:23:29] "GET /hme HTTP/1.1" 404 -
+127.0.0.1 - - [30/Jan/2018 13:23:39] code 404, message File not found
+127.0.0.1 - - [30/Jan/2018 13:23:39] "GET /home HTTP/1.1" 404 -
+127.0.0.1 - - [30/Jan/2018 13:23:47] code 404, message File not found
+127.0.0.1 - - [30/Jan/2018 13:23:47] "GET /home.html HTTP/1.1" 404 -
+127.0.0.1 - - [30/Jan/2018 13:23:53] "GET /static/ HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2018 13:23:55] "GET /templates/ HTTP/1.1" 200 -
+127.0.0.1 - - [30/Jan/2018 13:23:58] "GET /templates/home.html HTTP/1.1" 200 -
+Traceback (most recent call last):
+  File "C:\Python27\lib\runpy.py", line 174, in _run_module_as_main
+    "__main__", fname, loader, pkg_name)
+  File "C:\Python27\lib\runpy.py", line 72, in _run_code
+    exec code in run_globals
+  File "C:\Python27\lib\SimpleHTTPServer.py", line 235, in <module>
+    test()
+  File "C:\Python27\lib\SimpleHTTPServer.py", line 231, in test
+    BaseHTTPServer.test(HandlerClass, ServerClass)
+  File "C:\Python27\lib\BaseHTTPServer.py", line 610, in test
+    httpd.serve_forever()
+  File "C:\Python27\lib\SocketServer.py", line 231, in serve_forever
+    poll_interval)
+  File "C:\Python27\lib\SocketServer.py", line 150, in _eintr_retry
+    return func(*args)
+KeyboardInterrupt
+
+C:\Users\faceb\OneDrive - Nanyang Technological University\FYP\3d-recon>app.py
+Traceback (most recent call last):
+  File "C:\Users\faceb\OneDrive - Nanyang Technological University\FYP\3d-recon\app.py", line 8, in <module>
+    import osmbundler
+  File "C:\Users\faceb\OneDrive - Nanyang Technological University\FYP\3d-recon\osmbundler\__init__.py", line 5, in <module>
+    from PIL import Image
+ImportError: No module named PIL
+
+C:\Users\faceb\OneDrive - Nanyang Technological University\FYP\3d-recon>pip install image
+Collecting image
+  Downloading image-1.5.17-py2.py3-none-any.whl
+Collecting pillow (from image)
+  Downloading Pillow-5.0.0-cp27-cp27m-win32.whl (1.3MB)
+    100% |################################| 1.3MB 609kB/s
+Requirement already satisfied: django in c:\python27\lib\site-packages (from image)
+Requirement already satisfied: pytz in c:\python27\lib\site-packages (from django->image)
+Installing collected packages: pillow, image
+Successfully installed image-1.5.17 pillow-5.0.0
+
+C:\Users\faceb\OneDrive - Nanyang Technological University\FYP\3d-recon>app.py
+Traceback (most recent call last):
+  File "C:\Users\faceb\OneDrive - Nanyang Technological University\FYP\3d-recon\app.py", line 11, in <module>
+    import pyexiv2
+ImportError: No module named pyexiv2

@@ -1,0 +1,225 @@
+D:\FYP\3D_Virtualisation>python app.py
+Traceback (most recent call last):
+  File "app.py", line 11, in <module>
+    import pyexiv2
+ImportError: No module named pyexiv2
+
+D:\FYP\3D_Virtualisation>pip install pyexiv2
+Collecting pyexiv2
+  Could not find a version that satisfies the requirement pyexiv2 (from versions: )
+No matching distribution found for pyexiv2
+
+D:\FYP\3D_Virtualisation>conda install pyexiv2-0.3.2.tar.bz2
+'conda' is not recognized as an internal or external command,
+operable program or batch file.
+
+D:\FYP\3D_Virtualisation>cd packages
+
+D:\FYP\3D_Virtualisation\packages>pip install pyexiv2-0.3.2.tar.bz2
+Processing d:\fyp\3d_virtualisation\packages\pyexiv2-0.3.2.tar.bz2
+    Complete output from command python setup.py egg_info:
+    Traceback (most recent call last):
+      File "<string>", line 1, in <module>
+    IOError: [Errno 2] No such file or directory: 'c:\\users\\faceb\\appdata\\local\\temp\\pip-zyaqlw-build\\setup.py'
+
+    ----------------------------------------
+Command "python setup.py egg_info" failed with error code 1 in c:\users\faceb\appdata\local\temp\pip-zyaqlw-build\
+
+D:\FYP\3D_Virtualisation\packages>cd ..
+
+D:\FYP\3D_Virtualisation>python app.py
+Traceback (most recent call last):
+  File "app.py", line 13, in <module>
+    import numpy as np
+ImportError: No module named numpy
+
+D:\FYP\3D_Virtualisation>pip install numpy
+Collecting numpy
+  Cache entry deserialization failed, entry ignored
+  Downloading numpy-1.14.0-cp27-none-win32.whl (9.8MB)
+    100% |################################| 9.8MB 113kB/s
+Installing collected packages: numpy
+Successfully installed numpy-1.14.0
+
+D:\FYP\3D_Virtualisation>python app.py
+Traceback (most recent call last):
+  File "app.py", line 14, in <module>
+    from sklearn.neighbors import KDTree
+ImportError: No module named sklearn.neighbors
+
+D:\FYP\3D_Virtualisation>conda install scikit-learn
+'conda' is not recognized as an internal or external command,
+operable program or batch file.
+
+D:\FYP\3D_Virtualisation>python app.py
+Traceback (most recent call last):
+  File "app.py", line 14, in <module>
+    from sklearn.neighbors import KDTree
+ImportError: No module named sklearn.neighbors
+
+D:\FYP\3D_Virtualisation>pip install -U scikit-learn
+Collecting scikit-learn
+  Cache entry deserialization failed, entry ignored
+  Downloading scikit_learn-0.19.1-cp27-cp27m-win32.whl (4.1MB)
+    100% |################################| 4.1MB 276kB/s
+Installing collected packages: scikit-learn
+Successfully installed scikit-learn-0.19.1
+
+D:\FYP\3D_Virtualisation>python app.py
+Traceback (most recent call last):
+  File "app.py", line 14, in <module>
+    from sklearn.neighbors import KDTree
+  File "C:\Python27\lib\site-packages\sklearn\__init__.py", line 134, in <module>
+    from .base import clone
+  File "C:\Python27\lib\site-packages\sklearn\base.py", line 11, in <module>
+    from scipy import sparse
+ImportError: No module named scipy
+
+D:\FYP\3D_Virtualisation>pip install scipy
+Collecting scipy
+  Cache entry deserialization failed, entry ignored
+  Downloading scipy-1.0.0-cp27-none-win32.whl (26.4MB)
+    100% |################################| 26.4MB 38kB/s
+Requirement already satisfied: numpy>=1.8.2 in c:\python27\lib\site-packages (from scipy)
+Installing collected packages: scipy
+Successfully installed scipy-1.0.0
+
+D:\FYP\3D_Virtualisation>python app.py
+Traceback (most recent call last):
+  File "app.py", line 16, in <module>
+    from flask_debugtoolbar import DebugToolbarExtension
+ImportError: No module named flask_debugtoolbar
+
+D:\FYP\3D_Virtualisation>pip install flask_debugtoolbar
+Collecting flask_debugtoolbar
+  Cache entry deserialization failed, entry ignored
+  Cache entry deserialization failed, entry ignored
+  Downloading Flask_DebugToolbar-0.10.1-py2.py3-none-any.whl (326kB)
+    100% |################################| 327kB 1.7MB/s
+Requirement already satisfied: werkzeug in c:\python27\lib\site-packages (from flask_debugtoolbar)
+Requirement already satisfied: itsdangerous in c:\python27\lib\site-packages (from flask_debugtoolbar)
+Requirement already satisfied: Flask>=0.8 in c:\python27\lib\site-packages (from flask_debugtoolbar)
+Collecting Blinker (from flask_debugtoolbar)
+  Cache entry deserialization failed, entry ignored
+  Cache entry deserialization failed, entry ignored
+  Downloading blinker-1.4.tar.gz (111kB)
+    100% |################################| 112kB 3.3MB/s
+Requirement already satisfied: click>=2.0 in c:\python27\lib\site-packages (from Flask>=0.8->flask_debugtoolbar)
+Requirement already satisfied: Jinja2>=2.4 in c:\python27\lib\site-packages (from Flask>=0.8->flask_debugtoolbar)
+Requirement already satisfied: MarkupSafe>=0.23 in c:\python27\lib\site-packages (from Jinja2>=2.4->Flask>=0.8->flask_debugtoolbar)
+Building wheels for collected packages: Blinker
+  Running setup.py bdist_wheel for Blinker ... done
+  Stored in directory: C:\Users\faceb\AppData\Local\pip\Cache\wheels\7b\8a\eb\5a4f4444f366c515073db8a129c92d4727ad945e5e64b9e8bd
+Successfully built Blinker
+Installing collected packages: Blinker, flask-debugtoolbar
+Successfully installed Blinker-1.4 flask-debugtoolbar-0.10.1
+
+D:\FYP\3D_Virtualisation>python app.py
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 302-079-849
+ * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)
+1Traceback (most recent call last):
+  File "C:\Python27\lib\logging\__init__.py", line 882, in emit
+    stream.write(fs % msg)
+IOError: [Errno 0] Error
+Logged from file _internal.py, line 88
+----------------------------------------
+Exception happened during processing of request from ('127.0.0.1', 13284)
+Traceback (most recent call last):
+  File "C:\Python27\lib\SocketServer.py", line 290, in _handle_request_noblock
+    self.process_request(request, client_address)
+  File "C:\Python27\lib\SocketServer.py", line 318, in process_request
+    self.finish_request(request, client_address)
+  File "C:\Python27\lib\SocketServer.py", line 331, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "C:\Python27\lib\SocketServer.py", line 654, in __init__
+    self.finish()
+  File "C:\Python27\lib\SocketServer.py", line 713, in finish
+    self.wfile.close()
+  File "C:\Python27\lib\socket.py", line 283, in close
+    self.flush()
+  File "C:\Python27\lib\socket.py", line 307, in flush
+    self._sock.sendall(view[write_offset:write_offset+buffer_size])
+error: [Errno 10053] An established connection was aborted by the software in your host machine
+----------------------------------------
+127.0.0.1 - - [01/Feb/2018 15:36:50] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 15:36:50] "GET /_debug_toolbar/static/js/jquery.js HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 15:36:50] "GET /_debug_toolbar/static/js/jquery.tablesorter.js HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 15:36:50] "GET /_debug_toolbar/static/js/toolbar.js HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 15:36:50] "GET /_debug_toolbar/static/css/toolbar.css?0.24996422094039716 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 15:36:51] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [01/Feb/2018 15:36:51] "GET /_debug_toolbar/static/img/tick-red.png HTTP/1.1" 200 -
+1Traceback (most recent call last):
+  File "C:\Python27\lib\logging\__init__.py", line 882, in emit
+    stream.write(fs % msg)
+IOError: [Errno 0] Error
+Logged from file _internal.py, line 88
+127.0.0.1 - - [01/Feb/2018 15:37:23] "GET /_debug_toolbar/static/js/jquery.js HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 15:37:24] "GET /_debug_toolbar/static/js/jquery.tablesorter.js HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 15:37:24] "GET /_debug_toolbar/static/js/toolbar.js HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 15:37:24] "GET /_debug_toolbar/static/css/toolbar.css?0.04687544735628557 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 15:37:24] "GET /_debug_toolbar/static/img/tick-red.png HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 15:37:24] "GET /favicon.ico HTTP/1.1" 404 -
+127.0.0.1 - - [01/Feb/2018 15:37:31] "GET /_debug_toolbar/static/img/djdt_vertical.png HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 15:37:37] "GET /home HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 15:37:37] "GET /_debug_toolbar/static/css/toolbar.css?0.15948008527795032 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 15:37:45] "GET /_debug_toolbar/static/img/indicator.png HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 15:37:45] "GET /_debug_toolbar/static/img/close.png HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:06:22] "GET /_debug_toolbar/static/img/tick.png HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:06:29] "GET /home HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:06:30] "GET /_debug_toolbar/static/css/toolbar.css?0.3823040369085038 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:06:31] "GET /edit HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:06:31] "GET /_debug_toolbar/static/css/toolbar.css?0.12116022804122295 HTTP/1.1" 200 -
+[{'modification_time': '2018-01-25 02:53:36', 'file_size': 43L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'dolphins'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 13101L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'mesh'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 1745L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'new mesh (2)'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 771L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'simplified'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 6768L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'trimmed_mesh'}]
+127.0.0.1 - - [01/Feb/2018 16:06:37] "GET /edit/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:06:38] "GET /display/ HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:06:38] "GET /_debug_toolbar/static/css/toolbar.css?0.30483446165905503 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:06:38] "GET /static/js/PLYLoader.js HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:06:38] "GET /static/js/Detector.js HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:06:38] "GET /static/js/TrackballControls.js HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:06:38] "GET /static/js/TransformControls.js HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:06:38] "GET /static/js/csg.js HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:06:38] "GET /static/js/ThreeCSG.js HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:06:38] "GET /static/js/SimplifyModifier.js HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:06:40] "GET /_debug_toolbar/static/css/toolbar.css?0.8611918805457788 HTTP/1.1" 200 -
+[{'modification_time': '2018-01-25 02:53:36', 'file_size': 43L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'dolphins'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 13101L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'mesh'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 1745L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'new mesh (2)'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 771L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'simplified'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 6768L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'trimmed_mesh'}]
+127.0.0.1 - - [01/Feb/2018 16:06:45] "GET /edit/mesh HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:06:46] "GET /display/mesh HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:06:46] "GET /_debug_toolbar/static/css/toolbar.css?0.7184816415526596 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:06:46] "GET /static/model/mesh.ply HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:06:46] "GET /_debug_toolbar/static/css/toolbar.css?0.4188225682704756 HTTP/1.1" 200 -
+[{'modification_time': '2018-01-25 02:53:36', 'file_size': 43L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'dolphins'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 13101L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'mesh'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 1745L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'new mesh (2)'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 771L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'simplified'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 6768L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'trimmed_mesh'}]
+127.0.0.1 - - [01/Feb/2018 16:06:50] "GET /edit/mesh HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:06:51] "GET /display/mesh HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:06:51] "GET /_debug_toolbar/static/css/toolbar.css?0.7759215328849487 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:06:51] "GET /_debug_toolbar/static/css/toolbar.css?0.695318607647585 HTTP/1.1" 200 -
+[{'modification_time': '2018-01-25 02:53:36', 'file_size': 43L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'dolphins'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 13101L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'mesh'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 1745L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'new mesh (2)'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 771L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'simplified'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 6768L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'trimmed_mesh'}]
+127.0.0.1 - - [01/Feb/2018 16:07:29] "GET /edit/trimmed_mesh HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:07:29] "GET /display/trimmed_mesh HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:07:29] "GET /_debug_toolbar/static/css/toolbar.css?0.8701086251083128 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:07:30] "GET /static/model/trimmed_mesh.ply HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:07:30] "GET /_debug_toolbar/static/css/toolbar.css?0.8542861357686515 HTTP/1.1" 200 -
+[{'modification_time': '2018-01-25 02:53:36', 'file_size': 43L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'dolphins'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 13101L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'mesh'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 1745L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'new mesh (2)'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 771L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'simplified'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 6768L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'trimmed_mesh'}]
+127.0.0.1 - - [01/Feb/2018 16:07:47] "GET /edit/dolphins HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:07:47] "GET /display/dolphins HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:07:47] "GET /_debug_toolbar/static/css/toolbar.css?0.8399079992680905 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:07:47] "GET /_debug_toolbar/static/css/toolbar.css?0.4455264259956744 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:07:47] "GET /static/model/dolphins.ply HTTP/1.1" 200 -
+[{'modification_time': '2018-01-25 02:53:36', 'file_size': 43L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'dolphins'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 13101L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'mesh'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 1745L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'new mesh (2)'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 771L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'simplified'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 6768L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'trimmed_mesh'}]
+127.0.0.1 - - [01/Feb/2018 16:07:57] "GET /edit/new%20mesh%20(2) HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:07:58] "GET /display/new%20mesh%20(2) HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:07:58] "GET /_debug_toolbar/static/css/toolbar.css?0.14467534709814078 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:07:58] "GET /static/model/new%20mesh%20%282%29.ply HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:07:58] "GET /_debug_toolbar/static/css/toolbar.css?0.25638815853193586 HTTP/1.1" 200 -
+[{'modification_time': '2018-01-25 02:53:36', 'file_size': 43L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'dolphins'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 13101L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'mesh'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 1745L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'new mesh (2)'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 771L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'simplified'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 6768L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'trimmed_mesh'}]
+127.0.0.1 - - [01/Feb/2018 16:08:02] "GET /edit/simplified HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:08:02] "GET /display/simplified HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:08:02] "GET /_debug_toolbar/static/css/toolbar.css?0.21514196329040658 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:08:03] "GET /static/model/simplified.ply HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:08:03] "GET /_debug_toolbar/static/css/toolbar.css?0.09011392793185347 HTTP/1.1" 200 -
+[{'modification_time': '2018-01-25 02:53:36', 'file_size': 43L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'dolphins'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 13101L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'mesh'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 1745L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'new mesh (2)'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 771L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'simplified'}, {'modification_time': '2018-01-25 02:53:36', 'file_size': 6768L, 'creation_time': '2018-01-30 15:34:59', 'filename': 'trimmed_mesh'}]
+127.0.0.1 - - [01/Feb/2018 16:08:11] "GET /edit/mesh HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:08:11] "GET /display/mesh HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:08:11] "GET /_debug_toolbar/static/css/toolbar.css?0.5012038466748094 HTTP/1.1" 200 -
+127.0.0.1 - - [01/Feb/2018 16:08:12] "GET /_debug_toolbar/static/css/toolbar.css?0.3768133449768192 HTTP/1.1" 200 -
