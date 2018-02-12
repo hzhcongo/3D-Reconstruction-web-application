@@ -48,14 +48,14 @@
 	    //Scene
 	    scene = new THREE.Scene();
 	    scene.background = new THREE.Color( 0x72645b );
-	    scene.add( new THREE.GridHelper( 25, 20 ) );
+	    //scene.add( new THREE.GridHelper( 25, 20 ) );
 
 	    //Floor
 	    floorGeometry = new THREE.BoxGeometry(20,100,20);
 	    floorMaterial = new THREE.MeshBasicMaterial( {color: 0x00ff00, opacity : 0.5, transparent: true, depthWrite:false} );
 	    floorMesh = new THREE.Mesh(floorGeometry, floorMaterial);
 	    floorMesh.position.set(0,-50,0);
-	    scene.add(floorMesh);
+	    //scene.add(floorMesh);
 
 	    //Camera
 	    camera = new THREE.PerspectiveCamera(60 , window.innerWidth / window.innerHeight, 1, 1000 );
@@ -120,7 +120,6 @@
 	}
 
 	function animate() {
-
 		requestAnimationFrame(animate);
 		tbControl.update();
 	}
