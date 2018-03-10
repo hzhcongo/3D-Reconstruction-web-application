@@ -20,6 +20,7 @@ logging.basicConfig(level=logging.INFO, format="%(message)s")
 
 app = Flask(__name__)
 app.debug = True
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['SECRET_KEY'] = '123456'
 toolbar = DebugToolbarExtension(app)
 bootstrap = Bootstrap(app)

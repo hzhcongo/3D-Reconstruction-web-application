@@ -1,16 +1,16 @@
 {% extends "bootstrap/base.html" %}
 
-{% block title %}3D Reconstruction{% endblock %}
+{% block title %}3D reconstruction{% endblock %}
 
 {% block navbar %}
 	
 	{%include "NavBarTemplate.html" %}
 
-	<div class="container">
 {% endblock %}
 
 {%block content %}
-	  <h2>File Upload</h2>
+	<div class="container">
+	  <h2>File Uploader</h2>
 	  <form id="upload-form" action ="{{ url_for('upload') }}" method = "POST" enctype="multipart/form-data">
 	    <input type = "file" name = "file" accept="image/*" multiple>
 	    <input type="submit" value="Send">
