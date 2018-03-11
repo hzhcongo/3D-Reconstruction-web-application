@@ -49,6 +49,7 @@ def upload():
 		metadata['Exif.Image.Model'] = 'Iphone 6'
 		metadata.write()
 
+
 	# initialize OsmBundler manager class
 	workaddress = str(target)+'temp/'
 	manager = osmbundler.OsmBundler(target,workaddress)
@@ -195,6 +196,9 @@ def upload():
 	print("Total time taken ",  (datetime.utcnow() -beginTime).total_seconds())
 	sys.stdout.flush()
 
+	# change name of trimmed mesh and move to statics
+	modelName = str(request.form['name'])
+	os.rename(workaddress + "pmvs/models/trimmed_mesh.ply", os.path.join(APP_ROOT + "/static/model/" + modelName + ".ply"))
 	return redirect(url_for('fileUpload'))
 
 @app.route("/fileUpload")
@@ -217,6 +221,13 @@ def edit(name = None):
 	print(data)
 	sys.stdout.flush()
 	return render_template("edit.html", name=name, data = data)
+
+@app.route("/delete/<name>")
+def delete(name = None):
+	modelFolder = os.path.join(APP_ROOT, 'static/model/')
+	# meshFiles = [f for f in listdir(modelFolder)]
+	os.remove(os.path.join(modelFolder, name + ".ply"))
+	return redirect(url_for('edit'))
 
 @app.route("/")
 @app.route("/home")
