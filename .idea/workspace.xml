@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="119e4cb4-9140-416b-b97a-99bf37bb083e" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/Group.py" />
-      <change beforePath="" afterPath="$PROJECT_DIR$/Point.py" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/app.py" afterPath="$PROJECT_DIR$/app.py" />
-      <change beforePath="$PROJECT_DIR$/osmbundler/help.txt" afterPath="$PROJECT_DIR$/osmbundler/help.txt" />
-      <change beforePath="$PROJECT_DIR$/osmpmvs/__init__.py" afterPath="$PROJECT_DIR$/osmpmvs/__init__.py" />
-      <change beforePath="$PROJECT_DIR$/templates/NavBarTemplate.html" afterPath="$PROJECT_DIR$/templates/NavBarTemplate.html" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,8 +16,8 @@
       <file leaf-file-name="app.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="232">
-              <caret line="142" column="0" lean-forward="true" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
+            <state relative-caret-position="344">
+              <caret line="192" column="48" lean-forward="true" selection-start-line="192" selection-start-column="48" selection-end-line="192" selection-end-column="48" />
               <folding>
                 <element signature="e#0#77#0" expanded="true" />
               </folding>
@@ -34,7 +28,7 @@
       <file leaf-file-name="Group.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Group.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="536">
+            <state relative-caret-position="441">
               <caret line="35" column="15" lean-forward="false" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="15" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -149,36 +143,12 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
               <item name="3D-Virtualisation" type="b2602c69:ProjectViewProjectNode" />
               <item name="3D-Virtualisation" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="3D-Virtualisation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="3D-Virtualisation" type="462c0819:PsiDirectoryNode" />
-              <item name="osmbundler" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="3D-Virtualisation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="3D-Virtualisation" type="462c0819:PsiDirectoryNode" />
-              <item name="osmbundler" type="462c0819:PsiDirectoryNode" />
-              <item name="cameras" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="3D-Virtualisation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="3D-Virtualisation" type="462c0819:PsiDirectoryNode" />
-              <item name="osmbundler" type="462c0819:PsiDirectoryNode" />
-              <item name="features" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="3D-Virtualisation" type="b2602c69:ProjectViewProjectNode" />
-              <item name="3D-Virtualisation" type="462c0819:PsiDirectoryNode" />
-              <item name="osmbundler" type="462c0819:PsiDirectoryNode" />
-              <item name="matching" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="3D-Virtualisation" type="b2602c69:ProjectViewProjectNode" />
@@ -208,10 +178,22 @@
               <item name="bundler" type="462c0819:PsiDirectoryNode" />
               <item name="bin" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="3D-Virtualisation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="3D-Virtualisation" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="3D-Virtualisation" type="b2602c69:ProjectViewProjectNode" />
+              <item name="3D-Virtualisation" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="model" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -278,13 +260,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1048" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.13854167" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2359375" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.46298343" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27292818" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24972376" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -571,7 +554,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="5" column="0" lean-forward="true" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -684,7 +666,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -699,7 +680,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="179">
           <caret line="102" column="21" lean-forward="true" selection-start-line="102" selection-start-column="21" selection-end-line="102" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -707,7 +687,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="357" column="13" lean-forward="false" selection-start-line="357" selection-start-column="13" selection-end-line="357" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -715,13 +694,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="294">
           <caret line="14" column="36" lean-forward="false" selection-start-line="2" selection-start-column="0" selection-end-line="14" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Group.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="536">
+        <state relative-caret-position="441">
           <caret line="35" column="15" lean-forward="false" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="15" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -739,8 +717,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="232">
-          <caret line="142" column="0" lean-forward="true" selection-start-line="142" selection-start-column="0" selection-end-line="142" selection-end-column="0" />
+        <state relative-caret-position="344">
+          <caret line="192" column="48" lean-forward="true" selection-start-line="192" selection-start-column="48" selection-end-line="192" selection-end-column="48" />
           <folding>
             <element signature="e#0#77#0" expanded="true" />
           </folding>
