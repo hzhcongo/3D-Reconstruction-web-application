@@ -201,6 +201,11 @@ def upload():
 def fileUpload():
 	return render_template("fileUpload.html")
 
+@app.route("/delete/<name>")
+def delete(name = None):
+	os.remove(APP_ROOT+"/static/model/"+name+".ply")
+	return redirect(url_for('edit'))
+
 @app.route("/edit/")
 @app.route("/edit/<name>")
 def edit(name = None):
