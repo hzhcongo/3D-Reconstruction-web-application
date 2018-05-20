@@ -14,8 +14,6 @@ import numpy as np
 from sklearn.neighbors import KDTree
 import subprocess
 from flask_debugtoolbar import DebugToolbarExtension
-import Group
-import Point
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 
@@ -50,7 +48,6 @@ def upload():
 		metadata['Exif.Image.Model'] = 'Iphone 6'
 		metadata.write()
 
-
 	# initialize OsmBundler manager class
 	workaddress = str(target)+'temp/'
 	manager = osmbundler.OsmBundler(target,workaddress)
@@ -80,7 +77,7 @@ def upload():
 	# initialize PMVS input from Bundler output
 	pmvsmanager.doBundle2PMVS()
 	# cmvsmanager.doBundle2PMVS()
-	
+
 	print("Finish bundle2PMVS, time taken ", (datetime.utcnow() -_time).total_seconds())
 	sys.stdout.flush()
 	_time = datetime.utcnow()
@@ -107,7 +104,7 @@ def upload():
 	# a1 = []
 	# a2 = []
 	# a3 = []
-	
+
 	for line in f:
 		words = line.split()
 		if(isfloat(words[0])):
@@ -153,10 +150,8 @@ def upload():
 		if(distance[x]>upper):
 			indToRemove.append(x)
 
-	# re-add trimemed points
-	points = []
-	# nf = open(workaddress+"pmvs/models/trim.ply", "w+")
-	nf = open(workaddress+"pmvs/models/trim.txt", "w+")
+	nf = open(workaddress+"pmvs/models/trim.ply", "w+")
+	# nf = open(workaddress+"pmvs/models/trim.txt", "w+")
 	f = open(workaddress+"pmvs/models/pmvs_options.txt.ply","r")
 	newLen = len(distance) - len(indToRemove)
 	removeCount = 0
@@ -182,96 +177,12 @@ def upload():
 				# print("trim point")
 				continue
 		nf.write(line)
-
-		# ZEHAO EDITS
-		if(isfloat(words[0])):
-			point = Point.Point(float(words[0]),
-			                    float(words[1]),
-			                    float(words[2]),
-			                    float(words[3]),
-			                    float(words[4]),
-			                    float(words[5]),
-			                    int(words[6]),
-				                int(words[7]),
-				                int(words[8]))
-			points = np.append(points, point)
-		#
-
 	nf.close()
 	f.close()
 
 	print("Finish noiseRemoval part 1, time taken ", (datetime.utcnow() -_time).total_seconds())
 	sys.stdout.flush()
 	_time = datetime.utcnow()
-
-	# GROUPING AND REMOVING OF NOISES - ZEHAO
-	groupNum = 1
-	try:
-		groups = []
-		groups = np.array(groups)
-
-		for point in points:
-			flagGrouped = False
-			for groupToCheck in groups:
-				if (flagGrouped == False):
-					for pointToCheck in groupToCheck:
-						if (Point.Point.calcEuclideanDist(point, pointToCheck) < 0.05): # IF point CLOSE TO ANY pointToCheck (0.05 threshold via trial and error)
-							groupToCheck.addPoint(point)
-							flagGrouped = True
-							print("Added into Group: " + groupToCheck.getName())
-							break                                                       # STOP CHECKING POINTS IN GROUPTOCHECK
-				else:
-					break # STOP CHECKING GROUPS TO PUT IN
-			if(flagGrouped == False):
-				group = Group.Group(str(groupNum))
-				print("Creating new Group: " + group.getName())  				# CREATE NEW GROUP AND ADD point INTO IT //ERROR HERE LAST TIME COS USE WRONG GROUP
-				groupNum = groupNum + 1
-				group.addPoint(point)
-				groups = np.append(groups, group)
-			else:
-				flagGrouped = False
-
-		# THEN REMOVE SMALL GROUPS
-
-		nf = open(workaddress + "pmvs/models/trim.ply", "w+")
-		f = open(workaddress + "pmvs/models/trim.txt", "r")
-		newLen = len(distance) - len(indToRemove)
-		removeCount = 0
-		lineCount = -1
-		for line in f:
-			words = line.split()
-			if (words[0] == "element"):
-				nf.write(words[0] + " " + words[1] + " " + str(newLen) + "\n")
-				continue
-			if (words[0] == "property" and words[1] == "uchar" and words[2] == "diffuse_red"):
-				nf.write(words[0] + " " + words[1] + " " + "red\n")
-				continue
-			if (words[0] == "property" and words[1] == "uchar" and words[2] == "diffuse_green"):
-				nf.write(words[0] + " " + words[1] + " " + "green\n")
-				continue
-			if (words[0] == "property" and words[1] == "uchar" and words[2] == "diffuse_blue"):
-				nf.write(words[0] + " " + words[1] + " " + "blue\n")
-				continue
-			if (isfloat(words[0])):
-				lineCount += 1
-				if (removeCount < len(indToRemove) and lineCount == indToRemove[removeCount]):
-					removeCount += 1
-					continue
-			nf.write(line)
-		nf.close()
-		f.close()
-
-		print("Finish noiseRemoval part 2, time taken ", (datetime.utcnow() - _time).total_seconds())
-		sys.stdout.flush()
-		_time = datetime.utcnow()
-	except IOError as e:
-		print "I/O error({0}): {1}".format(e.errno, e.strerror)
-	except ValueError:
-		print "Could not convert data to an integer."
-	except:
-		print "Unexpected error:", sys.exc_info()[0]
-		raise
-	#
 
 	# distrPath = os.path.dirname( os.path.abspath(sys.argv[0]) )
 	possoinExecutable = os.path.join(APP_ROOT, "software/PoissonRecon.exe")
@@ -280,12 +191,10 @@ def upload():
 	subprocess.call([surfaceTrimmer, "--in", workaddress+"pmvs/models/mesh.ply", "--out", workaddress+"pmvs/models/trimmed_mesh.ply", "--trim", "7", "--smooth", "5"])
 
 	print("Finish mesh construction, time taken ", (datetime.utcnow() -_time).total_seconds())
+	os.rename(workaddress+"pmvs/models/trimmed_mesh.ply", workaddress+"../../../static/model/"+str(timestampfilename)+".ply")
 	print("Total time taken ",  (datetime.utcnow() -beginTime).total_seconds())
 	sys.stdout.flush()
 
-	# change name of trimmed mesh and move to statics
-	modelName = str(request.form['name'])
-	os.rename(workaddress + "pmvs/models/trimmed_mesh.ply", os.path.join(APP_ROOT + "/static/model/" + modelName + ".ply"))
 	return redirect(url_for('fileUpload'))
 
 @app.route("/fileUpload")
@@ -308,13 +217,6 @@ def edit(name = None):
 	print(data)
 	sys.stdout.flush()
 	return render_template("edit.html", name=name, data = data)
-
-@app.route("/delete/<name>")
-def delete(name = None):
-	modelFolder = os.path.join(APP_ROOT, 'static/model/')
-	# meshFiles = [f for f in listdir(modelFolder)]
-	os.remove(os.path.join(modelFolder, name + ".ply"))
-	return redirect(url_for('edit'))
 
 @app.route("/")
 @app.route("/home")
