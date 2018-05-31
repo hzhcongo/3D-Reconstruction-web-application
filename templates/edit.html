@@ -1,5 +1,4 @@
 {% extends "bootstrap/base.html" %}
-
 {% block title %}3D reconstruction{% endblock %}
 
 {% block styles %}
@@ -22,8 +21,24 @@
 		margin : 10px;
 	}
 </style>
-{% endblock %}
 
+<!--<script type="text/javascript" src="../static/js/jquery-3.2.1.js"></script>-->
+<!--<script type="text/javascript" src="../static/js/jquery.tablesorter.js"></script>-->
+<!--<script type="text/javascript">-->
+	<!--$(document).ready(function()-->
+		<!--{-->
+			<!--$("#myTable").tablesorter();-->
+		<!--}-->
+	<!--);-->
+<!--</script>-->
+<!--<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.16/datatables.min.css"/>-->
+<!--<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.16/datatables.min.js"></script>-->
+<!--<script type="text/javascript">-->
+	<!--$(document).ready( function () {-->
+		<!--$('#myTable').DataTable();-->
+	<!--} );-->
+<!--</script>-->
+{% endblock %}
 {% block navbar %}
 {%include "NavBarTemplate.html" %}
 {% endblock %}
@@ -33,24 +48,28 @@
 	<h1 class = "button">Meshes</h1>
 	<div class="row align-items-start">
 		<div id = "mesh_table" class = "col-4">
-			<table class="table table-hover">
+			<table id="myTable" class="table table-hover">
 				<thead>
+					<th>Mesh Name</th>
 					<th>Created Time</th>
 					<th>Modified Time</th>
-					<th>Mesh Name</th>
 					<th>File Size</th>
-					<th>Edit</th>
-					<th>Delete</th>
+					<th></th>
+					<th style="width:250px;"></th>
 				</thead>
 				<tbody>
 					{% for d in data %}
 					<tr>
+						<td>{{d.filename}}</td>
 						<td>{{d.creation_time}}</td>
 						<td>{{d.modification_time}}</td>
-						<td>{{d.filename}}</td>
 						<td>{{d.file_size}} KB</td>
-						<td><a href="/edit/{{d.filename}}">edit</a></td>
-						<td><a href="/delete/{{d.filename}}">delete</a></td>
+						<td></td>
+                        <td style="text-align: center;">
+                            <a href="/edit/{{d.filename}}">View / Edit</a>
+                            <a href="/delete/{{d.filename}}" style="margin-left:20px;">Delete</a>
+                            <!--<a href="../static/model/{{d.filename}}.ply" style="margin-left:20px;">Download</a>-->
+                        </td>
 					</tr>
 					{% endfor %}
 				</tbody>

@@ -18,7 +18,7 @@ from flask_debugtoolbar import DebugToolbarExtension
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 
 app = Flask(__name__)
-app.debug = True
+app.debug = False
 app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
 app.config['SECRET_KEY'] = '123456'
 toolbar = DebugToolbarExtension(app)
@@ -67,7 +67,6 @@ def upload():
 	print("Finish bundleadjustment, time taken ",  (datetime.utcnow() -_time).total_seconds())
 	sys.stdout.flush()
 	_time = datetime.utcnow()
-
 
 	# manager.openResult()
 
@@ -180,17 +179,51 @@ def upload():
 	nf.close()
 	f.close()
 
-	print("Finish noiseRemoval part 1, time taken ", (datetime.utcnow() -_time).total_seconds())
+	currentTime = datetime.utcnow()
+	print("Finish noiseRemoval part 1, time taken ", (datetime.utcnow() - currentTime).total_seconds())
 	sys.stdout.flush()
 	_time = datetime.utcnow()
 
 	# distrPath = os.path.dirname( os.path.abspath(sys.argv[0]) )
 	possoinExecutable = os.path.join(APP_ROOT, "software/PoissonRecon.exe")
 	surfaceTrimmer = os.path.join(APP_ROOT, "software/SurfaceTrimmer.exe")
-	subprocess.call([possoinExecutable, "--in", workaddress+"pmvs/models/trim.ply", "--out", workaddress+"pmvs/models/mesh.ply", "--depth", "12", "--color", "100", "--pointWeight","0", "--density"])
-	subprocess.call([surfaceTrimmer, "--in", workaddress+"pmvs/models/mesh.ply", "--out", workaddress+"pmvs/models/trimmed_mesh.ply", "--trim", "7", "--smooth", "5"])
 
-	print("Finish mesh construction, time taken ", (datetime.utcnow() -_time).total_seconds())
+	# HIGH QUALITY
+	currentTime = datetime.utcnow()
+	subprocess.call([possoinExecutable, "--in", workaddress+"pmvs/models/trim.ply", "--out", workaddress+"pmvs/models/mesh.ply", "--depth", "12", "--color", "100", "--pointWeight","0", "--density"])
+	print("d12 ", (datetime.utcnow() - currentTime).total_seconds())
+
+	currentTime = datetime.utcnow()
+	subprocess.call([surfaceTrimmer, "--in", workaddress+"pmvs/models/mesh.ply", "--out", workaddress+"pmvs/models/trimmed_mesh.ply", "--trim", "6", "--smooth", "7"])
+	print("200", (datetime.utcnow() - currentTime).total_seconds())
+
+	# # MED QUALITY
+	# currentTime = datetime.utcnow()
+	# subprocess.call([possoinExecutable, "--in", workaddress+"pmvs/models/trim.ply", "--out", workaddress+"pmvs/models/mesh.ply", "--depth", "10", "--color", "100", "--pointWeight","0", "--density"])
+	# print("d10 ", (datetime.utcnow() - currentTime).total_seconds())
+	#
+	# currentTime = datetime.utcnow()
+	# subprocess.call([surfaceTrimmer, "--in", workaddress+"pmvs/models/mesh.ply", "--out", workaddress+"pmvs/models/d10.ply", "--trim", "6", "--smooth", "7"])
+	# print("200", (datetime.utcnow() - currentTime).total_seconds())
+	#
+	# # LOW QUALITY
+	# currentTime = datetime.utcnow()
+	# subprocess.call([possoinExecutable, "--in", workaddress+"pmvs/models/trim.ply", "--out", workaddress+"pmvs/models/mesh.ply", "--depth", "8", "--color", "100", "--pointWeight","0", "--density"])
+	# print("d8 ", (datetime.utcnow() - currentTime).total_seconds())
+	#
+	# currentTime = datetime.utcnow()
+	# subprocess.call([surfaceTrimmer, "--in", workaddress+"pmvs/models/mesh.ply", "--out", workaddress+"pmvs/models/d8.ply", "--trim", "6", "--smooth", "7"])
+	# print("200", (datetime.utcnow() - currentTime).total_seconds())
+	#
+	# # VERY LOW QUALITY
+	# currentTime = datetime.utcnow()
+	# subprocess.call([possoinExecutable, "--in", workaddress+"pmvs/models/trim.ply", "--out", workaddress+"pmvs/models/mesh.ply", "--depth", "7", "--color", "100", "--pointWeight","0", "--density"])
+	# print("d7 ", (datetime.utcnow() - currentTime).total_seconds())
+
+	currentTime = datetime.utcnow()
+	subprocess.call([surfaceTrimmer, "--in", workaddress+"pmvs/models/mesh.ply", "--out", workaddress+"pmvs/models/d7.ply", "--trim", "6", "--smooth", "7"])
+	print("200", (datetime.utcnow() - currentTime).total_seconds())
+
 	os.rename(workaddress+"pmvs/models/trimmed_mesh.ply", workaddress+"../../../static/model/"+str(timestampfilename)+".ply")
 	print("Total time taken ",  (datetime.utcnow() -beginTime).total_seconds())
 	sys.stdout.flush()
