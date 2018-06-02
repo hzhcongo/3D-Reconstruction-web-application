@@ -27,11 +27,19 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 @app.route("/upload", methods = ['POST'])
 def upload():
-	timestampfilename= (datetime.utcnow() - datetime(1970,1,1)).total_seconds()
-	print(timestampfilename)
-	beginTime = datetime.utcnow()
+	modelname = request.form['modelname']
+	if(modelname == ''):
+		modelname = datetime.now().strftime('%d_%m_%Y_%H_%M_%S')
+	print("Model name:" + modelname)
+
+	quality = request.form['quality']
+	print("Quality:" + quality)
+
+	# timestampfilename= (datetime.now() - datetime(1970,1,1)).total_seconds()
+	# print(timestampfilename)
+	beginTime = datetime.now()
 	sys.stdout.flush()
-	target = os.path.join(APP_ROOT, 'images/'+str(timestampfilename)+'/')
+	target = os.path.join(APP_ROOT, 'images/'+str(modelname)+'/')
 
 	if not os.path.isdir(target):
 		os.mkdir(target)
@@ -52,21 +60,21 @@ def upload():
 	workaddress = str(target)+'temp/'
 	manager = osmbundler.OsmBundler(target,workaddress)
 
-	_time = datetime.utcnow()
+	_time = datetime.now()
 	manager.preparePhotos()
-	print("Finish preparing photos, time taken ", (datetime.utcnow() -_time).total_seconds())
+	print("Finish preparing photos, time taken ", (datetime.now() -_time).total_seconds())
 	sys.stdout.flush()
-	_time = datetime.utcnow()
+	_time = datetime.now()
 
 	manager.matchFeatures()
-	print("Finish matching features, time taken ", (datetime.utcnow() -_time).total_seconds())
+	print("Finish matching features, time taken ", (datetime.now() -_time).total_seconds())
 	sys.stdout.flush()
-	_time = datetime.utcnow()
+	_time = datetime.now()
 
 	manager.doBundleAdjustment()
-	print("Finish bundleadjustment, time taken ",  (datetime.utcnow() -_time).total_seconds())
+	print("Finish bundleadjustment, time taken ",  (datetime.now() -_time).total_seconds())
 	sys.stdout.flush()
-	_time = datetime.utcnow()
+	_time = datetime.now()
 
 	# manager.openResult()
 
@@ -77,18 +85,16 @@ def upload():
 	pmvsmanager.doBundle2PMVS()
 	# cmvsmanager.doBundle2PMVS()
 
-	print("Finish bundle2PMVS, time taken ", (datetime.utcnow() -_time).total_seconds())
+	print("Finish bundle2PMVS, time taken ", (datetime.now() -_time).total_seconds())
 	sys.stdout.flush()
-	_time = datetime.utcnow()
-
+	_time = datetime.now()
 
 	# call CMVS
 	# cmvsmanager.doCMVS()
 	# call PMVS
 	pmvsmanager.doPMVS()
-	print("Finish doPMVS, time taken ", (datetime.utcnow() -_time).total_seconds())
+	print("Finish doPMVS, time taken ", (datetime.now() -_time).total_seconds())
 	sys.stdout.flush()
-	_time = datetime.utcnow()
 
 	# do noise removal by KNN
 	def isfloat(value):
@@ -179,53 +185,42 @@ def upload():
 	nf.close()
 	f.close()
 
-	currentTime = datetime.utcnow()
-	print("Finish noiseRemoval part 1, time taken ", (datetime.utcnow() - currentTime).total_seconds())
+	currentTime = datetime.now()
+	print("Finish noiseRemoval part 1, time taken ", (datetime.now() - currentTime).total_seconds())
 	sys.stdout.flush()
-	_time = datetime.utcnow()
 
 	# distrPath = os.path.dirname( os.path.abspath(sys.argv[0]) )
 	possoinExecutable = os.path.join(APP_ROOT, "software/PoissonRecon.exe")
 	surfaceTrimmer = os.path.join(APP_ROOT, "software/SurfaceTrimmer.exe")
 
-	# HIGH QUALITY
-	currentTime = datetime.utcnow()
-	subprocess.call([possoinExecutable, "--in", workaddress+"pmvs/models/trim.ply", "--out", workaddress+"pmvs/models/mesh.ply", "--depth", "12", "--color", "100", "--pointWeight","0", "--density"])
-	print("d12 ", (datetime.utcnow() - currentTime).total_seconds())
+	# Quality settings to depth
+	if quality == 2:
+		depth = 12
+	elif quality == 1:
+		depth = 10
+	else:
+		depth = 8
+	# depth = 8 + (int(quality) * 2)
+	print("--depth: ", depth)
 
-	currentTime = datetime.utcnow()
-	subprocess.call([surfaceTrimmer, "--in", workaddress+"pmvs/models/mesh.ply", "--out", workaddress+"pmvs/models/trimmed_mesh.ply", "--trim", "6", "--smooth", "7"])
-	print("200", (datetime.utcnow() - currentTime).total_seconds())
+	currentTime = datetime.now()
+	subprocess.call([possoinExecutable, "--in", workaddress + "pmvs/models/trim.ply", "--out",
+	                 workaddress + "pmvs/models/mesh.ply", "--depth", str(depth), "--color", "100", "--pointWeight", "0",
+	                 "--density"])
+	print("Untrimmed: ", (datetime.now() - currentTime).total_seconds())
 
-	# # MED QUALITY
-	# currentTime = datetime.utcnow()
-	# subprocess.call([possoinExecutable, "--in", workaddress+"pmvs/models/trim.ply", "--out", workaddress+"pmvs/models/mesh.ply", "--depth", "10", "--color", "100", "--pointWeight","0", "--density"])
-	# print("d10 ", (datetime.utcnow() - currentTime).total_seconds())
-	#
-	# currentTime = datetime.utcnow()
-	# subprocess.call([surfaceTrimmer, "--in", workaddress+"pmvs/models/mesh.ply", "--out", workaddress+"pmvs/models/d10.ply", "--trim", "6", "--smooth", "7"])
-	# print("200", (datetime.utcnow() - currentTime).total_seconds())
-	#
-	# # LOW QUALITY
-	# currentTime = datetime.utcnow()
-	# subprocess.call([possoinExecutable, "--in", workaddress+"pmvs/models/trim.ply", "--out", workaddress+"pmvs/models/mesh.ply", "--depth", "8", "--color", "100", "--pointWeight","0", "--density"])
-	# print("d8 ", (datetime.utcnow() - currentTime).total_seconds())
-	#
-	# currentTime = datetime.utcnow()
-	# subprocess.call([surfaceTrimmer, "--in", workaddress+"pmvs/models/mesh.ply", "--out", workaddress+"pmvs/models/d8.ply", "--trim", "6", "--smooth", "7"])
-	# print("200", (datetime.utcnow() - currentTime).total_seconds())
-	#
+	currentTime = datetime.now()
+	subprocess.call([surfaceTrimmer, "--in", workaddress + "pmvs/models/mesh.ply", "--out",
+	                 workaddress + "pmvs/models/trimmed_mesh.ply", "--trim", "6", "--smooth", "7"])
+	print("Trimmed: ", (datetime.now() - currentTime).total_seconds())
+
 	# # VERY LOW QUALITY
-	# currentTime = datetime.utcnow()
+	# currentTime = datetime.now()
 	# subprocess.call([possoinExecutable, "--in", workaddress+"pmvs/models/trim.ply", "--out", workaddress+"pmvs/models/mesh.ply", "--depth", "7", "--color", "100", "--pointWeight","0", "--density"])
-	# print("d7 ", (datetime.utcnow() - currentTime).total_seconds())
+	# print("d7 ", (datetime.now() - currentTime).total_seconds())
 
-	currentTime = datetime.utcnow()
-	subprocess.call([surfaceTrimmer, "--in", workaddress+"pmvs/models/mesh.ply", "--out", workaddress+"pmvs/models/d7.ply", "--trim", "6", "--smooth", "7"])
-	print("200", (datetime.utcnow() - currentTime).total_seconds())
-
-	os.rename(workaddress+"pmvs/models/trimmed_mesh.ply", workaddress+"../../../static/model/"+str(timestampfilename)+".ply")
-	print("Total time taken ",  (datetime.utcnow() -beginTime).total_seconds())
+	os.rename(workaddress+"pmvs/models/trimmed_mesh.ply", workaddress+"../../../static/model/"+str(modelname)+".ply")
+	print("Total time taken ",  (datetime.now() - beginTime).total_seconds())
 	sys.stdout.flush()
 
 	return redirect(url_for('fileUpload'))

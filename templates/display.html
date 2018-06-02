@@ -22,12 +22,14 @@
     <div style="float:left;">
         <button onclick="switchControlMode()" class="button">Switch Control</button>
         <button onclick="cutBase()" class="button">Cut Base</button>
+        <!--<button onclick="simplify()">Simplify Mesh</button>-->
     </div>
-    <!--<button onclick="simplify()">Simplify Mesh</button>-->
     <div style="float:right;">
-        <button onclick="generateModelLink(0)" class="button">Update model (ASCII)</button>
-        <button onclick="generateModelLink(1)" class="button">Update model (Binary)</button>
-        <a id="linker" class="button" style="background-color: cornflowerblue;" href="{{ url_for('static', filename='model/' + name + '.ply')}}">Download model</a>
+        {% if name %}
+            <button onclick="generateModelLink(0)" class="button">Update model (ASCII)</button>
+            <button onclick="generateModelLink(1)" class="button">Update model (Binary)</button>
+            <a id="linker" class="button" style="background-color: cornflowerblue;" href="{{ url_for('static', filename='model/' + name + '.ply')}}">Download model</a>
+        {% endif %}
     </div>
 
         <script src="//cdn.rawgit.com/mrdoob/three.js/master/build/three.min.js"></script>
