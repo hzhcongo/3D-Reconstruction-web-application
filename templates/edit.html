@@ -50,12 +50,12 @@
 		<div id = "mesh_table" class = "col-4">
 			<table id="myTable" class="table table-hover">
 				<thead>
-					<th>Mesh Name</th>
-					<th>Created Time</th>
-					<th>Modified Time</th>
-					<th>File Size</th>
+					<th>Mesh name</th>
+					<th>Created time</th>
+					<th>Modified time</th>
+					<th>File size</th>
 					<th></th>
-					<th style="width:250px;"></th>
+					<th style="width:250px;">Actions</th>
 				</thead>
 				<tbody>
 					{% for d in data %}
@@ -68,7 +68,6 @@
                         <td style="text-align: center;">
                             <a href="/edit/{{d.filename}}">View / Edit</a>
                             <a href="/delete/{{d.filename}}" style="margin-left:20px;">Delete</a>
-                            <!--<a href="../static/model/{{d.filename}}.ply" style="margin-left:20px;">Download</a>-->
                         </td>
 					</tr>
 					{% endfor %}

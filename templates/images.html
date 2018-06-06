@@ -24,23 +24,21 @@
 		<div id = "mesh_table" class = "col-4">
 			<table id="myTable" class="table table-hover">
 				<thead>
-					<th>Image Set Name</th>
-					<th>Created Time</th>
-					<!--<th>Quality</th>-->
-					<!--<th>File size</th>-->
-					<th></th>
-					<th style="width:250px;"></th>
+					<th>Image set name</th>
+					<th>Uploaded time</th>
+					<th>Quality of model</th>
+					<th>Stage completed</th>
+					<th>Actions</th>
 				</thead>
 				<tbody>
 					{% for d in data %}
 					<tr>
 						<td>{{d.filename}}</td>
 						<td>{{d.creation_time}}</td>
-						<!--<td>{{d.quality}}</td>-->
-						<!--<td>{{d.file_size}} KB</td>-->
-						<td></td>
-                        <td style="text-align: center;">
-                            <a href="/process1/{{d.filename}}">Process</a>
+						<td>{{d.quality}}</td>
+						<td>{{d.stage}} / 4</td>
+                        <td>
+                            <a href="/osmbundler/{{d.filename}}">Process</a>
                             <a href="/deleteImages/{{d.filename}}" style="margin-left:20px;">Delete</a>
                         </td>
 					</tr>
@@ -48,6 +46,6 @@
 				</tbody>
 			</table>
 		</div>
-	</div> <!-- row -->
-</section> <!-- container -->
+	</div>
+</section>
 {% endblock %}
