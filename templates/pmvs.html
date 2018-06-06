@@ -23,15 +23,14 @@
 
 {%block content %}
 <section class="container">
-	<h1>Stage 1: Photogrammetry processing via osmbundler</h1>
+	<h1>Stage 2: Point cloud generation via PMVS</h1>
 			<br>
 			<br>
 	<div>
-		Processing image set "{{name}}"
+		Generating point cloud from image set "{{name}}"
 		<br>
 		<br>
-		<a class="button" style="background-color: cornflowerblue;" href="/osmprocess?name={{name}}&noisereduction=1">Process with image noise reduction</a>
-		<a class="button" style="background-color: cornflowerblue;" href="/osmprocess?name={{name}}&noisereduction=0">Process without image noise reduction</a>
+		<a class="button" style="background-color: cornflowerblue;" href="/pmvsprocess?name={{name}}">Generate</a>
 	</div>
 </section>
 {% endblock %}

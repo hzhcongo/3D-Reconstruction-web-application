@@ -6,6 +6,7 @@ import sys
 from datetime import datetime
 import logging
 import osmbundler
+from osmbundler import OsmBundler
 import osmpmvs
 import osmcmvs
 import pyexiv2
@@ -29,7 +30,6 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 @app.route("/upload", methods = ['POST'])
 def upload():
 	modelname = request.form['modelname']
-
 	if(modelname == ''):
 		modelname = datetime.now().strftime('%d_%m_%Y_%H_%M_%S')
 	print("Model name: " + modelname)
@@ -54,6 +54,10 @@ def upload():
 	saver.close()
 	#
 
+	if not os.path.isdir(target):
+		os.mkdir(target)
+		sys.stdout.flush()
+
 	images = 0
 	for file in request.files.getlist("file"):
 		images = images + 1
@@ -69,66 +73,99 @@ def upload():
 		metadata.write()
 
 	print("Images and relevant data saved. Total images: ", images)
+	sys.stdout.flush()
 	return redirect(url_for('images'))
 
 
-@app.route("/osmbundler/<name>")
-def osmbundler(name=None):
+@app.route("/osm/<name>")
+def osm(name=None):
 	return render_template("osmbundler.html", name=name)
 
 
-@app.route("/osmbundlerprocess" , methods=['GET'])
-def osmbundlerprocess():
+@app.route("/osmprocess" , methods=['GET'])
+def osmprocess():
 	# TTD: code here + stage 2 layout etc
 	noisereduction = request.args.get('noisereduction')
 	name = request.args.get('name')
-	# TTD: check stage and change process linking accordingly to stage
-	# TTD: return next stage
+
+	target = os.path.join(APP_ROOT, 'images/' + str(name) + '/')
+
+	_time = datetime.now()
+	if noisereduction == 1:
+		# TTD: Do noise reduction
+		# TTD: need overwrite images?
+		print("Noise reduction done, time taken ", (datetime.now() -_time).total_seconds())
+
+	# initialize OsmBundler manager class
+	workaddress = str(target)+'temp/'
+	manager = osmbundler.OsmBundler(target,workaddress)
+
+	try:
+		manager.preparePhotos()
+		print("Finish preparing photos, time taken ", (datetime.now() -_time).total_seconds())
+		sys.stdout.flush()
+		_time = datetime.now()
+
+		manager.matchFeatures()
+		print("Finish matching features, time taken ", (datetime.now() -_time).total_seconds())
+		sys.stdout.flush()
+		_time = datetime.now()
+
+		manager.doBundleAdjustment()
+		print("Finish bundleadjustment, time taken ",  (datetime.now() -_time).total_seconds())
+		sys.stdout.flush()
+		_time = datetime.now()
+
+		# manager.openResult()
+
+		# initialize OsmPMVS manager class
+		pmvsmanager = osmpmvs.OsmPmvs(workaddress)
+		# cmvsmanager = osmcmvs.OsmCmvs(workaddress)
+		# initialize PMVS input from Bundler output
+		pmvsmanager.doBundle2PMVS()
+		# cmvsmanager.doBundle2PMVS()
+
+		print("Finish bundle2PMVS, time taken ", (datetime.now() -_time).total_seconds())
+		sys.stdout.flush()
+		_time = datetime.now()
+
+		# call CMVS
+		# cmvsmanager.doCMVS()
+		# call PMVS
+		pmvsmanager.doPMVS()
+		print("Finish doPMVS, time taken ", (datetime.now() -_time).total_seconds())
+		sys.stdout.flush()
+
+	except AttributeError as e:
+		print("AttributeError", e.message)
+		return redirect(url_for('error', msg=e.message))
+	except IOError as e:
+		print("IOError", e.message)
+		return redirect(url_for('error', msg=e.message))
+	except ValueError as e:
+		print("ValueError", e.message)
+		# TTD: send message to errorpage
+		return redirect(url_for('error', msg=e.message))
+
 	return redirect(url_for('images'))
 
 
-	##########################################################
-	# initialize OsmBundler manager class
-	# workaddress = str(target)+'temp/'
-	# manager = osmbundler.OsmBundler(target,workaddress)
-	#
-	# _time = datetime.now()
-	# manager.preparePhotos()
-	# print("Finish preparing photos, time taken ", (datetime.now() -_time).total_seconds())
-	# sys.stdout.flush()
-	# _time = datetime.now()
-	#
-	# manager.matchFeatures()
-	# print("Finish matching features, time taken ", (datetime.now() -_time).total_seconds())
-	# sys.stdout.flush()
-	# _time = datetime.now()
-	#
-	# manager.doBundleAdjustment()
-	# print("Finish bundleadjustment, time taken ",  (datetime.now() -_time).total_seconds())
-	# sys.stdout.flush()
-	# _time = datetime.now()
-	#
-	# # manager.openResult()
-	#
-	# # initialize OsmPMVS manager class
-	# pmvsmanager = osmpmvs.OsmPmvs(workaddress)
-	# # cmvsmanager = osmcmvs.OsmCmvs(workaddress)
-	# # initialize PMVS input from Bundler output
-	# pmvsmanager.doBundle2PMVS()
-	# # cmvsmanager.doBundle2PMVS()
-	#
-	# print("Finish bundle2PMVS, time taken ", (datetime.now() -_time).total_seconds())
-	# sys.stdout.flush()
-	# _time = datetime.now()
-	#
-	# # call CMVS
-	# # cmvsmanager.doCMVS()
-	# # call PMVS
-	# pmvsmanager.doPMVS()
-	# print("Finish doPMVS, time taken ", (datetime.now() -_time).total_seconds())
-	# sys.stdout.flush()
-	#
-	# ##########################################
+@app.route("/error/<msg>")
+def error(msg=None):
+	return render_template("error.html", msg=msg)
+
+
+@app.route("/pmvs/<name>")
+def pmvs(name=None):
+	return render_template("pmvs.html", name=name)
+
+
+@app.route("/pmvsprocess" , methods=['GET'])
+def pmvsprocess():
+	return redirect(url_for('images'))
+
+
+    # ##########################################
 	#
 	# # do noise removal by KNN
 	# def isfloat(value):
@@ -334,5 +371,5 @@ def display(name = None):
 # 	return render_template("fullmoontest.html");
 
 if __name__ == "__main__":
-	app.run(host= '0.0.0.0', threaded=True)
+	app.run(host= '0.0.0.0')
 	# app.run()

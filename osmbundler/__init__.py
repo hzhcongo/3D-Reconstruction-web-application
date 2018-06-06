@@ -47,14 +47,14 @@ class OsmBundler():
     currentDir = ""
 
     workDir = ""
-    
+
     # value of command line argument --photos=<..>
     photosArg = ""
-    
+
     featureExtractor = None
-    
+
     matchingEngine = None
-    
+
     # sqlite cursor
     dbCursor = None
     
@@ -83,13 +83,18 @@ class OsmBundler():
         self.currentDir = os.getcwd()
         # create a working directory
         # self.workDir = tempfile.mkdtemp(prefix="osm-bundler-")
-        os.mkdir(workaddress)
+
+        ############################EDITS###############################
+        if not os.path.isdir(workaddress):
+            os.mkdir(workaddress)
+        ############################EDITS###############################
+
         self.workDir = workaddress
         logging.info("Working directory created: "+self.workDir)
-        
+
         if not (os.path.isdir(self.photosArg) or os.path.isfile(self.photosArg)):
             raise Exception, "'%s' is neither directory nor a file name" % self.photosArg
-        
+
         # initialize mathing engine based on command line arguments
         self.initMatchingEngine()
 
@@ -154,7 +159,7 @@ class OsmBundler():
         if os.path.isdir(self.photosArg):
             # directory with images
             photos = getPhotosFromDirectory(self.photosArg)
-            if len(photos)<3: raise Exception, "The directory with images should contain at least 3 .jpg photos"
+            if len(photos)<3: raise ValueError('The directory with images should contain at least 3 .jpg photos')
             for photo in photos:
                 photoInfo = dict(dirname=self.photosArg, basename=photo)
                 self._preparePhoto(photoInfo)
