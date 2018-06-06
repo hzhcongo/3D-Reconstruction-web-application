@@ -14,6 +14,7 @@ import numpy as np
 from sklearn.neighbors import KDTree
 import subprocess
 from flask_debugtoolbar import DebugToolbarExtension
+import shutil
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 
@@ -27,6 +28,7 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 @app.route("/upload", methods = ['POST'])
 def upload():
+	print(request)
 	modelname = request.form['modelname']
 	if(modelname == ''):
 		modelname = datetime.now().strftime('%d_%m_%Y_%H_%M_%S')
@@ -44,7 +46,10 @@ def upload():
 	if not os.path.isdir(target):
 		os.mkdir(target)
 
+	images = 0
+
 	for file in request.files.getlist("file"):
+		images = images + 1
 		filename = file.filename
 		destination = "/".join([target, filename])
 		file.save(destination)
@@ -56,6 +61,7 @@ def upload():
 		metadata['Exif.Image.Model'] = 'Iphone 6'
 		metadata.write()
 
+	print("total images ", images)
 	# initialize OsmBundler manager class
 	workaddress = str(target)+'temp/'
 	manager = osmbundler.OsmBundler(target,workaddress)
@@ -234,6 +240,11 @@ def delete(name = None):
 	os.remove(APP_ROOT+"/static/model/"+name+".ply")
 	return redirect(url_for('edit'))
 
+@app.route("/deleteImages/<name>")
+def deleteImages(name = None):
+	shutil.rmtree(APP_ROOT+"/images/"+name)
+	return redirect(url_for('images'))
+
 @app.route("/edit/")
 @app.route("/edit/<name>")
 def edit(name = None):
@@ -251,6 +262,27 @@ def edit(name = None):
 	sys.stdout.flush()
 	return render_template("edit.html", name=name, data = data)
 
+@app.route("/images/")
+def images():
+	modelFolder = os.path.join(APP_ROOT, 'images/')
+	# meshFiles = [f for f in listdir(modelFolder)]
+	data = []
+	for f in listdir(modelFolder):
+		# print(f, jsonify({'filename' : f}))
+		# sys.stdout.flush()
+		try:
+			path = os.path.join(modelFolder, f)
+			info = os.stat(path)
+			data.append({'filename' : f, 'creation_time' : datetime.fromtimestamp(info.st_ctime).strftime('%Y-%m-%d %H:%M:%S')})
+		except IOError:
+			print("IOError: ", path)
+		except:
+			print("Error: ", path)
+	# 	read quality via .txt?
+	print(data)
+	sys.stdout.flush()
+	return render_template("images.html", data = data)
+
 @app.route("/")
 @app.route("/home")
 def home():
@@ -266,5 +298,5 @@ def display(name = None):
 # 	return render_template("fullmoontest.html");
 
 if __name__ == "__main__":
-	app.run(host= '0.0.0.0')
+	app.run(host= '0.0.0.0', threaded=True)
 	# app.run()

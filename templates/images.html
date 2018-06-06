@@ -1,0 +1,53 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}3D reconstruction{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<style type="text/css">
+	#mesh_table {
+		/*max-width : 500px;*/
+/*		border-style: solid;
+		border-width: 5px;*/
+		<!--display : inline-block;-->
+		margin : 10px;
+	}
+</style>
+{% endblock %}
+{% block navbar %}
+{%include "NavBarTemplate.html" %}
+{% endblock %}
+
+{%block content %}
+<section class="container">
+	<h1 class = "button">Uploaded Image Sets</h1>
+	<div class="row align-items-start">
+		<div id = "mesh_table" class = "col-4">
+			<table id="myTable" class="table table-hover">
+				<thead>
+					<th>Image Set Name</th>
+					<th>Created Time</th>
+					<!--<th>Quality</th>-->
+					<!--<th>File size</th>-->
+					<th></th>
+					<th style="width:250px;"></th>
+				</thead>
+				<tbody>
+					{% for d in data %}
+					<tr>
+						<td>{{d.filename}}</td>
+						<td>{{d.creation_time}}</td>
+						<!--<td>{{d.quality}}</td>-->
+						<!--<td>{{d.file_size}} KB</td>-->
+						<td></td>
+                        <td style="text-align: center;">
+                            <a href="/process1/{{d.filename}}">Process</a>
+                            <a href="/deleteImages/{{d.filename}}" style="margin-left:20px;">Delete</a>
+                        </td>
+					</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div> <!-- row -->
+</section> <!-- container -->
+{% endblock %}
