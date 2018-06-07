@@ -356,7 +356,8 @@ class OsmBundler():
         # just run Bundler here
         logging.info("\nPerforming bundle adjustment...")
         os.chdir(self.workDir)
-        os.mkdir("bundle")
+        if not os.path.isdir(self.workDir+"/bundle"):
+            os.mkdir("bundle")
         
         # create options.txt
         optionsFile = open("options.txt", "w")

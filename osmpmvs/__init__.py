@@ -63,12 +63,16 @@ class OsmPmvs():
         # just run Bundle2PMVS here
         logging.info("\nPerforming Bundler2PMVS conversion...")
         os.chdir(self.workDir)
-        os.mkdir("pmvs")
+        if not os.path.isdir(self.workDir+"/pmvs"):
+            os.mkdir("pmvs")
 
         # Create directory structure
-        os.mkdir("pmvs/txt")
-        os.mkdir("pmvs/visualize")
-        os.mkdir("pmvs/models")
+        if not os.path.isdir(self.workDir+"/pmvs/txt"):
+            os.mkdir("pmvs/txt")
+        if not os.path.isdir(self.workDir+"/pmvs/visualize"):
+            os.mkdir("pmvs/visualize")
+        if not os.path.isdir(self.workDir+"/pmvs/models"):
+            os.mkdir("pmvs/models")
         
         #$BASE_PATH/bin32/Bundle2PMVS.exe list.txt  bundle/bundle.out
         print "Running Bundle2PMVS to generate geometry and converted camera file"

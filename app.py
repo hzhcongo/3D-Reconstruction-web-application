@@ -84,13 +84,11 @@ def osm(name=None):
 
 @app.route("/osmprocess" , methods=['GET'])
 def osmprocess():
-	# TTD: code here + stage 2 layout etc
 	noisereduction = request.args.get('noisereduction')
 	name = request.args.get('name')
-
 	target = os.path.join(APP_ROOT, 'images/' + str(name) + '/')
-
 	_time = datetime.now()
+
 	if noisereduction == 1:
 		# TTD: Do noise reduction
 		# TTD: need overwrite images?
@@ -136,164 +134,264 @@ def osmprocess():
 		print("Finish doPMVS, time taken ", (datetime.now() -_time).total_seconds())
 		sys.stdout.flush()
 
+		# update quality and processing stage in .txt file (1st digit = quality, 2nd digit = stage)
+		completeName = os.path.join(target, "data.txt")
+		saver = open(completeName, "r")
+		savedData = saver.read()
+		saver.close()
+		sys.stdout.flush()
+
+		saver = open(completeName, "w")
+		saver.write(str(savedData[0]))
+		saver.write("1")
+		saver.close()
+		sys.stdout.flush()
+		#
+
 	except AttributeError as e:
 		print("AttributeError", e.message)
 		return redirect(url_for('error', msg=e.message))
 	except IOError as e:
 		print("IOError", e.message)
+		if e.message:
+			return redirect(url_for('error', msg=e.message))
+		else:
+			return redirect(url_for('error', msg="IOError when updating or saving quality and current stage process"))
+	except ValueError as e:
+		print("ValueError", e.message)
+		# TTD: send message to errorpage
 		return redirect(url_for('error', msg=e.message))
+
+	return redirect(url_for('denoise', name=name))
+
+
+@app.route("/error/<msg>")
+def error(msg=None):
+		return render_template("error.html", msg=msg)
+
+
+# @app.route("/pmvs/<name>")
+# def pmvs(name=None):
+# 	return render_template("pmvs.html", name=name)
+#
+#
+# @app.route("/pmvsprocess" , methods=['GET'])
+# def pmvsprocess():
+# 	return redirect(url_for('images'))
+
+
+@app.route("/denoise/<name>")
+def denoise(name=None):
+	return render_template("denoise.html", name=name)
+
+
+@app.route("/denoiseprocess" , methods=['GET'])
+def denoiseprocess():
+	##########################################
+	name = request.args.get('name')
+	target = os.path.join(APP_ROOT, 'images/' + str(name) + '/')
+	workaddress = str(target) + 'temp/'
+
+	# do noise removal by KNN
+	def isfloat(value):
+		try:
+			float(value)
+			return True
+		except:
+			return False
+
+	try:
+		f = open(workaddress+"pmvs/models/pmvs_options.txt.ply","r")
+		points = []
+		# a1 = []
+		# a2 = []
+		# a3 = []
+
+		for line in f:
+			words = line.split()
+			if(isfloat(words[0])):
+				points.append([float(words[0]),float(words[1]),float(words[2])])
+				# a1.append(float(words[0]))
+				# a2.append(float(words[1]))
+				# a3.append(float(words[2]))
+
+		f.close()
+
+		points = np.array(points)
+		# a1 = np.array(a1)
+		# a2 = np.array(a2)
+		# a3 = np.array(a3)
+		# x_center = (np.amax(points, axis=0) - np.amin(points, axis=0))/2
+		# y_center = (np.amax(points, axis=1) - np.amin(points, axis=1))/2
+		# z_center = (np.amax(points, axis=2) - np.amin(points, axis=2))/2
+		# a1upper = np.percentile(a1,98)
+		# print("98 percentile for a1 is", a1upper)
+		# a2upper = np.percentile(a2,98)
+		# print("98 percentile for a2 is", a2upper)
+		# a3upper = np.percentile(a3,98)
+		# print("98 percentile for a3 is", a3upper)
+
+		# a1lower = np.percentile(a1,2)
+		# print("2 percentile for a1 is", a1lower)
+		# a2lower = np.percentile(a2,2)
+		# print("2 percentile for a2 is", a2lower)
+		# a3lower = np.percentile(a3,2)
+		# print("2 percentile for a3 is", a3lower)
+
+		tree = KDTree(points, leaf_size = 50)
+
+		distance = []
+		for x in points:
+			dist, ind = tree.query([x], k=200)
+			distance.append(np.average(dist))
+		distance = np.array(distance)
+		upper = np.percentile(distance,80)
+
+		indToRemove = []
+		for x in range(len(distance)):
+			if(distance[x]>upper):
+				indToRemove.append(x)
+
+		nf = open(workaddress+"pmvs/models/trim.ply", "w+")
+		# nf = open(workaddress+"pmvs/models/trim.txt", "w+")
+		f = open(workaddress+"pmvs/models/pmvs_options.txt.ply","r")
+		newLen = len(distance) - len(indToRemove)
+		removeCount = 0
+		lineCount = -1
+		for line in f:
+			words = line.split()
+			if(words[0] == "element"):
+				nf.write(words[0]+" "+words[1]+" "+str(newLen)+"\n")
+				continue
+			if(words[0] == "property" and words[1] == "uchar" and words[2] == "diffuse_red"):
+				nf.write(words[0]+" "+words[1]+" "+"red\n")
+				continue
+			if(words[0] == "property" and words[1] == "uchar" and words[2] == "diffuse_green"):
+				nf.write(words[0]+" "+words[1]+" "+"green\n")
+				continue
+			if(words[0] == "property" and words[1] == "uchar" and words[2] == "diffuse_blue"):
+				nf.write(words[0]+" "+words[1]+" "+"blue\n")
+				continue
+			if(isfloat(words[0])):
+				lineCount+=1
+				if(removeCount < len(indToRemove) and lineCount == indToRemove[removeCount]):
+					removeCount+=1
+					# print("trim point")
+					continue
+			nf.write(line)
+		nf.close()
+		f.close()
+
+		currentTime = datetime.now()
+		print("Finish denoising, time taken ", (datetime.now() - currentTime).total_seconds())
+		sys.stdout.flush()
+
+		# update quality and processing stage in .txt file (1st digit = quality, 2nd digit = stage)
+		completeName = os.path.join(target, "data.txt")
+		saver = open(completeName, "r")
+		savedData = saver.read()
+		saver.close()
+		sys.stdout.flush()
+
+		saver = open(completeName, "w")
+		saver.write(str(savedData[0]))
+		saver.write("2")
+		saver.close()
+		sys.stdout.flush()
+		#
+
+	except AttributeError as e:
+		print("AttributeError", e.message)
+		return redirect(url_for('error', msg=e.message))
+	except IOError as e:
+		print("IOError", e.message)
+		if e.message:
+			return redirect(url_for('error', msg=e.message))
+		else:
+			return redirect(url_for('error', msg="IOError when updating / saving quality and current stage process"))
+	except ValueError as e:
+		print("ValueError", e.message)
+		# TTD: send message to errorpage
+		return redirect(url_for('error', msg=e.message))
+
+	return redirect(url_for('poisson'))
+
+
+@app.route("/poisson/<name>")
+def poisson(name=None):
+	return render_template("poisson.html", name=name)\
+
+
+@app.route("/poissonprocess" , methods=['GET'])
+def poissonprocess():
+	#################################################
+	name = request.args.get('name')
+	target = os.path.join(APP_ROOT, 'images/' + str(name) + '/')
+	workaddress = str(target) + 'temp/'
+
+	try:
+		# update quality and processing stage in .txt file (1st digit = quality, 2nd digit = stage)
+		completeName = os.path.join(target, "data.txt")
+		saver = open(completeName, "r")
+		savedData = saver.read()
+		saver.close()
+		sys.stdout.flush()
+		#
+
+		# distrPath = os.path.dirname( os.path.abspath(sys.argv[0]) )
+		possoinExecutable = os.path.join(APP_ROOT, "software/PoissonRecon.exe")
+		surfaceTrimmer = os.path.join(APP_ROOT, "software/SurfaceTrimmer.exe")
+
+		# Quality settings to depth
+		if savedData[0] == 2:
+			depth = 12
+		elif savedData[0] == 1:
+			# TTD: TRY TEST 9 AND COMPARE WHICH ONE BETTER
+			depth = 10
+		else:
+			depth = 8
+		# depth = 8 + (int(quality) * 2)
+		print("--depth: ", depth)
+
+		currentTime = datetime.now()
+		subprocess.call([possoinExecutable, "--in", workaddress + "pmvs/models/trim.ply", "--out",
+		                 workaddress + "pmvs/models/mesh.ply", "--depth", str(depth), "--color", "100", "--pointWeight", "0",
+		                 "--density"])
+		print("Untrimmed: ", (datetime.now() - currentTime).total_seconds())
+
+		currentTime = datetime.now()
+		subprocess.call([surfaceTrimmer, "--in", workaddress + "pmvs/models/mesh.ply", "--out",
+		                 workaddress + "pmvs/models/trimmed_mesh.ply", "--trim", "6", "--smooth", "7"])
+		print("Trimmed: ", (datetime.now() - currentTime).total_seconds())
+
+		# # VERY LOW QUALITY
+		# currentTime = datetime.now()
+		# subprocess.call([possoinExecutable, "--in", workaddress+"pmvs/models/trim.ply", "--out", workaddress+"pmvs/models/mesh.ply", "--depth", "7", "--color", "100", "--pointWeight","0", "--density"])
+		# print("d7 ", (datetime.now() - currentTime).total_seconds())
+
+		os.rename(workaddress+"pmvs/models/trimmed_mesh.ply", workaddress+"../../../static/model/"+str(name)+".ply")
+
+		saver = open(completeName, "w")
+		saver.write(str(savedData[0]))
+		saver.write("3")
+		saver.close()
+		sys.stdout.flush()
+
+	except AttributeError as e:
+		print("AttributeError", e.message)
+		return redirect(url_for('error', msg=e.message))
+	except IOError as e:
+		print("IOError", e.message)
+		if e.message:
+			return redirect(url_for('error', msg=e.message))
+		else:
+			return redirect(url_for('error', msg="IOError when updating / saving quality and current stage process"))
 	except ValueError as e:
 		print("ValueError", e.message)
 		# TTD: send message to errorpage
 		return redirect(url_for('error', msg=e.message))
 
 	return redirect(url_for('images'))
-
-
-@app.route("/error/<msg>")
-def error(msg=None):
-	return render_template("error.html", msg=msg)
-
-
-@app.route("/pmvs/<name>")
-def pmvs(name=None):
-	return render_template("pmvs.html", name=name)
-
-
-@app.route("/pmvsprocess" , methods=['GET'])
-def pmvsprocess():
-	return redirect(url_for('images'))
-
-
-    # ##########################################
-	#
-	# # do noise removal by KNN
-	# def isfloat(value):
-	# 	try:
-	# 		float(value)
-	# 		return True
-	# 	except:
-	# 		return False
-	#
-	# f = open(workaddress+"pmvs/models/pmvs_options.txt.ply","r")
-	# points = []
-	# # a1 = []
-	# # a2 = []
-	# # a3 = []
-	#
-	# for line in f:
-	# 	words = line.split()
-	# 	if(isfloat(words[0])):
-	# 		points.append([float(words[0]),float(words[1]),float(words[2])])
-	# 		# a1.append(float(words[0]))
-	# 		# a2.append(float(words[1]))
-	# 		# a3.append(float(words[2]))
-	#
-	# f.close()
-	#
-	# points = np.array(points)
-	# # a1 = np.array(a1)
-	# # a2 = np.array(a2)
-	# # a3 = np.array(a3)
-	# # x_center = (np.amax(points, axis=0) - np.amin(points, axis=0))/2
-	# # y_center = (np.amax(points, axis=1) - np.amin(points, axis=1))/2
-	# # z_center = (np.amax(points, axis=2) - np.amin(points, axis=2))/2
-	# # a1upper = np.percentile(a1,98)
-	# # print("98 percentile for a1 is", a1upper)
-	# # a2upper = np.percentile(a2,98)
-	# # print("98 percentile for a2 is", a2upper)
-	# # a3upper = np.percentile(a3,98)
-	# # print("98 percentile for a3 is", a3upper)
-	#
-	# # a1lower = np.percentile(a1,2)
-	# # print("2 percentile for a1 is", a1lower)
-	# # a2lower = np.percentile(a2,2)
-	# # print("2 percentile for a2 is", a2lower)
-	# # a3lower = np.percentile(a3,2)
-	# # print("2 percentile for a3 is", a3lower)
-	#
-	# tree = KDTree(points, leaf_size = 50)
-	#
-	# distance = []
-	# for x in points:
-	# 	dist, ind = tree.query([x], k=200)
-	# 	distance.append(np.average(dist))
-	# distance = np.array(distance)
-	# upper = np.percentile(distance,80)
-	#
-	# indToRemove = []
-	# for x in range(len(distance)):
-	# 	if(distance[x]>upper):
-	# 		indToRemove.append(x)
-	#
-	# nf = open(workaddress+"pmvs/models/trim.ply", "w+")
-	# # nf = open(workaddress+"pmvs/models/trim.txt", "w+")
-	# f = open(workaddress+"pmvs/models/pmvs_options.txt.ply","r")
-	# newLen = len(distance) - len(indToRemove)
-	# removeCount = 0
-	# lineCount = -1
-	# for line in f:
-	# 	words = line.split()
-	# 	if(words[0] == "element"):
-	# 		nf.write(words[0]+" "+words[1]+" "+str(newLen)+"\n")
-	# 		continue
-	# 	if(words[0] == "property" and words[1] == "uchar" and words[2] == "diffuse_red"):
-	# 		nf.write(words[0]+" "+words[1]+" "+"red\n")
-	# 		continue
-	# 	if(words[0] == "property" and words[1] == "uchar" and words[2] == "diffuse_green"):
-	# 		nf.write(words[0]+" "+words[1]+" "+"green\n")
-	# 		continue
-	# 	if(words[0] == "property" and words[1] == "uchar" and words[2] == "diffuse_blue"):
-	# 		nf.write(words[0]+" "+words[1]+" "+"blue\n")
-	# 		continue
-	# 	if(isfloat(words[0])):
-	# 		lineCount+=1
-	# 		if(removeCount < len(indToRemove) and lineCount == indToRemove[removeCount]):
-	# 			removeCount+=1
-	# 			# print("trim point")
-	# 			continue
-	# 	nf.write(line)
-	# nf.close()
-	# f.close()
-	#
-	# currentTime = datetime.now()
-	# print("Finish noiseRemoval part 1, time taken ", (datetime.now() - currentTime).total_seconds())
-	# sys.stdout.flush()
-	#
-	# # distrPath = os.path.dirname( os.path.abspath(sys.argv[0]) )
-	# possoinExecutable = os.path.join(APP_ROOT, "software/PoissonRecon.exe")
-	# surfaceTrimmer = os.path.join(APP_ROOT, "software/SurfaceTrimmer.exe")
-	#
-	# # Quality settings to depth
-	# if quality == 2:
-	# 	depth = 12
-	# elif quality == 1:
-	# 	# TTD: TRY TEST 9 AND COMPARE WHICH ONE BETTER
-	# 	depth = 10
-	# else:
-	# 	depth = 8
-	# # depth = 8 + (int(quality) * 2)
-	# print("--depth: ", depth)
-	#
-	# currentTime = datetime.now()
-	# subprocess.call([possoinExecutable, "--in", workaddress + "pmvs/models/trim.ply", "--out",
-	#                  workaddress + "pmvs/models/mesh.ply", "--depth", str(depth), "--color", "100", "--pointWeight", "0",
-	#                  "--density"])
-	# print("Untrimmed: ", (datetime.now() - currentTime).total_seconds())
-	#
-	# currentTime = datetime.now()
-	# subprocess.call([surfaceTrimmer, "--in", workaddress + "pmvs/models/mesh.ply", "--out",
-	#                  workaddress + "pmvs/models/trimmed_mesh.ply", "--trim", "6", "--smooth", "7"])
-	# print("Trimmed: ", (datetime.now() - currentTime).total_seconds())
-	#
-	# # # VERY LOW QUALITY
-	# # currentTime = datetime.now()
-	# # subprocess.call([possoinExecutable, "--in", workaddress+"pmvs/models/trim.ply", "--out", workaddress+"pmvs/models/mesh.ply", "--depth", "7", "--color", "100", "--pointWeight","0", "--density"])
-	# # print("d7 ", (datetime.now() - currentTime).total_seconds())
-	#
-	# os.rename(workaddress+"pmvs/models/trimmed_mesh.ply", workaddress+"../../../static/model/"+str(modelname)+".ply")
-	# print("Total time taken ",  (datetime.now() - beginTime).total_seconds())
-	# sys.stdout.flush()
 	##########################################################
 
 @app.route("/fileUpload")
@@ -342,9 +440,9 @@ def images():
 			saver.close()
 
 			qualityText = "High"
-			if dataread[0] == 0:
+			if dataread[0] == "0":
 				qualityText = "Low"
-			elif  dataread[0] == 1:
+			elif  dataread[0] == "1":
 				qualityText = "Medium"
 
 			data.append({'filename' : f, 'creation_time' : datetime.fromtimestamp(info.st_ctime).strftime('%Y-%m-%d %H:%M:%S'), 'quality' : qualityText, 'stage' : dataread[1]})

@@ -1,5 +1,5 @@
 {% extends "bootstrap/base.html" %}
-{% block title %}3D reconstruction{% endblock %}
+{% block title %}Virtuaso{% endblock %}
 
 {% block styles %}
 {{ super() }}
@@ -65,7 +65,7 @@
 						<td>{{d.modification_time}}</td>
 						<td>{{d.file_size}} KB</td>
 						<td></td>
-                        <td style="text-align: center;">
+                        <td>
                             <a href="/edit/{{d.filename}}">View / Edit</a>
                             <a href="/delete/{{d.filename}}" style="margin-left:20px;">Delete</a>
                         </td>
