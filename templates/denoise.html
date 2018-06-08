@@ -31,6 +31,12 @@
 		<br>
 		<br>
 		<a class="button" style="background-color: cornflowerblue;" href="/denoiseprocess?name={{name}}">De-noise point cloud</a>
+		<br>
+		You can download the current state of the .ply model generated for the image set. <br>
+		Stage 2 will be applied on this model
+		<br>
+		<br>
+		<a class="button" style="background-color: cornflowerblue;" href="{{ url_for('static', filename= name + '/temp/pmvs/models/pmvs_options.txt.ply')}}">Download current state of model</a>
 	</div>
 </section>
 {% endblock %}

@@ -425,8 +425,8 @@ def edit(name = None):
 	sys.stdout.flush()
 	return render_template("edit.html", name=name, data = data)
 
-@app.route("/images/")
-def images():
+@app.route("/imagesets/")
+def imagesets():
 	modelFolder = os.path.join(APP_ROOT, 'images/')
 	data = []
 	for f in listdir(modelFolder):
@@ -452,7 +452,7 @@ def images():
 			print("Error: ", path)
 	print(data)
 	sys.stdout.flush()
-	return render_template("images.html", data = data)
+	return render_template("imagesets.html", data = data)
 
 @app.route("/")
 @app.route("/home")
