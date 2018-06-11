@@ -34,6 +34,13 @@ def upload():
 		modelname = datetime.now().strftime('%d_%m_%Y_%H_%M_%S')
 	print("Model name: " + modelname)
 
+	modelFolder = os.path.join(APP_ROOT, 'static/model/')
+	for f in listdir(modelFolder):
+		path = os.path.join(modelFolder, f)
+		filename = f[:-4]
+		if(filename == modelname):
+			return redirect(url_for('error', msg="Model name already exists in server. Please choose a different name or delete the old model."))
+
 	quality = request.form['quality']
 	print("Quality: " + quality)
 
@@ -41,7 +48,7 @@ def upload():
 	# print(timestampfilename)
 
 	sys.stdout.flush()
-	target = os.path.join(APP_ROOT, 'images/'+str(modelname)+'/')
+	target = os.path.join(APP_ROOT, 'static/images/'+str(modelname)+'/')
 
 	if not os.path.isdir(target):
 		os.mkdir(target)
@@ -74,7 +81,7 @@ def upload():
 
 	print("Images and relevant data saved. Total images: ", images)
 	sys.stdout.flush()
-	return redirect(url_for('images'))
+	return redirect(url_for('imagesets'))
 
 
 @app.route("/osm/<name>")
@@ -86,7 +93,7 @@ def osm(name=None):
 def osmprocess():
 	noisereduction = request.args.get('noisereduction')
 	name = request.args.get('name')
-	target = os.path.join(APP_ROOT, 'images/' + str(name) + '/')
+	target = os.path.join(APP_ROOT, 'static/images/' + str(name) + '/')
 	_time = datetime.now()
 
 	if noisereduction == 1:
@@ -159,8 +166,10 @@ def osmprocess():
 			return redirect(url_for('error', msg="IOError when updating or saving quality and current stage process"))
 	except ValueError as e:
 		print("ValueError", e.message)
-		# TTD: send message to errorpage
 		return redirect(url_for('error', msg=e.message))
+	except WindowsError as e:
+		print("WindowsError", e.message)
+		return redirect(url_for('error', msg="A model of the same name already exists in the server. Please rename your model or delete the model with the same name"))
 
 	return redirect(url_for('denoise', name=name))
 
@@ -168,16 +177,6 @@ def osmprocess():
 @app.route("/error/<msg>")
 def error(msg=None):
 		return render_template("error.html", msg=msg)
-
-
-# @app.route("/pmvs/<name>")
-# def pmvs(name=None):
-# 	return render_template("pmvs.html", name=name)
-#
-#
-# @app.route("/pmvsprocess" , methods=['GET'])
-# def pmvsprocess():
-# 	return redirect(url_for('images'))
 
 
 @app.route("/denoise/<name>")
@@ -189,7 +188,7 @@ def denoise(name=None):
 def denoiseprocess():
 	##########################################
 	name = request.args.get('name')
-	target = os.path.join(APP_ROOT, 'images/' + str(name) + '/')
+	target = os.path.join(APP_ROOT, 'static/images/' + str(name) + '/')
 	workaddress = str(target) + 'temp/'
 
 	# do noise removal by KNN
@@ -311,22 +310,24 @@ def denoiseprocess():
 			return redirect(url_for('error', msg="IOError when updating / saving quality and current stage process"))
 	except ValueError as e:
 		print("ValueError", e.message)
-		# TTD: send message to errorpage
 		return redirect(url_for('error', msg=e.message))
+	except WindowsError as e:
+		print("WindowsError", e.message)
+		return redirect(url_for('error', msg="A model of the same name already exists in the server. Please rename your model or delete the model with the same name"))
 
-	return redirect(url_for('poisson'))
+	return redirect(url_for('poisson', name=name))
 
 
 @app.route("/poisson/<name>")
 def poisson(name=None):
-	return render_template("poisson.html", name=name)\
+	return render_template("poisson.html", name=name)
 
 
 @app.route("/poissonprocess" , methods=['GET'])
 def poissonprocess():
 	#################################################
 	name = request.args.get('name')
-	target = os.path.join(APP_ROOT, 'images/' + str(name) + '/')
+	target = os.path.join(APP_ROOT, 'static/images/' + str(name) + '/')
 	workaddress = str(target) + 'temp/'
 
 	try:
@@ -340,16 +341,15 @@ def poissonprocess():
 
 		# distrPath = os.path.dirname( os.path.abspath(sys.argv[0]) )
 		possoinExecutable = os.path.join(APP_ROOT, "software/PoissonRecon.exe")
-		surfaceTrimmer = os.path.join(APP_ROOT, "software/SurfaceTrimmer.exe")
 
 		# Quality settings to depth
-		if savedData[0] == 2:
+		if savedData[0] == '2':
 			depth = 12
-		elif savedData[0] == 1:
-			# TTD: TRY TEST 9 AND COMPARE WHICH ONE BETTER
-			depth = 10
+		elif savedData[0] == '1':
+			depth = 9
 		else:
 			depth = 8
+
 		# depth = 8 + (int(quality) * 2)
 		print("--depth: ", depth)
 
@@ -359,17 +359,10 @@ def poissonprocess():
 		                 "--density"])
 		print("Untrimmed: ", (datetime.now() - currentTime).total_seconds())
 
-		currentTime = datetime.now()
-		subprocess.call([surfaceTrimmer, "--in", workaddress + "pmvs/models/mesh.ply", "--out",
-		                 workaddress + "pmvs/models/trimmed_mesh.ply", "--trim", "6", "--smooth", "7"])
-		print("Trimmed: ", (datetime.now() - currentTime).total_seconds())
-
 		# # VERY LOW QUALITY
 		# currentTime = datetime.now()
 		# subprocess.call([possoinExecutable, "--in", workaddress+"pmvs/models/trim.ply", "--out", workaddress+"pmvs/models/mesh.ply", "--depth", "7", "--color", "100", "--pointWeight","0", "--density"])
 		# print("d7 ", (datetime.now() - currentTime).total_seconds())
-
-		os.rename(workaddress+"pmvs/models/trimmed_mesh.ply", workaddress+"../../../static/model/"+str(name)+".ply")
 
 		saver = open(completeName, "w")
 		saver.write(str(savedData[0]))
@@ -388,15 +381,146 @@ def poissonprocess():
 			return redirect(url_for('error', msg="IOError when updating / saving quality and current stage process"))
 	except ValueError as e:
 		print("ValueError", e.message)
-		# TTD: send message to errorpage
 		return redirect(url_for('error', msg=e.message))
+	except WindowsError as e:
+		print("WindowsError", e.message)
+		return redirect(url_for('error', msg="A model of the same name already exists in the server. Please rename your model or delete the model with the same name"))
 
-	return redirect(url_for('images'))
+	return redirect(url_for('trimmer', name=name))
+	##########################################################
+
+@app.route("/trimmer/<name>")
+def trimmer(name=None):
+	return render_template("trimmer.html", name=name)
+
+@app.route("/trimmerprocess", methods=['GET'])
+def trimmerprocess():
+	#################################################
+	name = request.args.get('name')
+	target = os.path.join(APP_ROOT, 'static/images/' + str(name) + '/')
+	workaddress = str(target) + 'temp/'
+
+	try:
+		# update quality and processing stage in .txt file (1st digit = quality, 2nd digit = stage)
+		completeName = os.path.join(target, "data.txt")
+		saver = open(completeName, "r")
+		savedData = saver.read()
+		saver.close()
+		sys.stdout.flush()
+		#
+
+		###################### STAGE 4
+		surfaceTrimmer = os.path.join(APP_ROOT, "software/SurfaceTrimmer.exe")
+		currentTime = datetime.now()
+		subprocess.call([surfaceTrimmer, "--in", workaddress + "pmvs/models/mesh.ply", "--out",
+		                 workaddress + "pmvs/models/trimmed_mesh.ply", "--trim", "6", "--smooth", "7"])
+		print("Trimmed: ", (datetime.now() - currentTime).total_seconds())
+		######################
+
+		os.rename(workaddress+"pmvs/models/trimmed_mesh.ply", workaddress+"../../../model/"+str(name)+".ply")
+
+		saver = open(completeName, "w")
+		saver.write(str(savedData[0]))
+		saver.write("4")
+		saver.close()
+		sys.stdout.flush()
+
+	except AttributeError as e:
+		print("AttributeError", e.message)
+		return redirect(url_for('error', msg=e.message))
+	except IOError as e:
+		print("IOError", e.message)
+		if e.message:
+			return redirect(url_for('error', msg=e.message))
+		else:
+			return redirect(url_for('error', msg="IOError when updating / saving quality and current stage process"))
+	except ValueError as e:
+		print("ValueError", e.message)
+		return redirect(url_for('error', msg=e.message))
+	except WindowsError as e:
+		print("WindowsError", e.message)
+		return redirect(url_for('error', msg="A model of the same name already exists in the server. Please rename your model or delete the model with the same name"))
+
+	return redirect(url_for('edit', name=name))
 	##########################################################
 
 @app.route("/fileUpload")
 def fileUpload():
 	return render_template("fileUpload.html")
+
+
+@app.route("/plyUpload")
+def plyUpload():
+	return render_template("plyUpload.html")
+
+
+@app.route("/plyUploadprocess", methods = ['POST'])
+def plyUploadprocess():
+	modelname = request.form['modelname']
+	if(modelname == ''):
+		modelname = datetime.now().strftime('%d_%m_%Y_%H_%M_%S')
+	print("Model name: " + modelname)
+
+	modelFolder = os.path.join(APP_ROOT, 'static/model/')
+	for f in listdir(modelFolder):
+		path = os.path.join(modelFolder, f)
+		filename = f[:-4]
+		if(filename == modelname):
+			return redirect(url_for('error', msg="Model name already exists in server. Please choose a different name or delete the old model."))
+
+	quality = request.form['quality']
+	print("Quality: " + quality)
+
+	step = request.form['step']
+	print("Step: " + step)
+
+	uploadedfile = request.files['file']
+
+	sys.stdout.flush()
+	target = os.path.join(APP_ROOT, 'static/images/'+str(modelname)+'/')
+
+	if not os.path.isdir(target):
+		os.mkdir(target)
+
+	# Store quality and processing stage in .txt file (1st digit = quality, 2nd digit = stage)
+	completeName = os.path.join(target, "data.txt")
+	saver = open(completeName, "w+")
+	saver.write(quality)
+	saver.write("0")
+	saver.close()
+	#
+
+	if not os.path.isdir(target):
+		os.mkdir(target)
+		sys.stdout.flush()
+
+	newDir = os.path.join(target, 'temp/pmvs/models/')
+	if not os.path.isdir(newDir):
+		os.mkdir(os.path.join(target, 'temp/'))
+		os.mkdir(os.path.join(target, 'temp/pmvs/'))
+		os.mkdir(os.path.join(target, 'temp/pmvs/models/'))
+
+	if step == '2':
+		filename = "pmvs_options.txt.ply"
+	elif step == '3':
+		filename = "trim.ply"
+	else: # elif step == '4':
+		filename = "mesh.ply"
+
+	destination = "/".join([newDir, filename])
+	uploadedfile.save(destination)
+	print(".PLY saved")
+	sys.stdout.flush()
+
+	if step == '2':
+		return redirect(url_for('denoise', name=modelname))
+	elif step == '3':
+		return redirect(url_for('poisson', name=modelname))
+	elif step == '4':
+		return redirect(url_for('trimmer', name=modelname))
+
+	return redirect(url_for('error', msg="Step not chosen. Please try again"))
+
 
 @app.route("/delete/<name>")
 def delete(name = None):
@@ -405,8 +529,8 @@ def delete(name = None):
 
 @app.route("/deleteImages/<name>")
 def deleteImages(name = None):
-	shutil.rmtree(APP_ROOT+"/images/"+name)
-	return redirect(url_for('images'))
+	shutil.rmtree(APP_ROOT+"/static/images/"+name)
+	return redirect(url_for('imagesets'))
 
 @app.route("/edit/")
 @app.route("/edit/<name>")
@@ -427,7 +551,7 @@ def edit(name = None):
 
 @app.route("/imagesets/")
 def imagesets():
-	modelFolder = os.path.join(APP_ROOT, 'images/')
+	modelFolder = os.path.join(APP_ROOT, 'static/images/')
 	data = []
 	for f in listdir(modelFolder):
 		try:

@@ -1,0 +1,42 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Virtuaso{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<style type="text/css">
+	.button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            font: 400 13px Arial;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+        }
+</style>
+{% endblock %}
+{% block navbar %}
+{%include "NavBarTemplate.html" %}
+{% endblock %}
+
+{%block content %}
+<section class="container">
+	<h1>Stage 4: Surface trimming of generated mesh</h1>
+			<br>
+			<br>
+	<div>
+		Surface trimming of generated mesh via point cloud from image set "{{name}}"
+		<br>
+		<a class="button" style="background-color: cornflowerblue;" href="/trimmerprocess?name={{name}}">Trim mesh</a>
+		<br>
+		<br>
+		You can download the current state of the .ply model generated for the image set to save it locally. <br>
+		Stage 4 will be applied on this model
+		<br>
+		<a class="button" style="background-color: cornflowerblue;" href="{{ url_for('static', filename='images/' + name + '/temp/pmvs/models/mesh.ply')}}">Download current state of model</a>
+
+	</div>
+</section>
+{% endblock %}

@@ -1,0 +1,36 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}Virtuaso{% endblock %}
+<!--<script type="text/javascript">-->
+	<!--function checkForm() {-->
+		<!--console.log("start");-->
+			<!--if(document.getElementById('modelname').value.match(/^.*[^\s{1,}]\s.*/)) {-->
+				<!--alert('Model name must not have any spaces or special characters');-->
+				<!--return false;-->
+			<!--} else {-->
+				<!--document.getElementById('upload-form').submit();-->
+				<!--return true;-->
+			<!--}-->
+			<!--console.log("end");-->
+	<!--}-->
+<!--</script>-->
+{% block navbar %}
+	{%include "NavBarTemplate.html" %}
+{% endblock %}
+
+{%block content %}
+	<div class="container">
+	  <h2>.PLY Uploader</h2>
+	  <form id="upload-form" action ="{{ url_for('plyUploadprocess') }}" method = "POST" enctype="multipart/form-data">
+		  Model name (Leave blank to use current datetime as name):<br> <input type = "text" name = "modelname" id="modelname"><br><br>
+		  Model quality (0 = low, 1 = medium, 2 = high):<br> <input type = "number" name = "quality" value="0" max="2" min="0" required><br><br>
+		  Stage to process:<br>
+				<!--<li><a href="#">Photogrammetry processing + Point cloud generation </a></li>-->
+				<input type="radio" name="step" value="2" required> Point cloud de-noising<br>
+				<input type="radio" name="step" value="3"> Mesh generation<br>
+				<input type="radio" name="step" value="4"> Surface trimming<br><br>
+		  Upload .PLY file:<br> <input type = "file" name = "file" accept=".ply" required><br>
+	    <input type="submit" value="Send">
+	  </form>
+	</div>
+{% endblock %}

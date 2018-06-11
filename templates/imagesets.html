@@ -36,9 +36,11 @@
 						<td>{{d.filename}}</td>
 						<td>{{d.creation_time}}</td>
 						<td>{{d.quality}}</td>
-						<td>{{d.stage}} / 3</td>
+						<td>{{d.stage}} / 4</td>
                         <td>
-        					{% if d.stage == '2' or d.stage == '3' %}
+        					{% if d.stage == '3' or d.stage == '4' %}
+                            <a href="/trimmer/{{d.filename}}">Process</a>
+        					{% elif d.stage == '2' %}
                             <a href="/poisson/{{d.filename}}">Process</a>
         					{% elif d.stage == '1' %}
                             <a href="/denoise/{{d.filename}}">Process</a>

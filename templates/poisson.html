@@ -29,8 +29,14 @@
 	<div>
 		Generation of mesh via point cloud from image set "{{name}}"
 		<br>
-		<br>
 		<a class="button" style="background-color: cornflowerblue;" href="/poissonprocess?name={{name}}">Generate mesh</a>
+		<br>
+		<br>
+		You can download the current state of the .ply model generated for the image set to save it locally. <br>
+		Stage 3 will be applied on this model
+		<br>
+		<a class="button" style="background-color: cornflowerblue;" href="{{ url_for('static', filename='images/' + name + '/temp/pmvs/models/trim.ply')}}">Download current state of model</a>
+
 	</div>
 </section>
 {% endblock %}
