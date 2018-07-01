@@ -1,14 +1,15 @@
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, redirect, url_for
 from flask_bootstrap import Bootstrap
 import os
+import sys
 from os import listdir
 import sys
 from datetime import datetime
 import logging
 import osmbundler
-from osmbundler import OsmBundler
+# from osmbundler import OsmBundler
 import osmpmvs
-import osmcmvs
+# import osmcmvs
 import pyexiv2
 from fractions import Fraction
 import numpy as np
@@ -16,6 +17,8 @@ from sklearn.neighbors import KDTree
 import subprocess
 from flask_debugtoolbar import DebugToolbarExtension
 import shutil
+import cv2
+import fnmatch
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 
@@ -29,6 +32,7 @@ APP_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 @app.route("/upload", methods = ['POST'])
 def upload():
+
 	modelname = request.form['modelname']
 	if(modelname == ''):
 		modelname = datetime.now().strftime('%d_%m_%Y_%H_%M_%S')
@@ -91,15 +95,24 @@ def osm(name=None):
 
 @app.route("/osmprocess" , methods=['GET'])
 def osmprocess():
-	noisereduction = request.args.get('noisereduction')
+	# noisereduction = request.args.get('noisereduction')
 	name = request.args.get('name')
 	target = os.path.join(APP_ROOT, 'static/images/' + str(name) + '/')
 	_time = datetime.now()
 
-	if noisereduction == 1:
-		# TTD: Do noise reduction
-		# TTD: need overwrite images?
-		print("Noise reduction done, time taken ", (datetime.now() -_time).total_seconds())
+	# if noisereduction == '1':
+	# 	# TTD: Do noise reduction
+	# 	noImages = len(fnmatch.filter(os.listdir(target), '*.jpg'))
+	# 	print noImages
+	# 	# imgs = [cv2.imread(target + str(imgeNumber) + '.jpg') for imgeNumber in range(1, noImages)]
+	# 	# dst = cv2.fastNlMeansDenoisingColoredMulti(imgs, 2, 5, None, 4, 7, 35)
+	#
+	# 	for imgeNumber in range(1, noImages):
+	# 		img = cv2.imread(target + str(imgeNumber) + '.jpg')
+	# 		dst = cv2.fastNlMeansDenoisingColored(img, None, 8, 10, 7, 25)
+	# 		cv2.imwrite(target + str(imgeNumber) + '.jpg', dst)
+	# 	# TTD: need overwrite images?
+	# 	print("Noise reduction done, time taken ", (datetime.now() -_time).total_seconds())
 
 	# initialize OsmBundler manager class
 	workaddress = str(target)+'temp/'
@@ -209,7 +222,7 @@ def denoiseprocess():
 		for line in f:
 			words = line.split()
 			if(isfloat(words[0])):
-				points.append([float(words[0]),float(words[1]),float(words[2])])
+				points.append([float(words[0]),float(words[1]),float(words[2])]) #store x y z of points
 				# a1.append(float(words[0]))
 				# a2.append(float(words[1]))
 				# a3.append(float(words[2]))
@@ -238,13 +251,15 @@ def denoiseprocess():
 		# print("2 percentile for a3 is", a3lower)
 
 		tree = KDTree(points, leaf_size = 50)
-
+		# find leaf with most neighbours?
+		# add into leaf as long as
 		distance = []
 		for x in points:
-			dist, ind = tree.query([x], k=200)
+			dist, ind = tree.query([x], k=2000)
+			# np.median(dist)
 			distance.append(np.average(dist))
 		distance = np.array(distance)
-		upper = np.percentile(distance,80)
+		upper = np.percentile(distance,70)
 
 		indToRemove = []
 		for x in range(len(distance)):
@@ -252,7 +267,6 @@ def denoiseprocess():
 				indToRemove.append(x)
 
 		nf = open(workaddress+"pmvs/models/trim.ply", "w+")
-		# nf = open(workaddress+"pmvs/models/trim.txt", "w+")
 		f = open(workaddress+"pmvs/models/pmvs_options.txt.ply","r")
 		newLen = len(distance) - len(indToRemove)
 		removeCount = 0
@@ -274,7 +288,7 @@ def denoiseprocess():
 			if(isfloat(words[0])):
 				lineCount+=1
 				if(removeCount < len(indToRemove) and lineCount == indToRemove[removeCount]):
-					removeCount+=1
+					removeCount+=1 # Removed by skipping nf.write(line) below. continue to skip to next for loop
 					# print("trim point")
 					continue
 			nf.write(line)
@@ -355,7 +369,7 @@ def poissonprocess():
 
 		currentTime = datetime.now()
 		subprocess.call([possoinExecutable, "--in", workaddress + "pmvs/models/trim.ply", "--out",
-		                 workaddress + "pmvs/models/mesh.ply", "--depth", str(depth), "--color", "100", "--pointWeight", "0",
+		                 workaddress + "pmvs/models/mesh.ply", "--depth", str(depth), "--colors", "100", "--pointWeight", "0",
 		                 "--density"])
 		print("Untrimmed: ", (datetime.now() - currentTime).total_seconds())
 
