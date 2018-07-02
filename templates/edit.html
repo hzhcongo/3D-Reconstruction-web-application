@@ -50,9 +50,9 @@
 		<div id = "mesh_table" class = "col-4">
 			<table id="myTable" class="table table-hover">
 				<thead>
-					<th>Mesh name</th>
-					<th>Created time</th>
 					<th>Modified time</th>
+					<th>Created time</th>
+					<th>Mesh name</th>
 					<th>File size</th>
 					<th></th>
 					<th style="width:250px;">Actions</th>
@@ -60,9 +60,9 @@
 				<tbody>
 					{% for d in data %}
 					<tr>
-						<td>{{d.filename}}</td>
-						<td>{{d.creation_time}}</td>
 						<td>{{d.modification_time}}</td>
+						<td>{{d.creation_time}}</td>
+						<td>{{d.filename}}</td>
 						<td>{{d.file_size}} KB</td>
 						<td></td>
                         <td>

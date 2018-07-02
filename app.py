@@ -1,13 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_bootstrap import Bootstrap
 import os
-import sys
 from os import listdir
 import sys
 from datetime import datetime
 import logging
 import osmbundler
-# from osmbundler import OsmBundler
 import osmpmvs
 # import osmcmvs
 import pyexiv2
@@ -17,8 +15,7 @@ from sklearn.neighbors import KDTree
 import subprocess
 from flask_debugtoolbar import DebugToolbarExtension
 import shutil
-import cv2
-import fnmatch
+import trimesh
 
 logging.basicConfig(level=logging.INFO, format="%(message)s")
 
@@ -204,7 +201,7 @@ def denoiseprocess():
 	target = os.path.join(APP_ROOT, 'static/images/' + str(name) + '/')
 	workaddress = str(target) + 'temp/'
 
-	# do noise removal by KNN
+	# TTD: CAN TRY REMOVE IF TRIMESH PROBLEM IS SOLVED
 	def isfloat(value):
 		try:
 			float(value)
@@ -255,7 +252,7 @@ def denoiseprocess():
 		# add into leaf as long as
 		distance = []
 		for x in points:
-			dist, ind = tree.query([x], k=2000)
+			dist, ind = tree.query([x], k=200)
 			# np.median(dist)
 			distance.append(np.average(dist))
 		distance = np.array(distance)
@@ -423,7 +420,7 @@ def trimmerprocess():
 		sys.stdout.flush()
 		#
 
-		###################### STAGE 4
+		###################### STAGE 4 (Trims non-meaningful surfaces that may come from floors)
 		surfaceTrimmer = os.path.join(APP_ROOT, "software/SurfaceTrimmer.exe")
 		currentTime = datetime.now()
 		subprocess.call([surfaceTrimmer, "--in", workaddress + "pmvs/models/mesh.ply", "--out",
@@ -431,7 +428,38 @@ def trimmerprocess():
 		print("Trimmed: ", (datetime.now() - currentTime).total_seconds())
 		######################
 
-		os.rename(workaddress+"pmvs/models/trimmed_mesh.ply", workaddress+"../../../model/"+str(name)+".ply")
+		############################ TRIMESH
+		# load a file by name or from a buffer
+		mesh = trimesh.load(workaddress+"pmvs/models/trimmed_mesh.ply")
+
+		# Splits up seperated meshes from mesh in .PLY
+		meshes = mesh.split(only_watertight = False)
+
+		currentMeshIndex = -1
+		largestMeshIndex = -1
+		mesharea = []
+		largestMeshArea = 0
+
+		# Find largest mesh among split meshes
+		for eachmesh in meshes:
+			currentMeshIndex = currentMeshIndex + 1
+			mesharea.append(eachmesh.area)
+			if(eachmesh.area > largestMeshArea):
+				largestMeshIndex = currentMeshIndex
+				largestMeshArea = eachmesh.area
+
+		# Save largest mesh
+		# trimesh.Trimesh.export(meshes[largestMeshIndex], 'static/model/'+str(name)+'.stl', 'stl_ascii')
+		# result = trimesh.io.ply.export_ply(meshes[largestMeshIndex], encoding='ascii', vertex_normal=True)
+		# trimesh.Trimesh.export(meshes[largestMeshIndex], 'static/model/'+str(name)+'.ply', 'ply')
+		result = trimesh.io.ply.export_ply(meshes[largestMeshIndex], encoding='ascii', vertex_normal=None)
+
+		saver = open("static/model/"+str(name)+".ply", "w")
+		saver.write(str(result))
+		saver.close()
+		sys.stdout.flush()
+		# os.rename(workaddress+"pmvs/models/trimmed_mesh.ply", workaddress+"../../../model/"+str(name)+".ply")
+		############################ TRIMESH
 
 		saver = open(completeName, "w")
 		saver.write(str(savedData[0]))
@@ -552,7 +580,12 @@ def edit(name = None):
 	modelFolder = os.path.join(APP_ROOT, 'static/model/')
 	# meshFiles = [f for f in listdir(modelFolder)]
 	data = []
-	for f in listdir(modelFolder):
+
+	a = [s for s in os.listdir(modelFolder)
+	     if os.path.isfile(os.path.join(modelFolder, s))]
+	a.sort(key=lambda s: os.path.getmtime(os.path.join(modelFolder, s)))
+
+	for f in a:
 		# print(f, jsonify({'filename' : f}))
 		# sys.stdout.flush()
 		path = os.path.join(modelFolder, f)
