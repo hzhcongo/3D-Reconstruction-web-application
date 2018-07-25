@@ -26,9 +26,9 @@
     </div>
     <div style="float:right;">
         {% if name %}
-            <button onclick="generateModelLink(0)" class="button">Update model (ASCII)</button>
-            <button onclick="generateModelLink(1)" class="button">Update model (Binary)</button>
-            <a id="linker" class="button" style="background-color: cornflowerblue;" href="{{ url_for('static', filename='model/' + name + '.ply')}}">Download model</a>
+            <button onclick="generateModelLink(0)" class="button">Update mesh (ASCII)</button>
+            <button onclick="generateModelLink(1)" class="button">Update mesh (Binary)</button>
+            <a id="linker" class="button" style="background-color: cornflowerblue;" href="{{ url_for('static', filename='model/' + name + '.ply')}}">Download mesh</a>
         {% endif %}
     </div>
 
@@ -105,7 +105,11 @@
 		        var loader = new THREE.PLYLoader();
 		        loader.load( "{{ url_for('static', filename='model/' + name + '.ply')}}", function ( geometry ) {
 			        console.log(geometry);
-			        geometry.computeVertexNormals();
+			        geometry.computeFaceNormals();
+			        geometry.dynamic  = true;
+                    geometry.dirty = true;
+                    geometry.overdraw = true;
+
 			        var meshCenter = geometry.boundingSphere.center;
 			        var meshRadius = geometry.boundingSphere.radius;
 			        var s = (meshRadius === 0 ? 1 : 1.0 / meshRadius) * 10;
@@ -116,9 +120,10 @@
  			        0, 0, 0, 1);
 			        geometry.applyMatrix(m);
 
-			        geometry = new THREE.Geometry().fromBufferGeometry( geometry );
-			        material = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: true, vertexColors: THREE.VertexColors} );
-			        mesh = new THREE.Mesh( geometry, material );
+			        geometry1 = new THREE.Geometry().fromBufferGeometry( geometry );
+			        console.log(geometry1.toJSON);
+			        material = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: false, vertexColors: THREE.FaceColors} );
+			        mesh = new THREE.Mesh( geometry1, material );
 			        scene.add( mesh );
 			        tfControl.attach(mesh);
 			        scene.add(tfControl);

@@ -14,6 +14,39 @@
 			<!--console.log("end");-->
 	<!--}-->
 <!--</script>-->
+
+{% block styles %}
+{{ super() }}
+    <style>
+        .button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            font: 400 13px Arial;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+        }
+
+        <!--input[type="file"] {-->
+			<!--display: none;-->
+		<!--}-->
+		<!--.custom-file-upload {-->
+            <!--background-color: #4CAF50;-->
+            <!--border: none;-->
+            <!--color: white;-->
+            <!--padding: 10px 15px;-->
+            <!--font: 400 13px Arial;-->
+            <!--text-align: center;-->
+            <!--text-decoration: none;-->
+            <!--display: inline-block;-->
+            <!--cursor: pointer;-->
+		<!--}-->
+    </style>
+{% endblock %}
+
 {% block navbar %}
 	{%include "NavBarTemplate.html" %}
 {% endblock %}
@@ -24,8 +57,14 @@
 	  <form id="upload-form" action ="{{ url_for('upload') }}" method = "POST" enctype="multipart/form-data">
 		  Model name (Leave blank to use current datetime as name):<br> <input type = "text" name = "modelname" id="modelname"><br><br>
 		  Model quality (0 = low, 1 = medium, 2 = high):<br> <input type = "number" name = "quality" value="0" max="2" min="0" required><br><br>
-		  Upload images:<br> <input type = "file" name = "file" accept="image/*" multiple required><br>
-	    <input type="submit" value="Send">
+		  Upload images:<br>
+		  <!--<label for="file-upload" class="custom-file-upload">-->
+			<!--<i class="fa fa-cloud-upload"></i> Upload images-->
+		<!--</label>-->
+		  <input id="file-upload" type = "file" name = "file" accept="image/*" multiple required><br>
+	    <br>
+		  <input type="submit" value="Send" class="button" style="background-color: cornflowerblue;" >
+		  <!--<button onclick="this.form.submit();" class="button">Send</button>-->
 	  </form>
 	</div>
 {% endblock %}

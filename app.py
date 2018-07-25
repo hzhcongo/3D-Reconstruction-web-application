@@ -431,10 +431,11 @@ def trimmerprocess():
 		############################ TRIMESH
 		# load a file by name or from a buffer
 		mesh = trimesh.load(workaddress+"pmvs/models/trimmed_mesh.ply")
+		print("mesh.visual.kind = " + mesh.visual.kind)
 
 		# Splits up seperated meshes from mesh in .PLY
 		meshes = mesh.split(only_watertight = False)
-
+		mesh.visual.vertex_colors = mesh.visual.vertex_colors
 		currentMeshIndex = -1
 		largestMeshIndex = -1
 		mesharea = []
@@ -448,17 +449,11 @@ def trimmerprocess():
 				largestMeshIndex = currentMeshIndex
 				largestMeshArea = eachmesh.area
 
-		# Save largest mesh
-		# trimesh.Trimesh.export(meshes[largestMeshIndex], 'static/model/'+str(name)+'.stl', 'stl_ascii')
-		# result = trimesh.io.ply.export_ply(meshes[largestMeshIndex], encoding='ascii', vertex_normal=True)
-		# trimesh.Trimesh.export(meshes[largestMeshIndex], 'static/model/'+str(name)+'.ply', 'ply')
-		result = trimesh.io.ply.export_ply(meshes[largestMeshIndex], encoding='ascii', vertex_normal=None)
+		print("meshes[largestMeshIndex].visual.kind = " + meshes[largestMeshIndex].visual.kind)
 
-		saver = open("static/model/"+str(name)+".ply", "w")
-		saver.write(str(result))
-		saver.close()
-		sys.stdout.flush()
-		# os.rename(workaddress+"pmvs/models/trimmed_mesh.ply", workaddress+"../../../model/"+str(name)+".ply")
+		# Save largest mesh
+		meshes[largestMeshIndex].visual.vertex_colors = meshes[largestMeshIndex].visual.vertex_colors
+		meshes[largestMeshIndex].export('static/model/'+str(name)+'.ply')
 		############################ TRIMESH
 
 		saver = open(completeName, "w")
