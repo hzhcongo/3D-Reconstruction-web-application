@@ -395,7 +395,8 @@ def poissonprocess():
 		return redirect(url_for('error', msg=e.message))
 	except WindowsError as e:
 		print("WindowsError", e.message)
-		return redirect(url_for('error', msg="A model of the same name already exists in the server. Please rename your model or delete the model with the same name"))
+		return redirect(url_for('error', msg="A model of the same name already exists in the server. Please rename "
+		                                     "your model or delete the model with the same name"))
 
 	return redirect(url_for('trimmer', name=name))
 	##########################################################
@@ -493,17 +494,25 @@ def plyUpload():
 
 @app.route("/plyUploadprocess", methods = ['POST'])
 def plyUploadprocess():
+	# Check if file is a .ply object
+	if(request.files['file'].content_type != 'application/octet-stream'
+			or request.files['file'].filename.lower().rpartition('.')[-1] != 'ply'):
+			return redirect(url_for('error', msg="File is not .PLY. Please upload a an unfinished .PLY mesh model."))
+
+	# Set default name to timestamp if not defined
 	modelname = request.form['modelname']
 	if(modelname == ''):
 		modelname = datetime.now().strftime('%d_%m_%Y_%H_%M_%S')
 	print("Model name: " + modelname)
 
+	# Check if another file with the same name exists
 	modelFolder = os.path.join(APP_ROOT, 'static/model/')
 	for f in listdir(modelFolder):
 		path = os.path.join(modelFolder, f)
 		filename = f[:-4]
 		if(filename == modelname):
-			return redirect(url_for('error', msg="Model name already exists in server. Please choose a different name or delete the old model."))
+			return redirect(url_for('error', msg="Model name already exists in server. Please choose a different name "
+			                                     "or delete the old model."))
 
 	quality = request.form['quality']
 	print("Quality: " + quality)
