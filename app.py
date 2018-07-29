@@ -454,7 +454,7 @@ def trimmerprocess():
 
 		# Save largest mesh
 		meshes[largestMeshIndex].visual.vertex_colors = meshes[largestMeshIndex].visual.vertex_colors
-		meshes[largestMeshIndex].export('static/model/'+str(name)+'.ply')
+		meshes[largestMeshIndex].export(APP_ROOT+'/static/model/'+str(name)+'.ply')
 		############################ TRIMESH
 
 		saver = open(completeName, "w")
@@ -620,7 +620,8 @@ def imagesets():
 			elif  dataread[0] == "1":
 				qualityText = "Medium"
 
-			data.append({'filename' : f, 'creation_time' : datetime.fromtimestamp(info.st_ctime).strftime('%Y-%m-%d %H:%M:%S'), 'quality' : qualityText, 'stage' : dataread[1]})
+			data.append({'filename' : f, 'creation_time' : datetime.fromtimestamp(info.st_ctime).strftime('%Y-%m-%d %H:%M:%S')
+				            , 'quality' : qualityText, 'stage' : dataread[1]})
 		except IOError:
 			print("IOError: ", path)
 		except:
