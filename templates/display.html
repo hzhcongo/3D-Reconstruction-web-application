@@ -26,9 +26,10 @@
     </div>
     <div style="float:right;">
         {% if name %}
-            <button onclick="generateModelLink(0)" class="button">Update mesh (ASCII)</button>
-            <button onclick="generateModelLink(1)" class="button">Update mesh (Binary)</button>
-            <a id="linker" class="button" style="background-color: cornflowerblue;" href="{{ url_for('static', filename='model/' + name + '.ply')}}">Download mesh</a>
+            <button onclick="generateModelLink(0)" class="button">Update/Convert model to ASCII</button>
+            <button onclick="generateModelLink(1)" class="button">Update/Convert model to Binary</button>
+            <a id="linker" class="button" style="background-color: cornflowerblue;"
+               href="{{ url_for('static', filename='model/' + name + '.ply')}}">Download model</a>
         {% endif %}
     </div>
 
@@ -275,14 +276,11 @@
 	        }
 
 	        function generateModelLink(i){
-		        /*backGeometry(mesh);
-		        var json = mesh.geometry.toJSON();
-		        console.log(json);*/
 
                 var exp = new THREE.PLYExporter();
                 var endingFile = "_Binary.ply";
 
-                // process into the ASCII/binary file format
+                // Process into the ASCII/binary file format
                 if (i == 1) {
                     var data = exp.parse(mesh, { binary: true });
                 }

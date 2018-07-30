@@ -198,7 +198,7 @@ THREE.PLYExporter.prototype = {
 			// faces
 			header +=
 				`element face ${faceCount}\n` +
-				`property list uchar uint${ indexByteCount * 8 } vertex_index\n`;
+				`property list uchar int${ indexByteCount * 8 } vertex_index\n`;
 
 		}
 
@@ -224,8 +224,8 @@ THREE.PLYExporter.prototype = {
 			// 3 vertex indices at ${indexByteCount} bytes
 			var faceListLength = includeIndices ? faceCount * ( indexByteCount * 3 + 1 ) : 0;
 			var output = new DataView( new ArrayBuffer( headerBin.length + vertexListLength + faceListLength ) );
-			new Uint8Array( output.buffer ).set( headerBin, 0 );
 
+			new Int8Array( output.buffer ).set( headerBin, 0 );
 
 			var vOffset = headerBin.length;
 			var fOffset = headerBin.length + vertexListLength;
@@ -322,24 +322,24 @@ THREE.PLYExporter.prototype = {
 
 						if ( colors != null ) {
 
-							output.setUint8( vOffset, Math.floor( colors.getX( i ) * 255 ) );
+							output.setInt8( vOffset, Math.floor( colors.getX( i ) * 255 ) );
 							vOffset += 1;
 
-							output.setUint8( vOffset, Math.floor( colors.getY( i ) * 255 ) );
+							output.setInt8( vOffset, Math.floor( colors.getY( i ) * 255 ) );
 							vOffset += 1;
 
-							output.setUint8( vOffset, Math.floor( colors.getZ( i ) * 255 ) );
+							output.setInt8( vOffset, Math.floor( colors.getZ( i ) * 255 ) );
 							vOffset += 1;
 
 						} else {
 
-							output.setUint8( vOffset, 255 );
+							output.setInt8( vOffset, 255 );
 							vOffset += 1;
 
-							output.setUint8( vOffset, 255 );
+							output.setInt8( vOffset, 255 );
 							vOffset += 1;
 
-							output.setUint8( vOffset, 255 );
+							output.setInt8( vOffset, 255 );
 							vOffset += 1;
 
 						}
@@ -351,12 +351,12 @@ THREE.PLYExporter.prototype = {
 				if ( includeIndices === true ) {
 
 					// Create the face list
-					var faceIndexFunc = `setUint${indexByteCount * 8}`;
+					var faceIndexFunc = `setInt${indexByteCount * 8}`;
 					if ( indices !== null ) {
 
 						for ( var i = 0, l = indices.count; i < l; i += 3 ) {
 
-							output.setUint8( fOffset, 3 );
+							output.setInt8( fOffset, 3 );
 							fOffset += 1;
 
 							output[ faceIndexFunc ]( fOffset, indices.getX( i + 0 ) + writtenVertices );
@@ -374,7 +374,7 @@ THREE.PLYExporter.prototype = {
 
 						for ( var i = 0, l = vertices.count; i < l; i += 3 ) {
 
-							output.setUint8( fOffset, 3 );
+							output.setInt8( fOffset, 3 );
 							fOffset += 1;
 
 							output[ faceIndexFunc ]( fOffset, writtenVertices + i );
