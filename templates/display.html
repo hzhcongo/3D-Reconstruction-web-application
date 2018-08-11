@@ -74,10 +74,10 @@
 	            scene.add( new THREE.GridHelper( 25, 20 ) );
 
 	            //Floor
-	            floorGeometry = new THREE.BoxGeometry(20,100,20);
+	            floorGeometry = new THREE.BoxGeometry(15,0.001,15);
 	            floorMaterial = new THREE.MeshBasicMaterial( {color: 0x00ff00, opacity : 0.5, transparent: true, depthWrite:false} );
 	            floorMesh = new THREE.Mesh(floorGeometry, floorMaterial);
-	            floorMesh.position.set(0,-50,0);
+	            floorMesh.position.set(0,0,0);
 	            scene.add(floorMesh);
 
 	            //Camera

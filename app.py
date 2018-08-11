@@ -37,14 +37,14 @@ def upload():
 
 	modelFolder = os.path.join(APP_ROOT, 'static/model/')
 	for f in listdir(modelFolder):
-		path = os.path.join(modelFolder, f)
+		# path = os.path.join(modelFolder, f)
 		filename = f[:-4]
 		if(filename == modelname):
 			return redirect(url_for('error', msg="Model name already exists in server. Please choose a different name or delete the old model."))
 
 	quality = request.form['quality']
-	print("Quality: " + quality)
-
+	# print("Quality: " + quality)
+	#
 	# timestampfilename= (datetime.now() - datetime(1970,1,1)).total_seconds()
 	# print(timestampfilename)
 
@@ -80,7 +80,7 @@ def upload():
 		metadata['Exif.Image.Model'] = 'Iphone 6'
 		metadata.write()
 
-	print("Images and relevant data saved. Total images: ", images)
+	# print("Images and relevant data saved. Total images: ", images)
 	sys.stdout.flush()
 	return redirect(url_for('imagesets'))
 
@@ -92,24 +92,9 @@ def osm(name=None):
 
 @app.route("/osmprocess" , methods=['GET'])
 def osmprocess():
-	# noisereduction = request.args.get('noisereduction')
+	_time = datetime.now()
 	name = request.args.get('name')
 	target = os.path.join(APP_ROOT, 'static/images/' + str(name) + '/')
-	_time = datetime.now()
-
-	# if noisereduction == '1':
-	# 	# TTD: Do noise reduction
-	# 	noImages = len(fnmatch.filter(os.listdir(target), '*.jpg'))
-	# 	print noImages
-	# 	# imgs = [cv2.imread(target + str(imgeNumber) + '.jpg') for imgeNumber in range(1, noImages)]
-	# 	# dst = cv2.fastNlMeansDenoisingColoredMulti(imgs, 2, 5, None, 4, 7, 35)
-	#
-	# 	for imgeNumber in range(1, noImages):
-	# 		img = cv2.imread(target + str(imgeNumber) + '.jpg')
-	# 		dst = cv2.fastNlMeansDenoisingColored(img, None, 8, 10, 7, 25)
-	# 		cv2.imwrite(target + str(imgeNumber) + '.jpg', dst)
-	# 	# TTD: need overwrite images?
-	# 	print("Noise reduction done, time taken ", (datetime.now() -_time).total_seconds())
 
 	# initialize OsmBundler manager class
 	workaddress = str(target)+'temp/'
@@ -148,6 +133,7 @@ def osmprocess():
 		# cmvsmanager.doCMVS()
 		# call PMVS
 		pmvsmanager.doPMVS()
+
 		print("Finish doPMVS, time taken ", (datetime.now() -_time).total_seconds())
 		sys.stdout.flush()
 
@@ -164,6 +150,7 @@ def osmprocess():
 		saver.close()
 		sys.stdout.flush()
 		#
+
 
 	except AttributeError as e:
 		print("AttributeError", e.message)
@@ -197,11 +184,11 @@ def denoise(name=None):
 @app.route("/denoiseprocess" , methods=['GET'])
 def denoiseprocess():
 	##########################################
+	_time = datetime.now()
 	name = request.args.get('name')
 	target = os.path.join(APP_ROOT, 'static/images/' + str(name) + '/')
 	workaddress = str(target) + 'temp/'
 
-	# TTD: CAN TRY REMOVE IF TRIMESH PROBLEM IS SOLVED
 	def isfloat(value):
 		try:
 			float(value)
@@ -287,14 +274,11 @@ def denoiseprocess():
 				if(removeCount < len(indToRemove) and lineCount == indToRemove[removeCount]):
 					removeCount+=1 # Removed by skipping nf.write(line) below. continue to skip to next for loop
 					# print("trim point")
+					# TTD: COMMENTED CONTINUE TO SKIP REMOVAL OF POINTS VIA STATISTICAL APPROACH
 					continue
 			nf.write(line)
 		nf.close()
 		f.close()
-
-		currentTime = datetime.now()
-		print("Finish denoising, time taken ", (datetime.now() - currentTime).total_seconds())
-		sys.stdout.flush()
 
 		# update quality and processing stage in .txt file (1st digit = quality, 2nd digit = stage)
 		completeName = os.path.join(target, "data.txt")
@@ -309,6 +293,10 @@ def denoiseprocess():
 		saver.close()
 		sys.stdout.flush()
 		#
+
+		finish = datetime.now()
+		print("Finish denoising, time taken ", (finish - _time).total_seconds())
+		sys.stdout.flush()
 
 	except AttributeError as e:
 		print("AttributeError", e.message)
@@ -337,6 +325,7 @@ def poisson(name=None):
 @app.route("/poissonprocess" , methods=['GET'])
 def poissonprocess():
 	#################################################
+	_time = datetime.now()
 	name = request.args.get('name')
 	target = os.path.join(APP_ROOT, 'static/images/' + str(name) + '/')
 	workaddress = str(target) + 'temp/'
@@ -380,6 +369,11 @@ def poissonprocess():
 		saver.write("3")
 		saver.close()
 		sys.stdout.flush()
+		#
+
+		finish = datetime.now()
+		print("Finish denoising, time taken ", (finish - _time).total_seconds())
+		sys.stdout.flush()
 
 	except AttributeError as e:
 		print("AttributeError", e.message)
@@ -408,6 +402,7 @@ def trimmer(name=None):
 @app.route("/trimmerprocess", methods=['GET'])
 def trimmerprocess():
 	#################################################
+	_time = datetime.now()
 	name = request.args.get('name')
 	target = os.path.join(APP_ROOT, 'static/images/' + str(name) + '/')
 	workaddress = str(target) + 'temp/'
@@ -426,11 +421,13 @@ def trimmerprocess():
 		currentTime = datetime.now()
 		subprocess.call([surfaceTrimmer, "--in", workaddress + "pmvs/models/mesh.ply", "--out",
 		                 workaddress + "pmvs/models/trimmed_mesh.ply", "--trim", "6", "--smooth", "7"])
-		print("Trimmed: ", (datetime.now() - currentTime).total_seconds())
+		print("Trimmed: ", (datetime.now() - _time).total_seconds())
+		sys.stdout.flush()
 		######################
 
 		############################ TRIMESH
 		# load a file by name or from a buffer
+		_time = datetime.now()
 		mesh = trimesh.load(workaddress+"pmvs/models/trimmed_mesh.ply")
 
 		# Splits up seperated meshes from mesh in .PLY
@@ -452,6 +449,8 @@ def trimmerprocess():
 		# Save largest mesh
 		meshes[largestMeshIndex].visual.vertex_colors = meshes[largestMeshIndex].visual.vertex_colors
 		meshes[largestMeshIndex].export(APP_ROOT+'/static/model/'+str(name)+'.ply')
+		print("Trimmed: ", (datetime.now() - _time).total_seconds())
+		sys.stdout.flush()
 		############################ TRIMESH
 
 
@@ -463,6 +462,7 @@ def trimmerprocess():
 		saver.write("4")
 		saver.close()
 		sys.stdout.flush()
+		#
 
 	except AttributeError as e:
 		print("AttributeError", e.message)
