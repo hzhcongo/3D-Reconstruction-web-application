@@ -15,27 +15,37 @@
             text-decoration: none;
             display: inline-block;
             cursor: pointer;
+            width:130px;
         }
     </style>
 </head>
-<body>
-    <div style="float:left;">
+<body style='font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; font-size: 14px; line-height: 1.42857143; color: #333;'>
+    <div style="">
         <button onclick="switchControlMode()" class="button">Switch Control</button>
         <button onclick="cutBase()" class="button">Cut Base</button>
         <!--<button onclick="simplify()">Simplify Mesh</button>-->
     </div>
-    <div style="float:right;">
-        {% if name %}
-            <button onclick="generateModelLink(0)" class="button">Update/Convert model to ASCII</button>
-            <button onclick="generateModelLink(1)" class="button">Update/Convert model to Binary</button>
-            <a id="linker" class="button" style="background-color: cornflowerblue;"
-               href="{{ url_for('static', filename='model/' + name + '.ply')}}">Download model</a>
-        {% endif %}
+    {% if name %}
+    <div style="margin-top:10px;">
+        Update / Convert model to a:
     </div>
+    <div style="margin-bottom:10px;">
+            <button onclick="generateModelLink(0)" class="button">.PLY file (ASCII)</button>
+            <button onclick="generateModelLink(1)" class="button">.PLY file (Binary)</button>
+            <button onclick="generateModelLinkSTL(0)" class="button" style="margin-left:20px;">.STL file (ASCII)</button>
+            <button onclick="generateModelLinkSTL(1)" class="button">.STL file (Binary)</button>
+            <button onclick="generateModelLinkOBJ(0)" class="button" style="margin-left:20px;">.OBJ file (ASCII)</button>
+            <button onclick="generateModelLinkOBJ(1)" class="button">.OBJ file (Binary)</button>
+            <a id="linker" class="button" style="background-color: cornflowerblue; float: right;"
+               href="{{ url_for('static', filename='model/' + name + '.ply')}}">Download model</a>
+    </div>
+    {% endif %}
 
         <script src="//cdn.rawgit.com/mrdoob/three.js/master/build/three.min.js"></script>
         <script src="{{ url_for('static', filename='js/PLYLoader.js') }}"></script>
         <script src="{{ url_for('static', filename='js/PLYExporter.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/OBJExporter.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/STLExporter.js') }}"></script>
         <script src="{{ url_for('static', filename='js/Detector.js') }}"></script>
         <!-- <script src="{{ url_for('static', filename='js/stats.min.js')}}"></script> -->
         <script src="{{ url_for('static', filename='js/TrackballControls.js')}}"></script>
@@ -45,7 +55,8 @@
         <script src="{{ url_for('static', filename='js/SimplifyModifier.js') }}"></script>
         <script src="{{ url_for('static', filename='js/Blob.js') }}"></script>
 
-        <script type="text/javascript">
+</body>
+<script type="text/javascript">
 		    if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
 		    var camera, scene, renderer, tfControl, tbControl;
@@ -65,7 +76,7 @@
 
 	            //Renderer
 	            renderer = new THREE.WebGLRenderer( { antialias: true } );
-	            renderer.setSize( window.innerWidth, window.innerHeight );
+	            renderer.setSize( window.innerWidth - 20, window.innerHeight );
 	            container.appendChild( renderer.domElement );
 
 	            //Scene
@@ -301,6 +312,56 @@
                 window.alert("Model updated. Please download and save the model locally. Any changes will not be saved in the web server");
 	        }
 
+            function generateModelLinkSTL(i){
+                var exp = new THREE.STLExporter();
+                var endingFile = "_Binary.stl";
+
+                // Process into the ASCII/binary file format
+                if (i == 1) {
+                    var data = exp.parse(mesh, { binary: true });
+                }
+                else {
+                    if (confirm("Generating model in ASCII format may not work for big-sized models. Proceed?") == false)
+                        return false;
+                    var data = exp.parse(mesh);
+                    endingFile = "_ASCII.stl";
+                }
+
+                var file = new File([data], "generated.stl");
+                var a = document.getElementById("linker");
+                a.href = URL.createObjectURL(file);
+
+                var currURL = window.location.href.split("/");
+                a.download = currURL[currURL.length - 1] + endingFile;
+
+                window.alert("Model updated. Please download and save the model locally. Any changes will not be saved in the web server");
+	        }
+
+            function generateModelLinkOBJ(i){
+                var exp = new THREE.OBJExporter();
+                var endingFile = "_Binary.obj";
+
+                // Process into the ASCII/binary file format
+                if (i == 1) {
+                    var data = exp.parse(mesh, { binary: true });
+                }
+                else {
+                    if (confirm("Generating model in ASCII format may not work for big-sized models. Proceed?") == false)
+                        return false;
+                    var data = exp.parse(mesh);
+                    endingFile = "_ASCII.obj";
+                }
+
+                var file = new File([data], "generated.obj");
+                var a = document.getElementById("linker");
+                a.href = URL.createObjectURL(file);
+
+                var currURL = window.location.href.split("/");
+                a.download = currURL[currURL.length - 1] + endingFile;
+
+                window.alert("Model updated. Please download and save the model locally. Any changes will not be saved in the web server");
+	        }
+
             function contains(arr, element) {
 	            for (var i = 0; i < arr.length; i++) {
 	                if (arr[i] === element) {
@@ -310,5 +371,4 @@
 	            return false;
             }
     </script>
-</body>
 </html>
