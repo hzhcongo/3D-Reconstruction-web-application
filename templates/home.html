@@ -1,16 +1,57 @@
 {% extends "bootstrap/base.html" %}
 
+{% block styles %}
+{{ super() }}
+<style type="text/css">
+.column {
+    float: left;
+    width: 33.33%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+#outPopUp {
+  position: absolute;
+  width: 1140px;
+  height: 400px;
+  z-index: 15;
+  top: 50%;
+  left: 50%;
+  margin: -200px 0 0 -570px;
+}
+</style>
+{% endblock %}
+
 {% block title %}Virtuaso{% endblock %}
 
 {% block navbar %}
-	
 	{%include "NavBarTemplate.html" %}
-
 {% endblock %}
 
 {%block content %}
-	<div class="container">
-	  <h2>Hi! Welcome to Virtuaso</h2>
-		<p>Virtuaso allows you to take pictures from your mobile phone, upload it to our server, and generate the 3D models !</p>
-	</div>
+<section class="container">
+		<div style="height: 300px; background-color:silver;">
+			<h2>Virtuaso is an end-to-end 3D reconstruction software.
+				You can take pictures of objects from your iOS mobile phone, upload it to our server, and generate the 3D models!</h2>
+		</div>
+		<div>
+			<div><h1>Features</h1></div>
+		  <div class="column">
+			  <h3>End-to-end 3D reconstruction</h3>
+			  <p>Virtuaso does full generation of 3D models from images of physical objects. It even has it's very own iOS app for a seamless experience!</p></div>
+		  <div class="column">
+			  <h3>Efficient</h3>
+			  <p>Virtuaso's generated models are noiseless, and are reconstructed much quicker (15 - 20 minutes)!</p>
+		  </div>
+		  <div class="column">
+			  <h3>Free exporting of 3D models</h3>
+			  <p>Virtuaso allows free exporting of generated models to popular 3D model file types like .ply, .stl, and .obj!</p>
+		  </div>
+		</div>
+</section>
 {% endblock %}
