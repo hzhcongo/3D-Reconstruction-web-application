@@ -36,16 +36,24 @@
 						<td>{{d.filename}}</td>
 						<td>{{d.creation_time}}</td>
 						<td>{{d.quality}}</td>
-						<td>{{d.stage}} / 4</td>
+						<td>{{d.stage}} / 6</td>
                         <td>
-        					{% if d.stage == '3' or d.stage == '4' %}
-                            <a href="/trimmer/{{d.filename}}">Process</a>
+        					{% if d.stage == '6' %}
+                            <a href="/TrimAndNoiseRemoval/{{d.filename}}">Process</a>
+        					{% elif d.stage == '5' %}
+                            <a href="/TrimAndNoiseRemoval/{{d.filename}}">Process</a>
+        					{% elif d.stage == '4' %}
+                            <a href="/PoissonReconstruction/{{d.filename}}">Process</a>
+        					{% elif d.stage == '3' %}
+                            <a href="/PointCloudDenoise/{{d.filename}}">Process</a>
         					{% elif d.stage == '2' %}
-                            <a href="/poisson/{{d.filename}}">Process</a>
+                            <a href="/PMVS/{{d.filename}}">Process</a>
         					{% elif d.stage == '1' %}
-                            <a href="/denoise/{{d.filename}}">Process</a>
+                            <a href="/BundleAdjustment/{{d.filename}}">Process</a>
+        					{% elif d.stage == '0' %}
+                            <a href="/PrepAndMatch/{{d.filename}}">Process</a>
         					{% else %}
-                            <a href="/osm/{{d.filename}}">Process</a>
+                            <a href="/OSM/{{d.filename}}">Process</a>
 							{% endif %}
                             <a href="/deleteImages/{{d.filename}}" style="margin-left:20px;">Delete</a>
                         </td>

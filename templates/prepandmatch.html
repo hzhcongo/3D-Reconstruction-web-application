@@ -1,0 +1,35 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}Virtuaso{% endblock %}
+
+{% block styles %}
+{{ super() }}
+<style type="text/css">
+	.button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 10px 15px;
+            font: 400 13px Arial;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            cursor: pointer;
+        }
+</style>
+{% endblock %}
+{% block navbar %}
+{%include "NavBarTemplate.html" %}
+{% endblock %}
+
+{%block content %}
+<section class="container">
+	<h1>Stage 1: Photogrammetry processing (Preparation of images and feature matching)</h1>
+			<br>
+	<div>
+		Preparing and feature matching image set "{{name}}"
+		<br>
+		<br>
+		<a class="button" style="background-color: cornflowerblue;" href="/PrepAndMatchprocess?name={{name}}">Process</a>
+	</div>
+</section>
+{% endblock %}

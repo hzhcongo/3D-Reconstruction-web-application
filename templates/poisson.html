@@ -23,17 +23,17 @@
 
 {%block content %}
 <section class="container">
-	<h1>Stage 3: Mesh generation via Poisson Reconstruction Package</h1>
+	<h1>Stage 5: 3D mesh model generation via Poisson Reconstruction Package</h1>
 			<br>
 			<br>
 	<div>
-		Generation of mesh via point cloud from image set "{{name}}"
+		Generating a 3D mesh model via point cloud from image set "{{name}}"
 		<br>
-		<a class="button" style="background-color: cornflowerblue;" href="/poissonprocess?name={{name}}">Generate mesh</a>
+		<a class="button" style="background-color: cornflowerblue;" href="/PoissonReconstructionprocess?name={{name}}">Generate mesh</a>
 		<br>
 		<br>
-		You can download the current state of the .ply model generated for the image set to save it locally. <br>
-		Stage 3 will be applied on this model
+		Download the current state of the .ply model generated for the image set to save it locally. <br>
+		Stage 5 will be applied on this model
 		<br>
 		<a class="button" style="background-color: cornflowerblue;" href="{{ url_for('static', filename='images/' + name + '/temp/pmvs/models/trim.ply')}}">Download current state of model</a>
 

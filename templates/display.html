@@ -29,14 +29,14 @@
     <div style="margin-top:10px;">
         Update / Convert model to a:
     </div>
-    <div style="margin-bottom:10px;">
+    <div style="margin-bottom:0px;">
             <button onclick="generateModelLink(0)" class="button">.PLY file (ASCII)</button>
             <button onclick="generateModelLink(1)" class="button">.PLY file (Binary)</button>
             <button onclick="generateModelLinkSTL(0)" class="button" style="margin-left:20px;">.STL file (ASCII)</button>
             <button onclick="generateModelLinkSTL(1)" class="button">.STL file (Binary)</button>
             <button onclick="generateModelLinkOBJ(0)" class="button" style="margin-left:20px;">.OBJ file (ASCII)</button>
             <button onclick="generateModelLinkOBJ(1)" class="button">.OBJ file (Binary)</button>
-            <a id="linker" class="button" style="background-color: cornflowerblue; float: right;"
+            <a id="linker" class="button" style="background-color: cornflowerblue; float: right; margin-right:4px;"
                href="{{ url_for('static', filename='model/' + name + '.ply')}}">Download model</a>
     </div>
     {% endif %}

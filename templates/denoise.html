@@ -23,17 +23,16 @@
 
 {%block content %}
 <section class="container">
-	<h1>Stage 2: De-noising of point cloud</h1>
-			<br>
+	<h1>Stage 4: Point cloud de-noising</h1>
 			<br>
 	<div>
 		De-noising of point cloud generated from image set "{{name}}"
 		<br>
-		<a class="button" style="background-color: cornflowerblue;" href="/denoiseprocess?name={{name}}">De-noise point cloud</a>
+		<a class="button" style="background-color: cornflowerblue;" href="/PointCloudDenoiseprocess?name={{name}}">De-noise point cloud</a>
 		<br>
 		<br>
-		You can download the current state of the .ply model generated for the image set to save it locally. <br>
-		Stage 2 will be applied on this model
+		Download the current state of the .ply model generated for the image set.<br>
+		Stage 4 will be applied on this model
 		<br>
 		<a class="button" style="background-color: cornflowerblue;" href="{{ url_for('static', filename='images/' + name + '/temp/pmvs/models/pmvs_options.txt.ply')}}">Download current state of model</a>
 	</div>

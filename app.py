@@ -85,13 +85,73 @@ def upload():
 	return redirect(url_for('imagesets'))
 
 
-@app.route("/osm/<name>")
-def osm(name=None):
-	return render_template("osmbundler.html", name=name)
+@app.route("/PrepAndMatch/<name>")
+def prepandmatch(name=None):
+	return render_template("prepandmatch.html", name=name)
 
 
-@app.route("/osmprocess" , methods=['GET'])
-def osmprocess():
+@app.route("/PrepAndMatchprocess" , methods=['GET'])
+def prepandmatchprocess():
+	_time = datetime.now()
+	name = request.args.get('name')
+	target = os.path.join(APP_ROOT, 'static/images/' + str(name) + '/')
+
+	# initialize OsmBundler manager class
+	workaddress = str(target) + 'temp/'
+	manager = osmbundler.OsmBundler(target, workaddress)
+
+	try:
+		manager.preparePhotos()
+		print("Finish preparing photos, time taken ", (datetime.now() - _time).total_seconds())
+		sys.stdout.flush()
+		_time = datetime.now()
+
+		manager.matchFeatures()
+		print("Finish matching features, time taken ", (datetime.now() - _time).total_seconds())
+		sys.stdout.flush()
+		_time = datetime.now()
+
+		# update quality and processing stage in .txt file (1st digit = quality, 2nd digit = stage)
+		completeName = os.path.join(target, "data.txt")
+		saver = open(completeName, "r")
+		savedData = saver.read()
+		saver.close()
+		sys.stdout.flush()
+
+		saver = open(completeName, "w")
+		saver.write(str(savedData[0]))
+		saver.write("1")
+		saver.close()
+		sys.stdout.flush()
+	#
+
+	except AttributeError as e:
+		print("AttributeError", e.message)
+		return redirect(url_for('error', msg=e.message))
+	except IOError as e:
+		print("IOError", e.message)
+		if e.message:
+			return redirect(url_for('error', msg=e.message))
+		else:
+			return redirect(url_for('error', msg="IOError when updating or saving quality and current stage process"))
+	except ValueError as e:
+		print("ValueError", e.message)
+		return redirect(url_for('error', msg=e.message))
+	except WindowsError as e:
+		print("WindowsError", e.message)
+		return redirect(url_for('error',
+		                        msg="A model of the same name already exists in the server. Please rename your model or delete the model with the same name"))
+
+	return redirect(url_for('bundleadjustment', name=name))
+
+
+@app.route("/BundleAdjustment/<name>")
+def bundleadjustment(name=None):
+	return render_template("bundleadjustment.html", name=name)
+
+
+@app.route("/BundleAdjustmentprocess" , methods=['GET'])
+def bundleadjustmentprocess():
 	_time = datetime.now()
 	name = request.args.get('name')
 	target = os.path.join(APP_ROOT, 'static/images/' + str(name) + '/')
@@ -101,22 +161,10 @@ def osmprocess():
 	manager = osmbundler.OsmBundler(target,workaddress)
 
 	try:
-		manager.preparePhotos()
-		print("Finish preparing photos, time taken ", (datetime.now() -_time).total_seconds())
-		sys.stdout.flush()
-		_time = datetime.now()
-
-		manager.matchFeatures()
-		print("Finish matching features, time taken ", (datetime.now() -_time).total_seconds())
-		sys.stdout.flush()
-		_time = datetime.now()
-
 		manager.doBundleAdjustment()
 		print("Finish bundleadjustment, time taken ",  (datetime.now() -_time).total_seconds())
 		sys.stdout.flush()
 		_time = datetime.now()
-
-		# manager.openResult()
 
 		# initialize OsmPMVS manager class
 		pmvsmanager = osmpmvs.OsmPmvs(workaddress)
@@ -129,8 +177,57 @@ def osmprocess():
 		sys.stdout.flush()
 		_time = datetime.now()
 
-		# call CMVS
-		# cmvsmanager.doCMVS()
+		# update quality and processing stage in .txt file (1st digit = quality, 2nd digit = stage)
+		completeName = os.path.join(target, "data.txt")
+		saver = open(completeName, "r")
+		savedData = saver.read()
+		saver.close()
+		sys.stdout.flush()
+
+		saver = open(completeName, "w")
+		saver.write(str(savedData[0]))
+		saver.write("2")
+		saver.close()
+		sys.stdout.flush()
+		#
+
+	except AttributeError as e:
+		print("AttributeError", e.message)
+		return redirect(url_for('error', msg=e.message))
+	except IOError as e:
+		print("IOError", e.message)
+		if e.message:
+			return redirect(url_for('error', msg=e.message))
+		else:
+			return redirect(url_for('error', msg="IOError when updating or saving quality and current stage process"))
+	except ValueError as e:
+		print("ValueError", e.message)
+		return redirect(url_for('error', msg=e.message))
+	except WindowsError as e:
+		print("WindowsError", e.message)
+		return redirect(url_for('error', msg="A model of the same name already exists in the server. Please rename your model or delete the model with the same name"))
+
+	return redirect(url_for('pmvs', name=name))
+
+
+@app.route("/PMVS/<name>")
+def pmvs(name=None):
+	return render_template("pmvs.html", name=name)
+
+
+@app.route("/PMVSprocess" , methods=['GET'])
+def pmvsprocess():
+	_time = datetime.now()
+	name = request.args.get('name')
+	target = os.path.join(APP_ROOT, 'static/images/' + str(name) + '/')
+
+	# initialize OsmBundler manager class
+	workaddress = str(target)+'temp/'
+
+	try:
+		# initialize OsmPMVS manager class
+		pmvsmanager = osmpmvs.OsmPmvs(workaddress)
+
 		# call PMVS
 		pmvsmanager.doPMVS()
 
@@ -146,11 +243,10 @@ def osmprocess():
 
 		saver = open(completeName, "w")
 		saver.write(str(savedData[0]))
-		saver.write("1")
+		saver.write("3")
 		saver.close()
 		sys.stdout.flush()
 		#
-
 
 	except AttributeError as e:
 		print("AttributeError", e.message)
@@ -171,17 +267,12 @@ def osmprocess():
 	return redirect(url_for('denoise', name=name))
 
 
-@app.route("/error/<msg>")
-def error(msg=None):
-		return render_template("error.html", msg=msg)
-
-
-@app.route("/denoise/<name>")
+@app.route("/PointCloudDenoise/<name>")
 def denoise(name=None):
 	return render_template("denoise.html", name=name)
 
 
-@app.route("/denoiseprocess" , methods=['GET'])
+@app.route("/PointCloudDenoiseprocess" , methods=['GET'])
 def denoiseprocess():
 	##########################################
 	_time = datetime.now()
@@ -199,41 +290,14 @@ def denoiseprocess():
 	try:
 		f = open(workaddress+"pmvs/models/pmvs_options.txt.ply","r")
 		points = []
-		# a1 = []
-		# a2 = []
-		# a3 = []
 
 		for line in f:
 			words = line.split()
 			if(isfloat(words[0])):
 				points.append([float(words[0]),float(words[1]),float(words[2])]) #store x y z of points
-				# a1.append(float(words[0]))
-				# a2.append(float(words[1]))
-				# a3.append(float(words[2]))
-
 		f.close()
 
 		points = np.array(points)
-		# a1 = np.array(a1)
-		# a2 = np.array(a2)
-		# a3 = np.array(a3)
-		# x_center = (np.amax(points, axis=0) - np.amin(points, axis=0))/2
-		# y_center = (np.amax(points, axis=1) - np.amin(points, axis=1))/2
-		# z_center = (np.amax(points, axis=2) - np.amin(points, axis=2))/2
-		# a1upper = np.percentile(a1,98)
-		# print("98 percentile for a1 is", a1upper)
-		# a2upper = np.percentile(a2,98)
-		# print("98 percentile for a2 is", a2upper)
-		# a3upper = np.percentile(a3,98)
-		# print("98 percentile for a3 is", a3upper)
-
-		# a1lower = np.percentile(a1,2)
-		# print("2 percentile for a1 is", a1lower)
-		# a2lower = np.percentile(a2,2)
-		# print("2 percentile for a2 is", a2lower)
-		# a3lower = np.percentile(a3,2)
-		# print("2 percentile for a3 is", a3lower)
-
 		tree = KDTree(points, leaf_size = 50)
 		# find leaf with most neighbours?
 		# add into leaf as long as
@@ -289,7 +353,7 @@ def denoiseprocess():
 
 		saver = open(completeName, "w")
 		saver.write(str(savedData[0]))
-		saver.write("2")
+		saver.write("4")
 		saver.close()
 		sys.stdout.flush()
 		#
@@ -306,10 +370,10 @@ def denoiseprocess():
 		if e.message:
 			return redirect(url_for('error', msg=e.message))
 		else:
-			return redirect(url_for('error', msg="IOError when updating / saving quality and current stage process"))
+			return redirect(url_for('error', msg="IOError when updating or saving quality and current stage process"))
 	except ValueError as e:
 		print("ValueError", e.message)
-		return redirect(url_for('error', msg=e.message))
+		return redirect(url_for('error', msg=e.message + ". Perhaps images are too similar or different, and thus is unable to match features"))
 	except WindowsError as e:
 		print("WindowsError", e.message)
 		return redirect(url_for('error', msg="A model of the same name already exists in the server. Please rename your model or delete the model with the same name"))
@@ -317,12 +381,12 @@ def denoiseprocess():
 	return redirect(url_for('poisson', name=name))
 
 
-@app.route("/poisson/<name>")
+@app.route("/PoissonReconstruction/<name>")
 def poisson(name=None):
 	return render_template("poisson.html", name=name)
 
 
-@app.route("/poissonprocess" , methods=['GET'])
+@app.route("/PoissonReconstructionprocess" , methods=['GET'])
 def poissonprocess():
 	#################################################
 	_time = datetime.now()
@@ -366,7 +430,7 @@ def poissonprocess():
 
 		saver = open(completeName, "w")
 		saver.write(str(savedData[0]))
-		saver.write("3")
+		saver.write("5")
 		saver.close()
 		sys.stdout.flush()
 		#
@@ -395,11 +459,11 @@ def poissonprocess():
 	return redirect(url_for('trimmer', name=name))
 	##########################################################
 
-@app.route("/trimmer/<name>")
+@app.route("/TrimAndNoiseRemoval/<name>")
 def trimmer(name=None):
 	return render_template("trimmer.html", name=name)
 
-@app.route("/trimmerprocess", methods=['GET'])
+@app.route("/TrimAndNoiseRemovalprocess", methods=['GET'])
 def trimmerprocess():
 	#################################################
 	_time = datetime.now()
@@ -459,7 +523,7 @@ def trimmerprocess():
 
 		saver = open(completeName, "w")
 		saver.write(str(savedData[0]))
-		saver.write("4")
+		saver.write("6")
 		saver.close()
 		sys.stdout.flush()
 		#
@@ -482,6 +546,88 @@ def trimmerprocess():
 
 	return redirect(url_for('edit', name=name))
 	##########################################################
+
+
+@app.route("/OSM/<name>")
+def osm(name=None):
+	return render_template("osmbundler.html", name=name)
+
+
+@app.route("/OSMprocess" , methods=['GET'])
+def osmprocess():
+	_time = datetime.now()
+	name = request.args.get('name')
+	target = os.path.join(APP_ROOT, 'static/images/' + str(name) + '/')
+
+	# initialize OsmBundler manager class
+	workaddress = str(target)+'temp/'
+	manager = osmbundler.OsmBundler(target,workaddress)
+
+	try:
+		manager.preparePhotos()
+		print("Finish preparing photos, time taken ", (datetime.now() -_time).total_seconds())
+		sys.stdout.flush()
+		_time = datetime.now()
+
+		manager.matchFeatures()
+		print("Finish matching features, time taken ", (datetime.now() -_time).total_seconds())
+		sys.stdout.flush()
+		_time = datetime.now()
+
+		manager.doBundleAdjustment()
+		print("Finish bundleadjustment, time taken ",  (datetime.now() -_time).total_seconds())
+		sys.stdout.flush()
+		_time = datetime.now()
+
+		# manager.openResult()
+
+		# initialize OsmPMVS manager class
+		pmvsmanager = osmpmvs.OsmPmvs(workaddress)
+		# initialize PMVS input from Bundler output
+		pmvsmanager.doBundle2PMVS()
+
+		print("Finish bundle2PMVS, time taken ", (datetime.now() -_time).total_seconds())
+		sys.stdout.flush()
+		_time = datetime.now()
+
+		# call PMVS
+		pmvsmanager.doPMVS()
+
+		print("Finish doPMVS, time taken ", (datetime.now() -_time).total_seconds())
+		sys.stdout.flush()
+
+		# update quality and processing stage in .txt file (1st digit = quality, 2nd digit = stage)
+		completeName = os.path.join(target, "data.txt")
+		saver = open(completeName, "r")
+		savedData = saver.read()
+		saver.close()
+		sys.stdout.flush()
+
+		saver = open(completeName, "w")
+		saver.write(str(savedData[0]))
+		saver.write("1")
+		saver.close()
+		sys.stdout.flush()
+		#
+
+	except AttributeError as e:
+		print("AttributeError", e.message)
+		return redirect(url_for('error', msg=e.message))
+	except IOError as e:
+		print("IOError", e.message)
+		if e.message:
+			return redirect(url_for('error', msg=e.message))
+		else:
+			return redirect(url_for('error', msg="IOError when updating or saving quality and current stage process"))
+	except ValueError as e:
+		print("ValueError", e.message)
+		return redirect(url_for('error', msg=e.message))
+	except WindowsError as e:
+		print("WindowsError", e.message)
+		return redirect(url_for('error', msg="A model of the same name already exists in the server. Please rename your model or delete the model with the same name"))
+
+	return redirect(url_for('denoise', name=name))
+
 
 @app.route("/fileUpload")
 def fileUpload():
@@ -583,7 +729,6 @@ def deleteImages(name = None):
 @app.route("/edit/<name>")
 def edit(name = None):
 	modelFolder = os.path.join(APP_ROOT, 'static/model/')
-	# meshFiles = [f for f in listdir(modelFolder)]
 	data = []
 
 	a = [s for s in os.listdir(modelFolder)
@@ -591,8 +736,6 @@ def edit(name = None):
 	a.sort(key=lambda s: os.path.getmtime(os.path.join(modelFolder, s)))
 
 	for f in a:
-		# print(f, jsonify({'filename' : f}))
-		# sys.stdout.flush()
 		path = os.path.join(modelFolder, f)
 		info = os.stat(path)
 		filename = f[:-4]
@@ -641,9 +784,11 @@ def home():
 def display(name = None):
 	return render_template("display.html", name=name)
 
-# @app.route("/fullmoontest/")
-# def fullmoontest():
-# 	return render_template("fullmoontest.html");
+
+@app.route("/error/<msg>")
+def error(msg=None):
+		return render_template("error.html", msg=msg)
+
 
 if __name__ == "__main__":
 	app.run(host= '0.0.0.0')

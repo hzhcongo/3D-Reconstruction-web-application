@@ -14,16 +14,6 @@
     display: table;
     clear: both;
 }
-
-#outPopUp {
-  position: absolute;
-  width: 1140px;
-  height: 400px;
-  z-index: 15;
-  top: 50%;
-  left: 50%;
-  margin: -200px 0 0 -570px;
-}
 </style>
 {% endblock %}
 
@@ -35,12 +25,14 @@
 
 {%block content %}
 <section class="container">
-		<div style="height: 300px; background-color:silver;">
-			<h2>Virtuaso is an end-to-end 3D reconstruction software.
-				You can take pictures of objects from your iOS mobile phone, upload it to our server, and generate the 3D models!</h2>
+		<div style="height: 300px;">
+			<div style="position: relative; float: left; top: 50%; left: 50%; transform: translate(-50%, -50%);">
+				<h1>End-to-end 3D reconstruction software</h1>
+				<h2>Take pictures of objects, upload it to our server, and generate 3D models!</h2>
+			</div>
 		</div>
 		<div>
-			<div><h1>Features</h1></div>
+			<div><h2>Features</h2></div>
 		  <div class="column">
 			  <h3>End-to-end 3D reconstruction</h3>
 			  <p>Virtuaso does full generation of 3D models from images of physical objects. It even has it's very own iOS app for a seamless experience!</p></div>
