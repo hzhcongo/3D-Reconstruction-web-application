@@ -9,7 +9,7 @@ It allows users to reconstruct 3D models of objects using stereo photogrammetry 
 - Viewing and editing of generated 3D models
 - Exporting of 3D models into .ply / .stl / .obj files in either binary or ASCII format
 
-### The project has been an ongoing one, with the prototype being started off from Tan Jiasheng's Masters thesis.
+NOTE: This project has been an ongoing one, with the prototype being started off from Tan Jiasheng's Masters thesis.
 
 ## Credits
 Virtuaso integrates the following open-sourced tools and software: 
