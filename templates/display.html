@@ -5,58 +5,126 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
-        .button {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 10px 15px;
-            font: 400 13px Arial;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            cursor: pointer;
-            width:130px;
-        }
     </style>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<link rel="shortcut icon" href="{{ url_for('static', filename='ui/favicon.ico') }}">
+<!-- Bootstrap CSS CDN -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+<!-- Font Awesome JS -->
+<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
+<script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/sidebar.css') }}">
 </head>
-<body style='font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; font-size: 14px; line-height: 1.42857143; color: #333;'>
-    <div style="">
-        <button onclick="switchControlMode()" class="button">Switch Control</button>
-        <button onclick="cutBase()" class="button">Cut Base</button>
-        <!--<button onclick="simplify()">Simplify Mesh</button>-->
-    </div>
-    {% if name %}
-    <div style="margin-top:10px;">
-        Update / Convert model to a:
-    </div>
-    <div style="margin-bottom:0px;">
-            <button onclick="generateModelLink(0)" class="button">.PLY file (ASCII)</button>
-            <button onclick="generateModelLink(1)" class="button">.PLY file (Binary)</button>
-            <button onclick="generateModelLinkSTL(0)" class="button" style="margin-left:20px;">.STL file (ASCII)</button>
-            <button onclick="generateModelLinkSTL(1)" class="button">.STL file (Binary)</button>
-            <button onclick="generateModelLinkOBJ(0)" class="button" style="margin-left:20px;">.OBJ file (ASCII)</button>
-            <button onclick="generateModelLinkOBJ(1)" class="button">.OBJ file (Binary)</button>
-            <a id="linker" class="button" style="background-color: cornflowerblue; float: right; margin-right:4px;"
-               href="{{ url_for('static', filename='model/' + name + '.ply')}}">Download model</a>
-    </div>
-    {% endif %}
 
-        <script src="//cdn.rawgit.com/mrdoob/three.js/master/build/three.min.js"></script>
-        <script src="{{ url_for('static', filename='js/PLYLoader.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/PLYExporter.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/OBJExporter.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/STLExporter.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/Detector.js') }}"></script>
-        <!-- <script src="{{ url_for('static', filename='js/stats.min.js')}}"></script> -->
-        <script src="{{ url_for('static', filename='js/TrackballControls.js')}}"></script>
-        <script src="{{ url_for('static', filename='js/TransformControls.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/csg.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/ThreeCSG.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/SimplifyModifier.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/Blob.js') }}"></script>
+<body>
+    <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar" class="active">
+            <div class="sidebar-header">
+                <h3>3D model viewer</h3>
+            </div>
 
-</body>
-<script type="text/javascript">
+            <ul class="list-unstyled components">
+                <li>
+                    <a href="#">Switch control</a>
+                </li>
+                <li>
+                    <a href="#">Cut base</a>
+                </li>
+                <li>
+                    <a href="#binarymenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Save as binary file</a>
+                    <ul class="collapse list-unstyled" id="binarymenu">
+                        <li>
+                            <a href="#">.ply</a>
+                        </li>
+                        <li>
+                            <a href="#">.stl</a>
+                        </li>
+                        <li>
+                            <a href="#">.obj</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#ASCIImenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Save as ASCII file</a>
+                    <ul class="collapse list-unstyled" id="ASCIImenu">
+                        <li>
+                            <a href="#">.ply</a>
+                        </li>
+                        <li>
+                            <a href="#">.stl</a>
+                        </li>
+                        <li>
+                            <a href="#">.obj</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="list-unstyled CTAs">
+                <li>
+                    <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Export 3D model</a>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+            <div class="container-fluid" style="padding-left:0;">
+                <button type="button" id="sidebarCollapse" class="btn btn-info" style="background-color:#7386D5; border:none;">
+                    <i class="fas fa-align-left"></i>
+                    <span>Toggle Sidebar</span>
+                </button>
+                <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fas fa-align-justify"></i>
+                </button>
+            </div>
+
+            <div id="modelviewer">
+
+            </div>
+
+        </div>
+    </div>
+
+    <!-- jQuery CDN - Slim version (=without AJAX) -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#sidebarCollapse').on('click', function () {
+                $('#sidebar').toggleClass('active');
+
+                //if($('#sidebar').hasClass('active')){
+                //    newsize = $('#modelviewer').first().first().width() + 200;
+                //}
+                //else{
+                //    newsize = $('#modelviewer').first().first().width() - 200;
+                //}
+                //    $('#modelviewer').first().first().attr('width', newsize);
+            });
+        });
+    </script>
+
+    <script src="//cdn.rawgit.com/mrdoob/three.js/master/build/three.min.js"></script>
+    <script src="{{ url_for('static', filename='js/PLYLoader.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/PLYExporter.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/OBJExporter.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/STLExporter.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/Detector.js') }}"></script>
+    <!-- <script src="{{ url_for('static', filename='js/stats.min.js')}}"></script> -->
+    <script src="{{ url_for('static', filename='js/TrackballControls.js')}}"></script>
+    <script src="{{ url_for('static', filename='js/TransformControls.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/csg.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/ThreeCSG.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/SimplifyModifier.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/Blob.js') }}"></script>
+
+    <script type="text/javascript">
 		    if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
 		    var camera, scene, renderer, tfControl, tbControl;
@@ -72,7 +140,7 @@
 
              function init() {
 		        container = document.createElement('div');
-		        document.body.appendChild(container);
+		        document.getElementById("modelviewer").appendChild(container);
 
 	            //Renderer
 	            renderer = new THREE.WebGLRenderer( { antialias: true } );
@@ -81,12 +149,12 @@
 
 	            //Scene
 	            scene = new THREE.Scene();
-	            scene.background = new THREE.Color( 0x72645b );
+	            scene.background = new THREE.Color( 0xb7b8b6 );
 	            scene.add( new THREE.GridHelper( 25, 20 ) );
 
 	            //Floor
 	            floorGeometry = new THREE.BoxGeometry(15,0.001,15);
-	            floorMaterial = new THREE.MeshBasicMaterial( {color: 0x00ff00, opacity : 0.5, transparent: true, depthWrite:false} );
+	            floorMaterial = new THREE.MeshBasicMaterial( {color: 0x4cb5f5, opacity : 0.5, transparent: true, depthWrite:false} );
 	            floorMesh = new THREE.Mesh(floorGeometry, floorMaterial);
 	            floorMesh.position.set(0,0,0);
 	            scene.add(floorMesh);
@@ -371,4 +439,358 @@
 	            return false;
             }
     </script>
+</body>
+
+<!--<body style='font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; font-size: 14px; line-height: 1.42857143; color: #333;'>-->
+    <!--<div style="">-->
+        <!--<button onclick="switchControlMode()" class="button">Switch Control</button>-->
+        <!--<button onclick="cutBase()" class="button">Cut Base</button>-->
+        <!--&lt;!&ndash;<button onclick="simplify()">Simplify Mesh</button>&ndash;&gt;-->
+    <!--</div>-->
+    <!--{% if name %}-->
+    <!--<div style="margin-top:10px;">-->
+        <!--Update / Convert model to a:-->
+    <!--</div>-->
+    <!--<div style="margin-bottom:0px;">-->
+            <!--<button onclick="generateModelLink(0)" class="button">.PLY file (ASCII)</button>-->
+            <!--<button onclick="generateModelLink(1)" class="button">.PLY file (Binary)</button>-->
+            <!--<button onclick="generateModelLinkSTL(0)" class="button" style="margin-left:20px;">.STL file (ASCII)</button>-->
+            <!--<button onclick="generateModelLinkSTL(1)" class="button">.STL file (Binary)</button>-->
+            <!--<button onclick="generateModelLinkOBJ(0)" class="button" style="margin-left:20px;">.OBJ file (ASCII)</button>-->
+            <!--<button onclick="generateModelLinkOBJ(1)" class="button">.OBJ file (Binary)</button>-->
+            <!--<a id="linker" class="button" style="background-color: cornflowerblue; float: right; margin-right:4px;"-->
+               <!--href="{{ url_for('static', filename='model/' + name + '.ply')}}">Download model</a>-->
+    <!--</div>-->
+    <!--{% endif %}-->
+
+        <!--<script src="//cdn.rawgit.com/mrdoob/three.js/master/build/three.min.js"></script>-->
+        <!--<script src="{{ url_for('static', filename='js/PLYLoader.js') }}"></script>-->
+        <!--<script src="{{ url_for('static', filename='js/PLYExporter.js') }}"></script>-->
+        <!--<script src="{{ url_for('static', filename='js/OBJExporter.js') }}"></script>-->
+        <!--<script src="{{ url_for('static', filename='js/STLExporter.js') }}"></script>-->
+        <!--<script src="{{ url_for('static', filename='js/Detector.js') }}"></script>-->
+        <!--&lt;!&ndash; <script src="{{ url_for('static', filename='js/stats.min.js')}}"></script> &ndash;&gt;-->
+        <!--<script src="{{ url_for('static', filename='js/TrackballControls.js')}}"></script>-->
+        <!--<script src="{{ url_for('static', filename='js/TransformControls.js') }}"></script>-->
+        <!--<script src="{{ url_for('static', filename='js/csg.js') }}"></script>-->
+        <!--<script src="{{ url_for('static', filename='js/ThreeCSG.js') }}"></script>-->
+        <!--<script src="{{ url_for('static', filename='js/SimplifyModifier.js') }}"></script>-->
+        <!--<script src="{{ url_for('static', filename='js/Blob.js') }}"></script>-->
+
+<!--</body>-->
+<!--<script type="text/javascript">-->
+		    <!--if ( ! Detector.webgl ) Detector.addGetWebGLMessage();-->
+
+		    <!--var camera, scene, renderer, tfControl, tbControl;-->
+		    <!--var geometry, material, mesh;-->
+		    <!--var floorGeometry, floorMaterial, floorMesh;-->
+		    <!--var clicking = true;-->
+		    <!--var isTranslate = false;;-->
+	    <!--// $( document ).ready(function() {-->
+		    <!--init();-->
+		    <!--render();-->
+		    <!--animate();-->
+	    <!--// });-->
+
+             <!--function init() {-->
+		        <!--container = document.createElement('div');-->
+		        <!--document.body.appendChild(container);-->
+
+	            <!--//Renderer-->
+	            <!--renderer = new THREE.WebGLRenderer( { antialias: true } );-->
+	            <!--renderer.setSize( window.innerWidth - 20, window.innerHeight );-->
+	            <!--container.appendChild( renderer.domElement );-->
+
+	            <!--//Scene-->
+	            <!--scene = new THREE.Scene();-->
+	            <!--scene.background = new THREE.Color( 0xb7b8b6 );-->
+	            <!--scene.add( new THREE.GridHelper( 25, 20 ) );-->
+
+	            <!--//Floor-->
+	            <!--floorGeometry = new THREE.BoxGeometry(15,0.001,15);-->
+	            <!--floorMaterial = new THREE.MeshBasicMaterial( {color: 0x4cb5f5, opacity : 0.5, transparent: true, depthWrite:false} );-->
+	            <!--floorMesh = new THREE.Mesh(floorGeometry, floorMaterial);-->
+	            <!--floorMesh.position.set(0,0,0);-->
+	            <!--scene.add(floorMesh);-->
+
+	            <!--//Camera-->
+	            <!--camera = new THREE.PerspectiveCamera(60 , window.innerWidth / window.innerHeight, 1, 1000 );-->
+	            <!--camera.position.set(0, 10, 10 );-->
+	            <!--camera.lookAt(scene.position);-->
+
+	            <!--//Controls-->
+	            <!--tbControl = new THREE.TrackballControls( camera );-->
+	            <!--tbControl.rotateSpeed = 0;-->
+	            <!--tbControl.zoomSpeed = 1.2;-->
+	            <!--tbControl.panSpeed = 0.8;-->
+	            <!--tbControl.noZoom = false;-->
+	            <!--tbControl.noPan = false;-->
+	            <!--tbControl.staticMoving = true;-->
+	            <!--tbControl.dynamicDampingFactor = 0.3;-->
+	            <!--tbControl.keys = [ 65, 83, 68 ];-->
+	            <!--tbControl.addEventListener( 'change', render );-->
+
+		        <!--tfControl = new THREE.TransformControls( camera, renderer.domElement );-->
+		        <!--tfControl.addEventListener( 'change', render );-->
+
+		        <!--//PLY file-->
+		        <!--{% if name %}-->
+
+		        <!--var loader = new THREE.PLYLoader();-->
+		        <!--loader.load( "{{ url_for('static', filename='model/' + name + '.ply')}}", function ( geometry ) {-->
+			        <!--console.log(geometry);-->
+			        <!--geometry.computeFaceNormals();-->
+			        <!--geometry.dynamic  = true;-->
+                    <!--geometry.dirty = true;-->
+                    <!--geometry.overdraw = true;-->
+
+			        <!--var meshCenter = geometry.boundingSphere.center;-->
+			        <!--var meshRadius = geometry.boundingSphere.radius;-->
+			        <!--var s = (meshRadius === 0 ? 1 : 1.0 / meshRadius) * 10;-->
+			        <!--var m = new THREE.Matrix4().set(-->
+ 			        <!--s, 0, 0, -s*meshCenter.x,-->
+ 			        <!--0, s , 0, -s*meshCenter.y,-->
+ 			        <!--0, 0, s, -s*meshCenter.z,-->
+ 			        <!--0, 0, 0, 1);-->
+			        <!--geometry.applyMatrix(m);-->
+
+			        <!--geometry1 = new THREE.Geometry().fromBufferGeometry( geometry );-->
+			        <!--console.log(geometry1.toJSON);-->
+			        <!--material = new THREE.MeshPhongMaterial( { color: 0xffffff, flatShading: false, vertexColors: THREE.FaceColors} );-->
+			        <!--mesh = new THREE.Mesh( geometry1, material );-->
+			        <!--scene.add( mesh );-->
+			        <!--tfControl.attach(mesh);-->
+			        <!--scene.add(tfControl);-->
+			        <!--tfControl.setMode("rotate");-->
+			        <!--tfControl.setSpace( tfControl.space = "local");-->
+		        <!--});-->
+
+		        <!--{% endif %}-->
+
+	            <!--//Lights-->
+		        <!--var light = new THREE.DirectionalLight( 0xffffff, 1.5 );-->
+		        <!--light.position.set( 1, 1, 1 );-->
+		        <!--scene.add( light );-->
+		        <!--var light = new THREE.DirectionalLight( 0x002288 );-->
+		        <!--light.position.set( -1, -1, -1 );-->
+		        <!--scene.add( light );-->
+		        <!--var light = new THREE.AmbientLight( 0x222222 );-->
+		        <!--scene.add( light );-->
+
+	            <!--document.addEventListener( 'mousedown', onMouseDown );-->
+	        <!--}-->
+
+	        <!--function animate() {-->
+
+		        <!--requestAnimationFrame(animate);-->
+		        <!--tbControl.update();-->
+	        <!--}-->
+
+
+	        <!--function render() {-->
+		        <!--tfControl.update();-->
+		        <!--renderer.render( scene, camera );-->
+	        <!--}-->
+
+	        <!--function onMouseDown(event){-->
+		        <!--event.preventDefault();-->
+		        <!--var mouse3D = new THREE.Vector3( ( event.clientX / window.innerWidth ) * 2 - 1,  -( event.clientY / window.innerHeight ) * 2 + 1,  0.5 );-->
+		        <!--var raycaster =  new THREE.Raycaster();-->
+		        <!--raycaster.setFromCamera( mouse3D, camera );-->
+		        <!--var intersects = raycaster.intersectObjects(scene.children);-->
+		        <!--for ( var i = 0; i < intersects.length; i++ ) {-->
+			        <!--if(intersects[i].object.uuid == mesh.uuid){-->
+				        <!--/*if(clicking){-->
+					        <!--intersects[ i ].object.material.color.set( 0x96C0B7 );-->
+					        <!--clicking = !clicking;-->
+				        <!--}-->
+				        <!--else{-->
+					        <!--intersects[ i ].object.material.color.set( 0xff0000 );-->
+					        <!--clicking = !clicking;-->
+				        <!--}*/-->
+			        <!--}-->
+		        <!--}-->
+		        <!--render();-->
+		        <!--console.log(intersects);-->
+	        <!--}-->
+
+	        <!--function switchControlMode(){-->
+		        <!--isTranslate = !isTranslate;-->
+		        <!--if(isTranslate){-->
+			        <!--tfControl.setMode("translate");-->
+		        <!--}-->
+		        <!--else{-->
+			        <!--tfControl.setMode("rotate");-->
+		        <!--}-->
+	        <!--}-->
+
+	        <!--function csgSubtract(){-->
+		        <!--backGeometry(mesh);-->
+		        <!--backGeometry(floorMesh);-->
+
+		        <!--var mesh_bsp = new ThreeBSP(mesh);-->
+		        <!--var floorMesh_bsp = new ThreeBSP(floorMesh);-->
+		        <!--var result = mesh_bsp.subtract(floorMesh_bsp).toMesh();-->
+		        <!--mesh.geometry = result.geometry;-->
+		        <!--render();-->
+	        <!--}-->
+
+	        <!--function simplify(){-->
+		        <!--var modifer = new THREE.SimplifyModifier();-->
+		        <!--var simplified = modifer.modify( mesh.geometry, mesh.geometry.vertices.length * 0.5 | 0 );-->
+		        <!--console.log(mesh.geometry.vertices.length);-->
+		        <!--mesh.geometry = simplified;-->
+		        <!--console.log(mesh.geometry.vertices.length);-->
+		        <!--render();-->
+	        <!--}-->
+
+	        <!--function backGeometry(mesh){-->
+		        <!--mesh.updateMatrix();-->
+		        <!--mesh.geometry.applyMatrix( mesh.matrix );-->
+		        <!--mesh.matrix.identity();-->
+		        <!--mesh.position.set( 0, 0, 0 );-->
+		        <!--mesh.rotation.set( 0, 0, 0 );-->
+		        <!--mesh.scale.set( 1, 1, 1 );-->
+	        <!--}-->
+
+	        <!--function cutBase(){-->
+		        <!--// console.log(mesh.geometry);-->
+		        <!--backGeometry(mesh);-->
+		        <!--var vertices = mesh.geometry.vertices;-->
+		        <!--var vToDelete = [];-->
+		        <!--var collapsePoint=-1;-->
+		        <!--var min = 10000;-->
+		        <!--for (var i = 0; i <vertices.length; i++) {-->
+
+			        <!--if(vertices[i].y < 0){-->
+				        <!--vToDelete.push(i);-->
+			        <!--}-->
+			        <!--else {-->
+				        <!--if(collapsePoint == -1){-->
+					        <!--collapsePoint = i;-->
+					        <!--min = vertices[i].y-0;-->
+				        <!--}-->
+				        <!--else{-->
+					        <!--var current = vertices[i].y-0;-->
+					        <!--if(current < min){-->
+						        <!--collapsePoint = i;-->
+						        <!--min = current;-->
+					        <!--}-->
+				        <!--}-->
+			        <!--}-->
+		        <!--}-->
+		        <!--console.log(collapsePoint);-->
+		        <!--console.log(vToDelete);-->
+
+		        <!--if(collapsePoint!=-1){-->
+			        <!--vToDelete.forEach(function(element){-->
+				        <!--vertices[element] = vertices[collapsePoint]-->
+			        <!--});-->
+		        <!--}-->
+
+		        <!--// var faces = mesh.geometry.faces;-->
+		        <!--// var fToDelete = [];-->
+		        <!--// for (var i = 0; i <faces.length; i++) {-->
+		        <!--// 	if(contains(vToDelete, faces['a']) || contains(vToDelete, faces['b']) || contains(vToDelete, faces['c'])){-->
+		        <!--// 		fToDelete.push(i);-->
+		        <!--// 	}-->
+		        <!--// }-->
+
+		        <!--// for (var i = 0; i <vToDelete.length;i++){-->
+		        <!--// 	delete mesh.geometry.vertices[vToDelete[i]];-->
+		        <!--// }-->
+		        <!--// for (var i = 0; i <fToDelete.length;i++){-->
+		        <!--// 	delete mesh.geometry.faces[fToDelete[i]];-->
+		        <!--// }-->
+		        <!--// mesh.geometry.faces = mesh.geometry.faces.filter( function(a){ return a!== undefined });-->
+		        <!--// mesh.geometry.vertices = mesh.geometry.vertices.filter( function(a){ return a!== undefined });-->
+		        <!--mesh.geometry.elementsNeedUpdate = true;-->
+		        <!--render();-->
+	        <!--}-->
+
+	        <!--function generateModelLink(i){-->
+
+                <!--var exp = new THREE.PLYExporter();-->
+                <!--var endingFile = "_Binary.ply";-->
+
+                <!--// Process into the ASCII/binary file format-->
+                <!--if (i == 1) {-->
+                    <!--var data = exp.parse(mesh, { binary: true });-->
+                <!--}-->
+                <!--else {-->
+                    <!--if (confirm("Generating model in ASCII format may not work for big-sized models. Proceed?") == false)-->
+                        <!--return false;-->
+                    <!--var data = exp.parse(mesh);-->
+                    <!--endingFile = "_ASCII.ply";-->
+                <!--}-->
+
+                <!--var file = new File([data], "generated.ply");-->
+                <!--var a = document.getElementById("linker");-->
+                <!--a.href = URL.createObjectURL(file);-->
+
+                <!--var currURL = window.location.href.split("/");-->
+                <!--a.download = currURL[currURL.length - 1] + endingFile;-->
+
+                <!--window.alert("Model updated. Please download and save the model locally. Any changes will not be saved in the web server");-->
+	        <!--}-->
+
+            <!--function generateModelLinkSTL(i){-->
+                <!--var exp = new THREE.STLExporter();-->
+                <!--var endingFile = "_Binary.stl";-->
+
+                <!--// Process into the ASCII/binary file format-->
+                <!--if (i == 1) {-->
+                    <!--var data = exp.parse(mesh, { binary: true });-->
+                <!--}-->
+                <!--else {-->
+                    <!--if (confirm("Generating model in ASCII format may not work for big-sized models. Proceed?") == false)-->
+                        <!--return false;-->
+                    <!--var data = exp.parse(mesh);-->
+                    <!--endingFile = "_ASCII.stl";-->
+                <!--}-->
+
+                <!--var file = new File([data], "generated.stl");-->
+                <!--var a = document.getElementById("linker");-->
+                <!--a.href = URL.createObjectURL(file);-->
+
+                <!--var currURL = window.location.href.split("/");-->
+                <!--a.download = currURL[currURL.length - 1] + endingFile;-->
+
+                <!--window.alert("Model updated. Please download and save the model locally. Any changes will not be saved in the web server");-->
+	        <!--}-->
+
+            <!--function generateModelLinkOBJ(i){-->
+                <!--var exp = new THREE.OBJExporter();-->
+                <!--var endingFile = "_Binary.obj";-->
+
+                <!--// Process into the ASCII/binary file format-->
+                <!--if (i == 1) {-->
+                    <!--var data = exp.parse(mesh, { binary: true });-->
+                <!--}-->
+                <!--else {-->
+                    <!--if (confirm("Generating model in ASCII format may not work for big-sized models. Proceed?") == false)-->
+                        <!--return false;-->
+                    <!--var data = exp.parse(mesh);-->
+                    <!--endingFile = "_ASCII.obj";-->
+                <!--}-->
+
+                <!--var file = new File([data], "generated.obj");-->
+                <!--var a = document.getElementById("linker");-->
+                <!--a.href = URL.createObjectURL(file);-->
+
+                <!--var currURL = window.location.href.split("/");-->
+                <!--a.download = currURL[currURL.length - 1] + endingFile;-->
+
+                <!--window.alert("Model updated. Please download and save the model locally. Any changes will not be saved in the web server");-->
+	        <!--}-->
+
+            <!--function contains(arr, element) {-->
+	            <!--for (var i = 0; i < arr.length; i++) {-->
+	                <!--if (arr[i] === element) {-->
+	                    <!--return true;-->
+	                <!--}-->
+	            <!--}-->
+	            <!--return false;-->
+            <!--}-->
+    <!--</script>-->
 </html>

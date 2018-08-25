@@ -12,22 +12,27 @@
 		margin : 10px;
 	}
 </style>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<link rel="shortcut icon" href="{{ url_for('static', filename='ui/favicon.ico') }}">
 {% endblock %}
+
 {% block navbar %}
 {%include "NavBarTemplate.html" %}
 {% endblock %}
 
 {%block content %}
 <section class="container">
-	<h1 class = "button">Uploaded Image Sets</h1>
-	<div class="row align-items-start">
+	<h2>Uploaded Image Sets</h2>
+	<div class="align-items-start">
+		<p>This page allows you to view all uploaded image sets. For each image set, you can start it's 3D reconstruction process, or delete them.
+		<br>Deleting an image set will delete everything generated and/or used by the image set.<br><br></p>
 		<div id = "mesh_table" class = "col-4">
 			<table id="myTable" class="table table-hover">
 				<thead>
 					<th>Image set name</th>
 					<th>Uploaded time</th>
-					<th>Quality of model</th>
-					<th>Stage completed</th>
+					<th>Model quality</th>
+					<th>Current stage</th>
 					<th>Actions</th>
 				</thead>
 				<tbody>

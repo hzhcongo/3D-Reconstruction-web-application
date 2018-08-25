@@ -1,11 +1,15 @@
 {% extends "bootstrap/base.html" %}
-
 {% block styles %}
 {{ super() }}
 <style type="text/css">
 .column {
     float: left;
-    width: 33.33%;
+    width: 32%;
+    text-align: center;
+}
+.columnspacer {
+    float: left;
+    min-width: 2%;
 }
 
 /* Clear floats after the columns */
@@ -15,8 +19,9 @@
     clear: both;
 }
 </style>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<link rel="shortcut icon" href="{{ url_for('static', filename='ui/favicon.ico') }}">
 {% endblock %}
-
 {% block title %}Virtuaso{% endblock %}
 
 {% block navbar %}
@@ -26,23 +31,35 @@
 {%block content %}
 <section class="container">
 		<div style="height: 300px;">
-			<div style="position: relative; float: left; top: 50%; left: 50%; transform: translate(-50%, -50%);">
-				<h1>End-to-end 3D reconstruction software</h1>
-				<h2>Take pictures of objects, upload it to our server, and generate 3D models!</h2>
+			<div style="position: relative; float: left; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; width:90%;">
+				<!--<h1></h1>-->
+				<h2 class="title">A free, open-source and end-to-end 3D reconstruction software that generates 3D models by taking images of real-life objects.</h2>
 			</div>
 		</div>
 		<div>
-			<div><h2>Features</h2></div>
 		  <div class="column">
-			  <h3>End-to-end 3D reconstruction</h3>
-			  <p>Virtuaso does full generation of 3D models from images of physical objects. It even has it's very own iOS app for a seamless experience!</p></div>
-		  <div class="column">
-			  <h3>Efficient</h3>
-			  <p>Virtuaso's generated models are noiseless, and are reconstructed much quicker (15 - 20 minutes)!</p>
+			  <img src="../static/ui/easytouse.png" width="25%" height=auto>
+			  <h3>Easy to use</h3>
+			  <p>New to 3D modeling? No prior knowledge nor any other 3D modeling software is required for Virtuaso.
+				  Virtuaso guides you step-by-step in reconstructing your 3D models.</p>
+		  </div>
+		  <div class="columnspacer">
+			  <h3> </h3>
 		  </div>
 		  <div class="column">
+			  <img src="../static/ui/efficient.png" width="25%" height=auto>
+			  <h3>Efficient</h3>
+			  <p> Why wait half a day to render 3D models in 3D modeling software?
+				  Virtuoso contains a fully integrated pipeline of various photogrammetry and noise reduction tools
+				  capable of generating 3D models with minimal background noise seamlessly and quickly.</p>
+		  </div>
+		  <div class="columnspacer">
+			  <h3> </h3>
+		  </div>
+		  <div class="column">
+			  <img src="../static/ui/export.png" width="25%" height=auto>
 			  <h3>Free exporting of 3D models</h3>
-			  <p>Virtuaso allows free exporting of generated models to popular 3D model file types like .ply, .stl, and .obj!</p>
+			  <p>Who doesn't like free things? Virtuaso allows free exporting of generated 3D models to popular 3D model file types like .ply, .stl, and .obj.</p>
 		  </div>
 		</div>
 </section>

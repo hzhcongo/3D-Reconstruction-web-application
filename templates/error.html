@@ -4,26 +4,18 @@
 {% block styles %}
 {{ super() }}
 <style type="text/css">
-	.button {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 10px 15px;
-            font: 400 13px Arial;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            cursor: pointer;
-        }
 </style>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<link rel="shortcut icon" href="{{ url_for('static', filename='ui/favicon.ico') }}">
 {% endblock %}
+
 {% block navbar %}
 {%include "NavBarTemplate.html" %}
 {% endblock %}
 
 {%block content %}
 <section class="container">
-	<h1>Something happened</h1>
+	<h2>Oops! Something happened that is too powerful for Virtuaso to handle!</h2>
 			<br>
 			<br>
 	<div>

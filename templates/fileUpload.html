@@ -1,50 +1,12 @@
 {% extends "bootstrap/base.html" %}
-
 {% block title %}Virtuaso{% endblock %}
-<!--<script type="text/javascript">-->
-	<!--function checkForm() {-->
-		<!--console.log("start");-->
-			<!--if(document.getElementById('modelname').value.match(/^.*[^\s{1,}]\s.*/)) {-->
-				<!--alert('Model name must not have any spaces or special characters');-->
-				<!--return false;-->
-			<!--} else {-->
-				<!--document.getElementById('upload-form').submit();-->
-				<!--return true;-->
-			<!--}-->
-			<!--console.log("end");-->
-	<!--}-->
-<!--</script>-->
 
 {% block styles %}
 {{ super() }}
     <style>
-        .button {
-            background-color: #4CAF50;
-            border: none;
-            color: white;
-            padding: 10px 15px;
-            font: 400 13px Arial;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            cursor: pointer;
-        }
-
-        <!--input[type="file"] {-->
-			<!--display: none;-->
-		<!--}-->
-		<!--.custom-file-upload {-->
-            <!--background-color: #4CAF50;-->
-            <!--border: none;-->
-            <!--color: white;-->
-            <!--padding: 10px 15px;-->
-            <!--font: 400 13px Arial;-->
-            <!--text-align: center;-->
-            <!--text-decoration: none;-->
-            <!--display: inline-block;-->
-            <!--cursor: pointer;-->
-		<!--}-->
     </style>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+<link rel="shortcut icon" href="{{ url_for('static', filename='ui/favicon.ico') }}">
 {% endblock %}
 
 {% block navbar %}
@@ -53,18 +15,42 @@
 
 {%block content %}
 	<div class="container">
-	  <h2>Image Uploader</h2>
-	  <form id="upload-form" action ="{{ url_for('upload') }}" method = "POST" enctype="multipart/form-data">
-		  Model name (Leave blank to use current datetime as name):<br> <input type = "text" name = "modelname" id="modelname"><br><br>
-		  Model quality (0 = low, 1 = medium, 2 = high):<br> <input type = "number" name = "quality" value="0" max="2" min="0" required><br><br>
-		  Upload images:<br>
+	  <h2>Upload image set</h2>
+		<p>This page allows you to upload the images you have taken to begin the first stage of the 3D reconstruction process.</p>
+        <br><br>
+        <div id="boxed">
+            <form id="upload-form" action ="{{ url_for('upload') }}" method = "POST" enctype="multipart/form-data">
+              <div class="form-group">
+                <label for="modelname">Model name (Leave blank to use current datetime as name):</label>
+                <input type = "text" name = "modelname" class="form-control" id="modelname" style="width: 50%">
+              </div>
+              <div class="form-group">
+                <label for="quality">Model quality:</label><br>
+                <label class="radio-inline"><input type="radio" name="quality" value="0" >Low</label>
+                <label class="radio-inline"><input type="radio" name="quality" value="1" >Medium</label>
+                <label class="radio-inline"><input type="radio" name="quality" value="2" checked>High</label>
+              </div>
+              <div class="form-group">
+                <label for="file-upload">Upload images:</label>
+                <input id="file-upload" type = "file" name = "file" accept="image/*" multiple required>
+              </div>
+              <button type="submit" value="Send" class="btn btn-default">Submit</button>
+            </form>
+        </div>
+		<!--<form id="upload-form" action ="{{ url_for('upload') }}" method = "POST" enctype="multipart/form-data"><br>-->
+		  <!--Model name (Leave blank to use current datetime as name):<br> <input type = "text" name = "modelname" id="modelname"><br><br>-->
+		  <!--Model quality:-->
+			<!--<input type="radio" name="quality" value="0"> Low-->
+			<!--<input type="radio" name="quality" value="1"> Medium-->
+			<!--<input type="radio" name="quality" value="2"> High <br><br>-->
+		  <!--<input type = "number" name = "quality" value="0" max="2" min="0" required><br><br>-->
+		  <!--Upload images:-->
 		  <!--<label for="file-upload" class="custom-file-upload">-->
 			<!--<i class="fa fa-cloud-upload"></i> Upload images-->
 		<!--</label>-->
-		  <input id="file-upload" type = "file" name = "file" accept="image/*" multiple required><br>
-	    <br>
-		  <input type="submit" value="Send" class="button" style="background-color: cornflowerblue;" >
+		  <!--<input id="file-upload" type = "file" name = "file" accept="image/*" multiple required><br>-->
+		  <!--<input type="submit" value="Send" class="button" style="background-color: cornflowerblue;" >-->
 		  <!--<button onclick="this.form.submit();" class="button">Send</button>-->
-	  </form>
+		<!--</form>-->
 	</div>
 {% endblock %}

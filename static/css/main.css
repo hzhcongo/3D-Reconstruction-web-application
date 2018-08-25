@@ -1,0 +1,36 @@
+@import url('https://fonts.googleapis.com/css?family=Bitter|Merriweather');
+
+html {
+    overflow: -moz-scrollbars-vertical;
+    overflow-y: scroll;
+}
+
+body{
+    background-color: #e7f4ff;
+}
+
+.title{
+    font-family: 'Bitter', serif;
+}
+
+th{
+    padding: 6px 0px;
+}
+
+.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    font: 400 13px Arial;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+#boxed {
+    border: 1px solid #cbcbcb;
+    border-radius: 10px;
+    padding:10px;
+}
