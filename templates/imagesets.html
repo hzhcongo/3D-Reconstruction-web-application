@@ -21,25 +21,27 @@
 {% endblock %}
 
 {%block content %}
-<section class="container">
-	<h2><img src="../static/ui/pics.png" width="50px" height=auto style="margin-right:20px;"><br>Uploaded image sets</h2>
-	<div class="align-items-start">
+<section class="container" style="text-align:center;">
+	<div style="margin:50px auto; width:60%;">
+		<h2><img src="../static/ui/pics.png" width="100px" height=auto style="margin-bottom: 10px;"><br>Uploaded image sets</h2>
 		<p>This page allows you to view all uploaded image sets. For each image set, you can start it's 3D reconstruction process, or delete them.
-		<br>Deleting an image set will delete everything generated and/or used by the image set.<br><br></p>
-		<div id = "mesh_table" class = "col-4" style="max-width: 1000px; margin: auto;">
+			Deleting an image set will delete everything generated and/or used by the image set.</p>
+	</div>
+	<div class="align-items-start">
+		<div id = "mesh_table" class = "col-4" style="max-width: 1005px; margin: auto; text-align:left; width:100%;">
 			<table id="myTable" class="table table-hover">
 				<thead>
-					<th style="width:5%;">Process</th>
-					<th style="width:40%;">Image set name</th>
-					<th style="width:20%;">Uploaded time</th>
+					<th style="width:15%;">Process image set</th>
+					<th style="width:42%;">Image set name</th>
+					<th style="width:12%;">Uploaded time</th>
 					<th style="width:15%;">Model quality</th>
-					<th style="width:15%;">Current stage</th>
+					<th style="width:11%;">Current stage</th>
 					<th style="width:5%;">Delete</th>
 				</thead>
 				<tbody>
 					{% for d in data %}
 					<tr>
-						<td>
+						<td style="text-align:center;">
         					{% if d.stage == '6' %}
                             <a href="/TrimAndNoiseRemoval/{{d.filename}}"><img src="../static/ui/gears.png" style="max-width:10%; min-width: 20px;" height=auto></a>
         					{% elif d.stage == '5' %}
@@ -62,8 +64,8 @@
 						<td>{{d.quality}}</td>
 						<td>{{d.creation_time}}</td>
 						<td>{{d.stage}} / 6</td>
-						<td>
-                            <a href="/deleteImages/{{d.filename}}" style="margin-left:20px;"><img src="../static/ui/delete.png" style="max-width:10%; min-width: 20px;" height=auto></a>
+						<td style="text-align:center;">
+                            <a href="/deleteImages/{{d.filename}}"><img src="../static/ui/delete.png" style="max-width:10%; min-width: 20px;" height=auto></a>
                         </td>
 
 					</tr>

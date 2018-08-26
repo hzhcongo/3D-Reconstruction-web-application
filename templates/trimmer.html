@@ -14,12 +14,11 @@
 {% endblock %}
 
 {%block content %}
-<section class="container">
-	<h1>Stage 6: Surface trimming and noise removal of generated mesh via mesh splitting</h1>
-			<br>
-	<div>
-		Surface trimming and noise removal of 3D mesh model generated from image set "{{name}}".<br>
-		You can also download the current state of the .ply model generated from the image set.<br><br>
+<section class="container" style="text-align:center;">
+	<div style="margin:50px auto; width:100%;">
+	<h2>Stage 6: Surface trimming and noise removal of generated mesh via mesh splitting</h2>
+		<p>Surface trimming and noise removal of 3D mesh model generated from image set "{{name}}".</p>
+		<br><br>
 		<a class="btn btn-default" href="{{ url_for('static', filename='images/' + name + '/temp/pmvs/models/mesh.ply')}}">Download current state of model</a>
 		<a class="btn btn-primary" href="/TrimAndNoiseRemovalprocess?name={{name}}">Trim mesh</a>
 	</div>

@@ -14,11 +14,10 @@
 {% endblock %}
 
 {%block content %}
-<section class="container">
+<section class="container" style="text-align:center;">
+	<div style="margin:50px auto; width:100%;">
 	<h2>Stage 3: Point cloud generation via Patch-based Multi-view Stereo Software </h2>
-			<br>
-	<div>
-		Generating point cloud from image set "{{name}}".
+		<p>Generating point cloud from image set "{{name}}".</p>
 		<br><br>
 		<a class="btn btn-primary" href="/PMVSprocess?name={{name}}">Generate point cloud</a>
 	</div>

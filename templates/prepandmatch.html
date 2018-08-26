@@ -14,13 +14,11 @@
 {% endblock %}
 
 {%block content %}
-<section class="container">
+<section class="container" style="text-align:center;">
+	<div style="margin:50px auto; width:100%;">
 	<h2>Stage 1: Photogrammetry processing (Preparation of images and feature matching)</h2>
-			<br>
-	<div>
-		Preparing and feature matching image set "{{name}}".
-		<br>
-		<br>
+		<p>Preparing and feature matching image set "{{name}}".</p>
+		<br><br>
 		<a class="btn btn-primary" href="/PrepAndMatchprocess?name={{name}}">Do feature matching</a>
 	</div>
 </section>

@@ -14,12 +14,11 @@
 {% endblock %}
 
 {%block content %}
-<section class="container">
+<section class="container" style="text-align:center;">
+	<div style="margin:50px auto; width:100%;">
 	<h2>Stage 4: Point cloud de-noising</h2>
-			<br>
-	<div>
-		De-noising of point cloud generated from image set "{{name}}".<br>
-		You can also download the current state of the .ply model generated from the image set.<br><br>
+		<p>De-noising of point cloud generated from image set "{{name}}".</p>
+		<br><br>
 		<a class="btn btn-default" href="{{ url_for('static', filename='images/' + name + '/temp/pmvs/models/pmvs_options.txt.ply')}}">Download current state of model</a>
 		<a class="btn btn-primary" href="/PointCloudDenoiseprocess?name={{name}}">De-noise point cloud</a>
 	</div>

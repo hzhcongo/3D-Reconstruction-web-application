@@ -17,6 +17,13 @@ th{
     padding: 6px 0px;
 }
 
+.navbar-brand {
+  transform: translateX(-50%);
+  left: 50%;
+  position: absolute;
+}
+
+
 //
 // Buttons
 // --------------------------------------------------
@@ -188,4 +195,8 @@ input[type="button"] {
     border: 1px solid #cbcbcb;
     border-radius: 10px;
     padding:10px;
+    width:60%;
+    max-width: 700px;
+    margin: auto;
+    text-align:left;">
 }

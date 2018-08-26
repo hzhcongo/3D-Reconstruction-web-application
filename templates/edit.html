@@ -37,33 +37,36 @@
 {% endblock %}
 
 {%block content %}
-<section class="container">
-	<h2><img src="../static/ui/box.png" width="50px" height=auto style="margin-right:20px;">Generated 3D models</h2>
+<section class="container" style="text-align:center;">
+	<div style="margin:50px auto; width:60%;">
+		<h2><img src="../static/ui/box.png" width="100px" height=auto style="margin-bottom: 10px;"><br>Generated 3D models</h2>
+		<p>This page allows you to view all generated 3D mesh models. The selected model will be shown in the 3D viewer.
+			Models can also be edited with the base-cutter tool, or deleted.</p>
+	</div>
 	<div class="align-items-start">
-		<p>This page allows you to view all generated 3D mesh models. The selected model will be shown in the 3D viewer. Models can also be edited with the base-cutter tool, or deleted.<br><br></p>
-		<div id = "mesh_table" class = "col-4" style="max-width: 1000px; margin: auto;">
+		<div id = "mesh_table" class = "col-4" style="max-width: 1005px; margin: auto; text-align:left; width:100%;">
 			<table id="myTable" class="table table-hover">
 				<thead>
-					<th style="width:5%;">View</th>
-					<th style="width:40%;">Mesh name</th>
-					<th style="width:20%;">Created time</th>
-					<th style="width:20%;">Modified time</th>
-					<th style="width:10%;">File size</th>
+					<th style="width:10%;">View model</th>
+					<th style="width:46%;">Model name</th>
+					<th style="width:15%;">Created time</th>
+					<th style="width:15%;">Modified time</th>
+					<th style="width:9%;">File size</th>
 					<th style="width:5%;">Delete</th>
 					<!--<th></th>-->
 				</thead>
 				<tbody>
 					{% for d in data %}
 					<tr>
-                        <td>
+                        <td style="text-align:center;">
                             <a href="/edit/{{d.filename}}"><img src="../static/ui/view.png" style="max-width:10%; min-width: 20px;" height=auto></a>
                         </td>
 						<td>{{d.filename}}</td>
 						<td>{{d.creation_time}}</td>
 						<td>{{d.modification_time}}</td>
 						<td>{{d.file_size}} KB</td>
-                        <td>
-                            <a href="/delete/{{d.filename}}" style="margin-left:20px;"><img src="../static/ui/delete.png" style="max-width:10%; min-width: 20px;" height=auto></a>
+                        <td style="text-align:center;">
+                            <a href="/delete/{{d.filename}}"><img src="../static/ui/delete.png" style="max-width:10%; min-width: 20px;" height=auto></a>
                         </td>
 						<!--<td></td>-->
 					</tr>
