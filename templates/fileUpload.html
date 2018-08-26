@@ -17,7 +17,7 @@
 	<div class="container">
 	  <h2>Upload image set</h2>
 		<p>This page allows you to upload the images you have taken to begin the first stage of the 3D reconstruction process.</p>
-        <br><br>
+        <br>
         <div id="boxed">
             <form id="upload-form" action ="{{ url_for('upload') }}" method = "POST" enctype="multipart/form-data">
               <div class="form-group">
@@ -34,7 +34,7 @@
                 <label for="file-upload">Upload images:</label>
                 <input id="file-upload" type = "file" name = "file" accept="image/*" multiple required>
               </div>
-              <button type="submit" value="Send" class="btn btn-default">Submit</button>
+              <button type="submit" value="Send" class="btn btn-primary">Submit</button>
             </form>
         </div>
 		<!--<form id="upload-form" action ="{{ url_for('upload') }}" method = "POST" enctype="multipart/form-data"><br>-->

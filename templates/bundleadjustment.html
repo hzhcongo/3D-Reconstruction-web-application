@@ -18,10 +18,9 @@
 	<h2>Stage 2: Photogrammetry processing (bundle adjustment) and initializing of output for PMVS</h2>
 			<br>
 	<div>
-		Processing image set "{{name}}".
-		<br>
-		<br>
-		<a class="button" style="background-color: cornflowerblue;" href="/BundleAdjustmentprocess?name={{name}}">Process</a>
+		Processing image set "{{name}}".<br>
+		You can also download the current state of the .ply model generated from the image set.<br><br>
+		<a class="btn btn-primary" href="/BundleAdjustmentprocess?name={{name}}">Do bundle adjustment</a>
 	</div>
 </section>
 {% endblock %}

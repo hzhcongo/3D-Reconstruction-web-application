@@ -22,46 +22,50 @@
 
 {%block content %}
 <section class="container">
-	<h2>Uploaded Image Sets</h2>
+	<h2><img src="../static/ui/pics.png" width="50px" height=auto style="margin-right:20px;"><br>Uploaded image sets</h2>
 	<div class="align-items-start">
 		<p>This page allows you to view all uploaded image sets. For each image set, you can start it's 3D reconstruction process, or delete them.
 		<br>Deleting an image set will delete everything generated and/or used by the image set.<br><br></p>
-		<div id = "mesh_table" class = "col-4">
+		<div id = "mesh_table" class = "col-4" style="max-width: 1000px; margin: auto;">
 			<table id="myTable" class="table table-hover">
 				<thead>
-					<th>Image set name</th>
-					<th>Uploaded time</th>
-					<th>Model quality</th>
-					<th>Current stage</th>
-					<th>Actions</th>
+					<th style="width:5%;">Process</th>
+					<th style="width:40%;">Image set name</th>
+					<th style="width:20%;">Uploaded time</th>
+					<th style="width:15%;">Model quality</th>
+					<th style="width:15%;">Current stage</th>
+					<th style="width:5%;">Delete</th>
 				</thead>
 				<tbody>
 					{% for d in data %}
 					<tr>
-						<td>{{d.filename}}</td>
-						<td>{{d.creation_time}}</td>
-						<td>{{d.quality}}</td>
-						<td>{{d.stage}} / 6</td>
-                        <td>
+						<td>
         					{% if d.stage == '6' %}
-                            <a href="/TrimAndNoiseRemoval/{{d.filename}}">Process</a>
+                            <a href="/TrimAndNoiseRemoval/{{d.filename}}"><img src="../static/ui/gears.png" style="max-width:10%; min-width: 20px;" height=auto></a>
         					{% elif d.stage == '5' %}
-                            <a href="/TrimAndNoiseRemoval/{{d.filename}}">Process</a>
+                            <a href="/TrimAndNoiseRemoval/{{d.filename}}"><img src="../static/ui/gears.png" style="max-width:10%; min-width: 20px;" height=auto></a>
         					{% elif d.stage == '4' %}
-                            <a href="/PoissonReconstruction/{{d.filename}}">Process</a>
+                            <a href="/PoissonReconstruction/{{d.filename}}"><img src="../static/ui/gears.png" style="max-width:10%; min-width: 20px;" height=auto></a>
         					{% elif d.stage == '3' %}
-                            <a href="/PointCloudDenoise/{{d.filename}}">Process</a>
+                            <a href="/PointCloudDenoise/{{d.filename}}"><img src="../static/ui/gears.png" style="max-width:10%; min-width: 20px;" height=auto></a>
         					{% elif d.stage == '2' %}
                             <a href="/PMVS/{{d.filename}}">Process</a>
         					{% elif d.stage == '1' %}
-                            <a href="/BundleAdjustment/{{d.filename}}">Process</a>
+                            <a href="/BundleAdjustment/{{d.filename}}"><img src="../static/ui/gears.png" style="max-width:10%; min-width: 20px;" height=auto></a>
         					{% elif d.stage == '0' %}
-                            <a href="/PrepAndMatch/{{d.filename}}">Process</a>
+                            <a href="/PrepAndMatch/{{d.filename}}"><img src="../static/ui/gears.png" style="max-width:10%; min-width: 20px;" height=auto></a>
         					{% else %}
-                            <a href="/OSM/{{d.filename}}">Process</a>
+                            <a href="/OSM/{{d.filename}}"><img src="../static/ui/gears.png" style="max-width:10%; min-width: 20px;" height=auto></a>
 							{% endif %}
-                            <a href="/deleteImages/{{d.filename}}" style="margin-left:20px;">Delete</a>
+						</td>
+						<td>{{d.filename}}</td>
+						<td>{{d.quality}}</td>
+						<td>{{d.creation_time}}</td>
+						<td>{{d.stage}} / 6</td>
+						<td>
+                            <a href="/deleteImages/{{d.filename}}" style="margin-left:20px;"><img src="../static/ui/delete.png" style="max-width:10%; min-width: 20px;" height=auto></a>
                         </td>
+
 					</tr>
 					{% endfor %}
 				</tbody>

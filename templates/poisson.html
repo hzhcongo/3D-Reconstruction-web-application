@@ -19,15 +19,10 @@
 			<br>
 			<br>
 	<div>
-		Generating a 3D mesh model via point cloud from image set "{{name}}"
-		<br>
-		<a class="button" style="background-color: cornflowerblue;" href="/PoissonReconstructionprocess?name={{name}}">Generate mesh</a>
-		<br>
-		<br>
-		Download the current state of the .ply model generated for the image set to save it locally. <br>
-		Stage 5 will be applied on this model
-		<br>
-		<a class="button" style="background-color: cornflowerblue;" href="{{ url_for('static', filename='images/' + name + '/temp/pmvs/models/trim.ply')}}">Download current state of model</a>
+		Generating a 3D mesh model via point cloud from image set "{{name}}".<br>
+		You can also download the current state of the .ply model generated from the image set.<br><br>
+		<a class="btn btn-default" href="{{ url_for('static', filename='images/' + name + '/temp/pmvs/models/trim.ply')}}">Download current state of model</a>
+		<a class="btn btn-primary" href="/PoissonReconstructionprocess?name={{name}}">Generate mesh</a>
 
 	</div>
 </section>
