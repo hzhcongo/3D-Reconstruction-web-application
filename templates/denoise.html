@@ -15,12 +15,14 @@
 
 {%block content %}
 <section class="container" style="text-align:center;">
-	<div style="margin:50px auto; width:100%;">
-	<h2>Stage 4: Point cloud de-noising</h2>
-		<p>De-noising of point cloud generated from image set "{{name}}".</p>
+	<div class="centercenter">
+	<h3>Stage 4: Point cloud de-noising of "{{name}}"</h3>
+		<p>De-noising of the generated point cloud is done via a statistical approach.
+			A K-Nearest Neighbors algorithm is used to find the neighboring points.
+			All points whose mean distance to it's neighbouring points exceed the global distance's mean and standard deviation are treated as noise and removed.</p>
 		<br><br>
-		<a class="btn btn-default" href="{{ url_for('static', filename='images/' + name + '/temp/pmvs/models/pmvs_options.txt.ply')}}">Download current state of model</a>
-		<a class="btn btn-primary" href="/PointCloudDenoiseprocess?name={{name}}">De-noise point cloud</a>
+		<a class="btn btn-default halfwidth" href="{{ url_for('static', filename='images/' + name + '/temp/pmvs/models/pmvs_options.txt.ply')}}">Download current state of model</a><br><br>
+		<a class="btn btn-primary halfwidth" href="/PointCloudDenoiseprocess?name={{name}}">Begin Stage 4</a>
 	</div>
 </section>
 {% endblock %}

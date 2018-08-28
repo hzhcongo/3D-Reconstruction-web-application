@@ -15,11 +15,13 @@
 
 {%block content %}
 <section class="container" style="text-align:center;">
-	<div style="margin:50px auto; width:100%;">
-	<h2>Stage 1: Photogrammetry processing (Preparation of images and feature matching)</h2>
-		<p>Preparing and feature matching image set "{{name}}".</p>
+	<div class="centercenter">
+		<h3>Stage 1: Preparation of images and feature matching of "{{name}}"</h3>
+		<p>All images will have it's Exif data extracted using Exiv2, an image metadata library. After that, the features in each
+			image is detected via Scale-Invariant Feature Transform (SIFT) algorithm. Similar features between different images are then matched via triangulation.
+		</p>
 		<br><br>
-		<a class="btn btn-primary" href="/PrepAndMatchprocess?name={{name}}">Do feature matching</a>
+		<a class="btn btn-primary halfwidth" href="/PrepAndMatchprocess?name={{name}}">Begin Stage 1</a>
 	</div>
 </section>
 {% endblock %}

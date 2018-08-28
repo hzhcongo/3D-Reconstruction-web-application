@@ -15,11 +15,13 @@
 
 {%block content %}
 <section class="container" style="text-align:center;">
-	<div style="margin:50px auto; width:100%;">
-	<h2>Stage 2: Photogrammetry processing (bundle adjustment) and initializing of output for PMVS</h2>
-		<p>Processing image set "{{name}}".</p>
+	<div class="centercenter">
+	<h3>Stage 2: Camera pose estimation and bundle adjustment of "{{name}}"</h3>
+		<p>The position of the camera when an image is taken is estimated. This is done by applying the pinhole camera
+			model on all images. Bundle adjustment then does a large scale optimization of the
+			estimation results during this stage by applying Levenberg–Marquardt algorithm to solve the 	non-linear least squares problems.</p>
 		<br><br>
-		<a class="btn btn-primary" href="/BundleAdjustmentprocess?name={{name}}">Do bundle adjustment</a>
+		<a class="btn btn-primary halfwidth" href="/BundleAdjustmentprocess?name={{name}}">Begin Stage 2</a>
 	</div>
 </section>
 {% endblock %}

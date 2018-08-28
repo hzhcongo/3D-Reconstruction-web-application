@@ -15,12 +15,13 @@
 
 {%block content %}
 <section class="container" style="text-align:center;">
-	<div style="margin:50px auto; width:100%;">
-	<h2>Stage 5: 3D mesh model generation via Poisson Reconstruction Package</h2>
-		<p>Generating a 3D mesh model via point cloud from image set "{{name}}".</p>
+	<div class="centercenter">
+	<h3>Stage 5: Poisson Reconstruction of "{{name}}"</h3>
+		<p>Poisson Reconstruction Package is used to generate a 3D mesh model based on the point cloud from the previous stage.
+			This is done by reconstructing the 3D surfaces from the point in the point cloud.</p>
 		<br><br>
-		<a class="btn btn-default" href="{{ url_for('static', filename='images/' + name + '/temp/pmvs/models/trim.ply')}}">Download current state of model</a>
-		<a class="btn btn-primary" href="/PoissonReconstructionprocess?name={{name}}">Generate mesh</a>
+		<a class="btn btn-default halfwidth" href="{{ url_for('static', filename='images/' + name + '/temp/pmvs/models/trim.ply')}}">Download current state of model</a><br><br>
+		<a class="btn btn-primary halfwidth" href="/PoissonReconstructionprocess?name={{name}}">Begin Stage 5</a>
 	</div>
 </section>
 {% endblock %}

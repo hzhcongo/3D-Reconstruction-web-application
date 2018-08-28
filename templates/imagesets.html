@@ -14,6 +14,24 @@
 </style>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 <link rel="shortcut icon" href="{{ url_for('static', filename='ui/favicon.ico') }}">
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.js') }}"></script>
+<script src="{{ url_for('static', filename='js/ezBSAlert.js') }}"></script>
+
+<!--FROM ezBSAlert.js-->
+<script type="text/javascript">
+	function confirm(filename) {
+		ezBSAlert({
+		  type: 'confirm',
+		  messageText: "Confirm delete of '" + filename + "'? This action can't be undone.",
+		  alertType: 'Confirm'
+		}).done(function (e) {
+			if(e){
+				window.location.href = '/deleteImages/'+filename;
+			}
+			return false;
+		});
+	}
+</script>
 {% endblock %}
 
 {% block navbar %}
@@ -65,7 +83,9 @@
 						<td>{{d.creation_time}}</td>
 						<td>{{d.stage}} / 6</td>
 						<td style="text-align:center;">
-                            <a href="/deleteImages/{{d.filename}}"><img src="../static/ui/delete.png" style="max-width:10%; min-width: 20px;" height=auto></a>
+                            <!--<a href="/deleteImages/{{d.filename}}"><img src="../static/ui/delete.png" style="max-width:10%; min-width: 20px;" height=auto></a>-->
+							<a class="delete btnConfirm" id="{{d.filename}}" onclick="confirm('{{d.filename}}')">
+							<img src="../static/ui/delete.png" style="max-width:10%; min-width: 20px;" height=auto></a>
                         </td>
 
 					</tr>

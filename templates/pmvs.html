@@ -15,11 +15,12 @@
 
 {%block content %}
 <section class="container" style="text-align:center;">
-	<div style="margin:50px auto; width:100%;">
-	<h2>Stage 3: Point cloud generation via Patch-based Multi-view Stereo Software </h2>
-		<p>Generating point cloud from image set "{{name}}".</p>
+	<div class="centercenter">
+	<h3>Stage 3: Point cloud generation of "{{name}}"</h3>
+		<p>Patch Multi-View Stereo (PMVS) takes the output from the previous stage and generates a point cloud.
+		The point cloud contains the 3D coordinates and the surface normal of each oriented point. </p>
 		<br><br>
-		<a class="btn btn-primary" href="/PMVSprocess?name={{name}}">Generate point cloud</a>
+		<a class="btn btn-primary halfwidth" href="/PMVSprocess?name={{name}}">Begin Stage 3</a>
 	</div>
 </section>
 {% endblock %}

@@ -27,9 +27,24 @@
 		window.scrollTo(0,document.body.scrollHeight);
 	};
 	{% endif %}
+
+	function confirm(filename) {
+		ezBSAlert({
+		  type: 'confirm',
+		  messageText: "Confirm delete of '" + filename + "'? This action can't be undone.",
+		  alertType: 'Confirm'
+		}).done(function (e) {
+			if(e){
+				window.location.href = '/delete/'+filename;
+			}
+			return false;
+		});
+	}
 </script>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 <link rel="shortcut icon" href="{{ url_for('static', filename='ui/favicon.ico') }}">
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.js') }}"></script>
+<script src="{{ url_for('static', filename='js/ezBSAlert.js') }}"></script>
 {% endblock %}
 
 {% block navbar %}
@@ -39,7 +54,7 @@
 {%block content %}
 <section class="container" style="text-align:center;">
 	<div style="margin:50px auto; width:60%;">
-		<h2><img src="../static/ui/box.png" width="100px" height=auto style="margin-bottom: 10px;"><br>Generated 3D models</h2>
+		<h3><img src="../static/ui/box.png" width="100px" height=auto style="margin-bottom: 10px;"><br>Generated 3D models</h3>
 		<p>This page allows you to view all generated 3D mesh models. The selected model will be shown in the 3D viewer.
 			Models can also be edited with the base-cutter tool, or deleted.</p>
 	</div>
@@ -66,7 +81,8 @@
 						<td>{{d.modification_time}}</td>
 						<td>{{d.file_size}} KB</td>
                         <td style="text-align:center;">
-                            <a href="/delete/{{d.filename}}"><img src="../static/ui/delete.png" style="max-width:10%; min-width: 20px;" height=auto></a>
+							<a class="delete btnConfirm" id="{{d.filename}}" onclick="confirm('{{d.filename}}')">
+							<img src="../static/ui/delete.png" style="max-width:10%; min-width: 20px;" height=auto></a>
                         </td>
 						<!--<td></td>-->
 					</tr>
