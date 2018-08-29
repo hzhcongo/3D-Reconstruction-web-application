@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Display</title>
+    <title>Virtuaso: Display</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-    </style>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 <link rel="shortcut icon" href="{{ url_for('static', filename='ui/favicon.ico') }}">
 <!-- Bootstrap CSS CDN -->
@@ -19,7 +17,7 @@
 <body>
     <div class="wrapper">
         <!-- Sidebar  -->
-        <nav id="sidebar" class="active">
+        <nav id="sidebar">
             <div class="sidebar-header">
                 <h3>3D model viewer</h3>
             </div>
@@ -195,7 +193,7 @@
 
             //Renderer
             renderer = new THREE.WebGLRenderer( { antialias: true } );
-            renderer.setSize( window.innerWidth - 20, window.innerHeight );
+            renderer.setSize( window.innerWidth, window.innerHeight );
             container.appendChild( renderer.domElement );
 
             //Scene
