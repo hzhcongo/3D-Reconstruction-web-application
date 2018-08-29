@@ -1,12 +1,35 @@
 {% extends "bootstrap/base.html" %}
-{% block title %}Virtuaso{% endblock %}
+{% block title %}Virtuaso: Stage 6{% endblock %}
 
 {% block styles %}
 {{ super() }}
-<style type="text/css">
-</style>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 <link rel="shortcut icon" href="{{ url_for('static', filename='ui/favicon.ico') }}">
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.js') }}"></script>
+<script>
+	$(document).ready(function () {
+		$("#processstage").click(function(){
+			$('#cover-spin').show(0);
+			$.ajax({
+				url: "/TrimAndNoiseRemovalprocess?name={{name}}",
+				type: 'GET',
+				data: "",
+				cache: false,
+				success: function(result){
+
+				}
+			});
+		});
+	});
+</script>
+<!--<script>-->
+	<!--$(document).ready(function () {-->
+		<!--$("#processstage").click(function(){-->
+			<!--$('#cover-spin').show(0);-->
+			<!--window.location.href = "/TrimAndNoiseRemovalprocess?name={{name}}";-->
+		<!--});-->
+	<!--});-->
+<!--</script>-->
 {% endblock %}
 
 {% block navbar %}
@@ -21,7 +44,9 @@
 			Noise removal is then done via retaining the largest mesh after mesh splitting.</p>
 		<br><br>
 		<a class="btn btn-default halfwidth" href="{{ url_for('static', filename='images/' + name + '/temp/pmvs/models/mesh.ply')}}">Download current state of model</a><br><br>
-		<a class="btn btn-primary halfwidth" href="/TrimAndNoiseRemovalprocess?name={{name}}">Begin Stage 6</a>
+		<a class="btn btn-primary halfwidth" id="processstage">Begin Stage 6</a>
+		<!--<a class="btn btn-primary halfwidth" id="processstage">Begin Stage 6</a>-->
 	</div>
 </section>
+<div id="cover-spin"></div>
 {% endblock %}

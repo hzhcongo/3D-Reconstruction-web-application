@@ -1,5 +1,5 @@
 {% extends "bootstrap/base.html" %}
-{% block title %}Virtuaso{% endblock %}
+{% block title %}Virtuaso: View 3D Models{% endblock %}
 
 {% block styles %}
 {{ super() }}
@@ -53,13 +53,20 @@
 
 {%block content %}
 <section class="container" style="text-align:center;">
-	<div style="margin:50px auto; width:60%;">
-		<h3><img src="../static/ui/box.png" width="100px" height=auto style="margin-bottom: 10px;"><br>Generated 3D models</h3>
-		<p>This page allows you to view all generated 3D mesh models. The selected model will be shown in the 3D viewer.
-			Models can also be edited with the base-cutter tool, or deleted.</p>
+	<div id="titleheader" style="margin: 50px auto; max-width: 1005px; height: 150px; display: flex; justify-content: center; align-items: center;">
+		<div id="one"><img src="../static/ui/box.png" style="text-align: right; margin-top:25px; max-height: 100px; "></div>
+		<div id="mid" style="border-left: 1.5px solid silver; height: 130px; max-height: 100%; margin: 10px 20px;"></div>
+		<div id="two" style="text-align:left;"><div><h3 style="margin-top:0;">Generated 3D models</h3>
+			This page allows you to view all generated 3D mesh models. The selected model will be shown in the 3D viewer.
+			Models can also be edited with the base-cutter tool, or deleted.</div></div>
 	</div>
+	<!--<div style="margin:50px auto; width:60%;">-->
+		<!--<h3><img src="../static/ui/box.png" width="100px" height=auto style="margin-bottom: 10px;"><br>Generated 3D models</h3>-->
+		<!--<p>This page allows you to view all generated 3D mesh models. The selected model will be shown in the 3D viewer.-->
+			<!--Models can also be edited with the base-cutter tool, or deleted.</p>-->
+	<!--</div>-->
 	<div class="align-items-start">
-		<div id = "mesh_table" class = "col-4" style="max-width: 1005px; margin: auto; text-align:left; width:100%;">
+		<div id = "mesh_table" class = "col-4" style="margin: auto; text-align:left; width:100%;">
 			<table id="myTable" class="table table-hover">
 				<thead>
 					<th style="width:10%;">View model</th>
