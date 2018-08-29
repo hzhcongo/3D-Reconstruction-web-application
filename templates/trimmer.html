@@ -6,21 +6,39 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 <link rel="shortcut icon" href="{{ url_for('static', filename='ui/favicon.ico') }}">
 <script src="{{ url_for('static', filename='js/jquery-3.3.1.js') }}"></script>
-<script src="{{ url_for('static', filename='js/pace.js') }}"></script>
+<script data-pace-options='{ "ajax": true }' src="{{ url_for('static', filename='js/pace.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pace-theme-center-circle.css') }}">
+<script>
+window.paceOptions = {
+    ajax: {
+        trackMethods: ['GET', 'POST', 'PUT', 'DELETE', 'REMOVE']
+    },
+    ajax: true
+};
+</script>
+<script>
+	$(document).ajaxStart(function() {
+	   Pace.restart();
+	}).ajaxStop(function() {
+	   Pace.stop();
+    });
+</script>
 <script>
 	$(document).ready(function () {
 		$("#processstage").click(function(){
 			alert("start");
-			$.ajax({
-				url: "/TrimAndNoiseRemovalprocess?name={{name}}",
-				type: 'GET',
-				data: "",
-				cache: false,
-				success: function(result){
-					alert("done");
-					window.location.href = "/edit/name={{name}}";
-				}
-			});
+	   		Pace.start();
+				$.ajax({
+					url: "/TrimAndNoiseRemovalprocess?name={{name}}",
+					type: 'GET',
+					data: "",
+					cache: false,
+					success: function(result){
+						alert(result);
+						window.location.href = "/edit/{{name}}";
+					}
+				});
+	   		Pace.stop();
 		});
 	});
 </script>
@@ -53,5 +71,5 @@
 		<!--<a class="btn btn-primary halfwidth" id="processstage">Begin Stage 6</a>-->
 	</div>
 </section>
-<div id="cover-spin"></div>
+<!--<div id="cover-spin"></div>-->
 {% endblock %}

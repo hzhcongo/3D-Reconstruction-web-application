@@ -174,7 +174,8 @@ a:hover {
 }
 
 .halfwidth{
-    padding: 10px 50px;
+    padding: 10px;
+    min-width: 260px;
 }
 
 .centercenter{
@@ -218,6 +219,7 @@ input[type="button"] {
     text-align:left;>
 }
 
+/*
 //For loading spinner
 #cover-spin {
     position:fixed;
@@ -252,3 +254,4 @@ input[type="button"] {
     -webkit-animation: spin .8s linear infinite;
     animation: spin .8s linear infinite;
 }
+*/
