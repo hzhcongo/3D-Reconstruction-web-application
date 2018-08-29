@@ -544,8 +544,8 @@ def trimmerprocess():
 		print("WindowsError", e.message)
 		return redirect(url_for('error', msg="A model of the same name already exists in the server. Please rename your model or delete the model with the same name"))
 
-	# return redirect(url_for('edit', name=name))
-	return "0"
+	return redirect(url_for('edit', name=name))
+	# return "0"
 	##########################################################
 
 

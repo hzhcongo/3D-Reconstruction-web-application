@@ -7,22 +7,25 @@
 </style>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 <link rel="shortcut icon" href="{{ url_for('static', filename='ui/favicon.ico') }}">
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.js') }}"></script>
 <script src="{{ url_for('static', filename='js/pace.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pace-theme-center-circle.css') }}">
 <script>
 	$(document).ready(function () {
 		$("#processstage").click(function(){
+			Pace.track(function(){
 			$.ajax({
-				url: "/TrimAndNoiseRemovalprocess?name={{name}}",
+				url: "/BundleAdjustmentprocess?name={{name}}",
 				type: 'GET',
 				data: "",
 				cache: false,
 				success: function(result){
-					alert("done");
-					window.location.href = "/TrimAndNoiseRemovalprocess?name={{name}}";
+					window.location.href = "/PMVS/{{name}}";
 				},
 				error: function(result){
 					alert(result.toString());
 				}
+			});
 			});
 		});
 	});
@@ -37,10 +40,7 @@
 <section class="container" style="text-align:center;">
 	<div class="centercenter">
 		<div id="titleheader" style="margin: 50px auto; max-width: 1005px; height: 150px; display: flex; justify-content: center; align-items: center;">
-			<div id="one">
-				<h3 style="text-align: right; margin-top:25px; max-height: 100px;">Stage</h3>
-				<h1>2</h1>
-			</div>
+			<div id="one"><h3 style="text-align: right; margin-top:0; max-height: 100px;">Stage</h3><h1 style="font-size: 60px; margin:0;">2</h1></div>
 			<div id="mid" style="border-left: 1.5px solid silver; height: 130px; max-height: 100%; margin: 10px 20px;"></div>
 			<div id="two" style="text-align:left;">
 				<div>
@@ -51,7 +51,8 @@
 				</div>
 			</div>
 		</div>
-		<a class="btn btn-primary halfwidth" href="/BundleAdjustmentprocess?name={{name}}">Begin Stage 2</a>
+		<!--<a class="btn btn-primary halfwidth" href="/BundleAdjustmentprocess?name={{name}}">Begin Stage 2</a>-->
+		<a class="btn btn-primary halfwidth" id="processstage">Begin Stage 2</a>
 	</div>
 </section>
 {% endblock %}

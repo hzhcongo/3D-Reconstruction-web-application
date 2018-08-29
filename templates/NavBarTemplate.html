@@ -1,21 +1,3 @@
-<script src="{{ url_for('static', filename='js/jquery-3.3.1.js') }}"></script>
-<script src="{{ url_for('static', filename='js/pace.js') }}"></script>
-<link rel="stylesheet" href="{{ url_for('static', filename='css/pace-theme-center-circle.css') }}">
-<script>
-window.paceOptions = {
-    ajax: {
-        trackMethods: ['GET', 'POST', 'PUT', 'DELETE', 'REMOVE']
-    },
-    ajax: true
-};
-</script>
-<script>
-	$(document).ajaxStart(function() {
-	   Pace.start();
-	}).ajaxStop(function() {
-	   Pace.stop();
-    });
-</script>
 <!--CENTER ALIGNED NAVBAR-->
 <!--<nav class="navbar navbar-inverse" role="navigation" style="margin-bottom:0; border-radius: 0px;">-->
     <!--<div class="navbar-header">-->

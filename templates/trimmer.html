@@ -6,47 +6,38 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 <link rel="shortcut icon" href="{{ url_for('static', filename='ui/favicon.ico') }}">
 <script src="{{ url_for('static', filename='js/jquery-3.3.1.js') }}"></script>
-<script data-pace-options='{ "ajax": true }' src="{{ url_for('static', filename='js/pace.js') }}"></script>
+<script src="{{ url_for('static', filename='js/pace.js') }}"></script>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/pace-theme-center-circle.css') }}">
-<script>
-window.paceOptions = {
-    ajax: {
-        trackMethods: ['GET', 'POST', 'PUT', 'DELETE', 'REMOVE']
-    },
-    ajax: true
-};
-</script>
-<script>
-	$(document).ajaxStart(function() {
-	   Pace.restart();
-	}).ajaxStop(function() {
-	   Pace.stop();
-    });
-</script>
 <script>
 	$(document).ready(function () {
 		$("#processstage").click(function(){
-			alert("start");
-	   		Pace.start();
-				$.ajax({
-					url: "/TrimAndNoiseRemovalprocess?name={{name}}",
-					type: 'GET',
-					data: "",
-					cache: false,
-					success: function(result){
-						alert(result);
-						window.location.href = "/edit/{{name}}";
-					}
-				});
-	   		Pace.stop();
+			Pace.track(function(){
+			$.ajax({
+				url: "/TrimAndNoiseRemovalprocess?name={{name}}",
+				type: 'GET',
+				data: "",
+				cache: false,
+				success: function(result){
+					window.location.href = "/edit/{{name}}";
+				},
+				error: function(result){
+					alert(result.toString());
+				}
+			});
+			});
 		});
 	});
 </script>
+
+			<!--$('#cover-spin').show(0);-->
+
 <!--<script>-->
 	<!--$(document).ready(function () {-->
 		<!--$("#processstage").click(function(){-->
-			<!--$('#cover-spin').show(0);-->
+	   <!--Pace.restart();-->
+	   <!--Pace.start();-->
 			<!--window.location.href = "/TrimAndNoiseRemovalprocess?name={{name}}";-->
+	   <!--Pace.stop();-->
 		<!--});-->
 	<!--});-->
 <!--</script>-->
@@ -60,15 +51,15 @@ window.paceOptions = {
 <section class="container" style="text-align:center;">
 	<div class="centercenter">
 		<div id="titleheader" style="margin: 50px auto; max-width: 1005px; height: 150px; display: flex; justify-content: center; align-items: center;">
-			<div id="one"><h3 style="text-align: right; margin-top:25px; max-height: 100px;">Stage</h3><h1>6</h1></div>
+			<div id="one"><h3 style="text-align: right; margin-top:0; max-height: 100px;">Stage</h3><h1 style="font-size: 60px; margin:0;">6</h1></div>
 			<div id="mid" style="border-left: 1.5px solid silver; height: 130px; max-height: 100%; margin: 10px 20px;"></div>
 			<div id="two" style="text-align:left;"><div><h3 style="margin-top:0;">Surface trimming and noise removal of "{{name}}"</h3>
 				Here, the generated 3D mesh model from the previous stage is surface-trimmed to remove as much unrelated background noise as possible.
 			Noise removal is then done via retaining the largest mesh after mesh splitting.</div></div>
 		</div>
 		<a class="btn btn-default halfwidth" href="{{ url_for('static', filename='images/' + name + '/temp/pmvs/models/mesh.ply')}}">Download current state of model</a>
+		<!--<a class="btn btn-primary halfwidth" href="/TrimAndNoiseRemovalprocess?name={{name}}">Begin Stage 6</a>-->
 		<a class="btn btn-primary halfwidth" id="processstage">Begin Stage 6</a>
-		<!--<a class="btn btn-primary halfwidth" id="processstage">Begin Stage 6</a>-->
 	</div>
 </section>
 <!--<div id="cover-spin"></div>-->

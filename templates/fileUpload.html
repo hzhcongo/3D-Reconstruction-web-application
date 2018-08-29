@@ -15,10 +15,12 @@
 
 {%block content %}
 	<div class="container" style="text-align:center;">
-        <div style="margin:50px auto; width:60%; max-width:420px;">
-	        <h3>Upload image set</h3>
-            <p>This page allows you to upload the images you have taken and begin the 3D reconstruction process.</p>
-	    </div>
+        <div id="titleheader" style="margin: 50px auto; max-width: 600px; height: 150px; display: flex; justify-content: center; align-items: center;">
+            <div id="one"><img src="../static/ui/pics.png" style="text-align: right; margin-top:25px; max-height: 100px; "></div>
+            <div id="mid" style="border-left: 1.5px solid silver; height: 130px; max-height: 100%; margin: 10px 20px;"></div>
+            <div id="two" style="text-align:left;"><div><h3 style="margin-top:0;">Upload image set</h3>
+                This page allows you to upload the images you have taken and begin the 3D reconstruction process.</div></div>
+        </div>
         <div id="boxed">
             <form id="upload-form" action ="{{ url_for('upload') }}" method = "POST" enctype="multipart/form-data">
               <div class="form-group">
