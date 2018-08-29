@@ -7,6 +7,7 @@
 </style>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 <link rel="shortcut icon" href="{{ url_for('static', filename='ui/favicon.ico') }}">
+<script src="{{ url_for('static', filename='js/pace.js') }}"></script>
 {% endblock %}
 
 {% block navbar %}
@@ -16,11 +17,21 @@
 {%block content %}
 <section class="container" style="text-align:center;">
 	<div class="centercenter">
-	<h3>Stage 4: Point cloud de-noising of "{{name}}"</h3>
-		<p>De-noising of the generated point cloud is done via a statistical approach.
-			A K-Nearest Neighbors algorithm is used to find the neighboring points.
-			All points whose mean distance to it's neighbouring points exceed the global distance's mean and standard deviation are treated as noise and removed.</p>
-		<br><br>
+		<div id="titleheader" style="margin: 50px auto; max-width: 1005px; height: 150px; display: flex; justify-content: center; align-items: center;">
+			<div id="one">
+				<h3 style="text-align: right; margin-top:25px; max-height: 100px;">Stage</h3>
+				<h1>4</h1>
+			</div>
+			<div id="mid" style="border-left: 1.5px solid silver; height: 130px; max-height: 100%; margin: 10px 20px;"></div>
+			<div id="two" style="text-align:left;">
+				<div>
+					<h3 style="margin-top:0;">Point cloud de-noising of "{{name}}"</h3>
+					De-noising of the generated point cloud is done via a statistical approach.
+					A K-Nearest Neighbors algorithm is used to find the neighboring points.
+					All points whose mean distance to it's neighbouring points exceed the global distance's mean and standard deviation are treated as noise and removed.
+				</div>
+			</div>
+		</div>
 		<a class="btn btn-default halfwidth" href="{{ url_for('static', filename='images/' + name + '/temp/pmvs/models/pmvs_options.txt.ply')}}">Download current state of model</a><br><br>
 		<a class="btn btn-primary halfwidth" href="/PointCloudDenoiseprocess?name={{name}}">Begin Stage 4</a>
 	</div>

@@ -6,17 +6,19 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 <link rel="shortcut icon" href="{{ url_for('static', filename='ui/favicon.ico') }}">
 <script src="{{ url_for('static', filename='js/jquery-3.3.1.js') }}"></script>
+<script src="{{ url_for('static', filename='js/pace.js') }}"></script>
 <script>
 	$(document).ready(function () {
 		$("#processstage").click(function(){
-			$('#cover-spin').show(0);
+			alert("start");
 			$.ajax({
 				url: "/TrimAndNoiseRemovalprocess?name={{name}}",
 				type: 'GET',
 				data: "",
 				cache: false,
 				success: function(result){
-
+					alert("done");
+					window.location.href = "/edit/name={{name}}";
 				}
 			});
 		});
@@ -39,11 +41,14 @@
 {%block content %}
 <section class="container" style="text-align:center;">
 	<div class="centercenter">
-		<h3>Stage 6: Surface trimming and noise removal of "{{name}}"</h3>
-		<p>Here, the generated 3D mesh model from the previous stage is surface-trimmed to remove as much unrelated background noise as possible.
-			Noise removal is then done via retaining the largest mesh after mesh splitting.</p>
-		<br><br>
-		<a class="btn btn-default halfwidth" href="{{ url_for('static', filename='images/' + name + '/temp/pmvs/models/mesh.ply')}}">Download current state of model</a><br><br>
+		<div id="titleheader" style="margin: 50px auto; max-width: 1005px; height: 150px; display: flex; justify-content: center; align-items: center;">
+			<div id="one"><h3 style="text-align: right; margin-top:25px; max-height: 100px;">Stage</h3><h1>6</h1></div>
+			<div id="mid" style="border-left: 1.5px solid silver; height: 130px; max-height: 100%; margin: 10px 20px;"></div>
+			<div id="two" style="text-align:left;"><div><h3 style="margin-top:0;">Surface trimming and noise removal of "{{name}}"</h3>
+				Here, the generated 3D mesh model from the previous stage is surface-trimmed to remove as much unrelated background noise as possible.
+			Noise removal is then done via retaining the largest mesh after mesh splitting.</div></div>
+		</div>
+		<a class="btn btn-default halfwidth" href="{{ url_for('static', filename='images/' + name + '/temp/pmvs/models/mesh.ply')}}">Download current state of model</a>
 		<a class="btn btn-primary halfwidth" id="processstage">Begin Stage 6</a>
 		<!--<a class="btn btn-primary halfwidth" id="processstage">Begin Stage 6</a>-->
 	</div>

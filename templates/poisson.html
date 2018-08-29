@@ -7,6 +7,7 @@
 </style>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 <link rel="shortcut icon" href="{{ url_for('static', filename='ui/favicon.ico') }}">
+<script src="{{ url_for('static', filename='js/pace.js') }}"></script>
 {% endblock %}
 
 {% block navbar %}
@@ -16,10 +17,20 @@
 {%block content %}
 <section class="container" style="text-align:center;">
 	<div class="centercenter">
-	<h3>Stage 5: Poisson Reconstruction of "{{name}}"</h3>
-		<p>Poisson Reconstruction Package is used to generate a 3D mesh model based on the point cloud from the previous stage.
-			This is done by reconstructing the 3D surfaces from the point in the point cloud.</p>
-		<br><br>
+		<div id="titleheader" style="margin: 50px auto; max-width: 1005px; height: 150px; display: flex; justify-content: center; align-items: center;">
+			<div id="one">
+				<h3 style="text-align: right; margin-top:25px; max-height: 100px;">Stage</h3>
+				<h1>5</h1>
+			</div>
+			<div id="mid" style="border-left: 1.5px solid silver; height: 130px; max-height: 100%; margin: 10px 20px;"></div>
+			<div id="two" style="text-align:left;">
+				<div>
+					<h3 style="margin-top:0;">Preparation of images and feature matching of "{{name}}"</h3>
+					AllPoisson Reconstruction Package is used to generate a 3D mesh model based on the point cloud from the previous stage.
+					This is done by reconstructing the 3D surfaces from the point in the point cloud.
+				</div>
+			</div>
+		</div>
 		<a class="btn btn-default halfwidth" href="{{ url_for('static', filename='images/' + name + '/temp/pmvs/models/trim.ply')}}">Download current state of model</a><br><br>
 		<a class="btn btn-primary halfwidth" href="/PoissonReconstructionprocess?name={{name}}">Begin Stage 5</a>
 	</div>

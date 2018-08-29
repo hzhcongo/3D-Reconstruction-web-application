@@ -7,6 +7,26 @@
 </style>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 <link rel="shortcut icon" href="{{ url_for('static', filename='ui/favicon.ico') }}">
+<script src="{{ url_for('static', filename='js/pace.js') }}"></script>
+<script>
+	$(document).ready(function () {
+		$("#processstage").click(function(){
+			$.ajax({
+				url: "/TrimAndNoiseRemovalprocess?name={{name}}",
+				type: 'GET',
+				data: "",
+				cache: false,
+				success: function(result){
+					alert("done");
+					window.location.href = "/TrimAndNoiseRemovalprocess?name={{name}}";
+				},
+				error: function(result){
+					alert(result.toString());
+				}
+			});
+		});
+	});
+</script>
 {% endblock %}
 
 {% block navbar %}
@@ -16,11 +36,21 @@
 {%block content %}
 <section class="container" style="text-align:center;">
 	<div class="centercenter">
-	<h3>Stage 2: Camera pose estimation and bundle adjustment of "{{name}}"</h3>
-		<p>The position of the camera when an image is taken is estimated. This is done by applying the pinhole camera
-			model on all images. Bundle adjustment then does a large scale optimization of the
-			estimation results during this stage by applying Levenberg–Marquardt algorithm to solve the 	non-linear least squares problems.</p>
-		<br><br>
+		<div id="titleheader" style="margin: 50px auto; max-width: 1005px; height: 150px; display: flex; justify-content: center; align-items: center;">
+			<div id="one">
+				<h3 style="text-align: right; margin-top:25px; max-height: 100px;">Stage</h3>
+				<h1>2</h1>
+			</div>
+			<div id="mid" style="border-left: 1.5px solid silver; height: 130px; max-height: 100%; margin: 10px 20px;"></div>
+			<div id="two" style="text-align:left;">
+				<div>
+					<h3 style="margin-top:0;">Camera pose estimation and bundle adjustment of "{{name}}"</h3>
+					The position of the camera when an image is taken is estimated. This is done by applying the pinhole camera
+					model on all images. Bundle adjustment then does a large scale optimization of the
+					estimation results during this stage by applying Levenberg–Marquardt algorithm to solve the 	non-linear least squares problems.
+				</div>
+			</div>
+		</div>
 		<a class="btn btn-primary halfwidth" href="/BundleAdjustmentprocess?name={{name}}">Begin Stage 2</a>
 	</div>
 </section>

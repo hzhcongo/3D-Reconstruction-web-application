@@ -7,6 +7,8 @@
 </style>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 <link rel="shortcut icon" href="{{ url_for('static', filename='ui/favicon.ico') }}">
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.js') }}"></script>
+<script src="{{ url_for('static', filename='js/pace.js') }}"></script>
 {% endblock %}
 
 {% block navbar %}
@@ -16,10 +18,20 @@
 {%block content %}
 <section class="container" style="text-align:center;">
 	<div class="centercenter">
-	<h3>Stage 3: Point cloud generation of "{{name}}"</h3>
-		<p>Patch Multi-View Stereo (PMVS) takes the output from the previous stage and generates a point cloud.
-		The point cloud contains the 3D coordinates and the surface normal of each oriented point. </p>
-		<br><br>
+		<div id="titleheader" style="margin: 50px auto; max-width: 1005px; height: 150px; display: flex; justify-content: center; align-items: center;">
+			<div id="one">
+				<h3 style="text-align: right; margin-top:25px; max-height: 100px;">Stage</h3>
+				<h1>3</h1>
+			</div>
+			<div id="mid" style="border-left: 1.5px solid silver; height: 130px; max-height: 100%; margin: 10px 20px;"></div>
+			<div id="two" style="text-align:left;">
+				<div>
+					<h3 style="margin-top:0;">Point cloud generation of "{{name}}"</h3>
+					Patch Multi-View Stereo (PMVS) takes the output from the previous stage and generates a point cloud.
+					The point cloud contains the 3D coordinates and the surface normal of each oriented point.
+				</div>
+			</div>
+		</div>
 		<a class="btn btn-primary halfwidth" href="/PMVSprocess?name={{name}}">Begin Stage 3</a>
 	</div>
 </section>

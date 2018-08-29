@@ -15,9 +15,18 @@
 {%block content %}
 <section class="container" style="text-align:center;">
 	<div style="margin:50px auto; width:100%;">
-	<h3>Photogrammetry processing via osmbundler and point cloud generation via PMVS</h3>
-		<p>Processing image set "{{name}}".</p>
-		<br><br>
+		<div id="titleheader" style="margin: 50px auto; max-width: 1005px; height: 150px; display: flex; justify-content: center; align-items: center;">
+			<div id="one">
+				<h3 style="text-align: right; margin-top:25px; max-height: 100px;">Stage</h3>
+				<h1>-1</h1>
+			</div>
+			<div id="mid" style="border-left: 1.5px solid silver; height: 130px; max-height: 100%; margin: 10px 20px;"></div>
+			<div id="two" style="text-align:left;">
+				<div>
+					<h3 style="margin-top:0;">Photogrammetry processing via osmbundler and point cloud generation via PMVS</h3>
+				</div>
+			</div>
+		</div>
 		<a class="btn btn-primary" href="/osmprocess?name={{name}}">Generate 3D model</a>
 	</div>
 </section>

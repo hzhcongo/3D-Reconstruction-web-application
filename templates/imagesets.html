@@ -1,5 +1,5 @@
 {% extends "bootstrap/base.html" %}
-{% block title %}Virtuaso{% endblock %}
+{% block title %}Virtuaso: View Image Sets{% endblock %}
 
 {% block styles %}
 {{ super() }}
@@ -40,21 +40,28 @@
 
 {%block content %}
 <section class="container" style="text-align:center;">
-	<div style="margin:50px auto; width:60%;">
-		<h2><img src="../static/ui/pics.png" width="100px" height=auto style="margin-bottom: 10px;"><br>Uploaded image sets</h2>
-		<p>This page allows you to view all uploaded image sets. For each image set, you can start it's 3D reconstruction process, or delete them.
-			Deleting an image set will delete everything generated and/or used by the image set.</p>
+	<!--<div style="margin:50px auto; width:60%;">-->
+		<!--<h2><img src="../static/ui/pics.png" width="100px" height=auto style="margin-bottom: 10px;"><br>Uploaded image sets</h2>-->
+		<!--<p>This page allows you to view all uploaded image sets. For each image set, you can start it's 3D reconstruction process, or delete them.-->
+			<!--Deleting an image set will delete everything generated and/or used by the image set.</p>-->
+	<!--</div>-->
+	<div id="titleheader" style="margin: 50px auto; max-width: 1005px; height: 150px; display: flex; justify-content: center; align-items: center;">
+		<div id="one"><img src="../static/ui/pics.png" style="text-align: right; margin-top:25px; max-height: 100px; "></div>
+		<div id="mid" style="border-left: 1.5px solid silver; height: 130px; max-height: 100%; margin: 10px 20px;"></div>
+		<div id="two" style="text-align:left;"><div><h3 style="margin-top:0;">Uploaded image sets</h3>
+			This page allows you to view all uploaded image sets. For each image set, you can start it's 3D reconstruction process, or delete them.
+			Deleting an image set will delete everything generated and/or used by the image set.</div></div>
 	</div>
 	<div class="align-items-start">
-		<div id = "mesh_table" class = "col-4" style="max-width: 1005px; margin: auto; text-align:left; width:100%;">
+		<div id = "mesh_table" class = "col-4" style="margin: auto; text-align:left; width:100%;">
 			<table id="myTable" class="table table-hover">
 				<thead>
-					<th style="width:15%;">Process image set</th>
+					<th style="width:15%; text-align:center;">Process image set</th>
 					<th style="width:42%;">Image set name</th>
 					<th style="width:12%;">Uploaded time</th>
 					<th style="width:15%;">Model quality</th>
 					<th style="width:11%;">Current stage</th>
-					<th style="width:5%;">Delete</th>
+					<th style="width:5%; text-align:center;">Delete</th>
 				</thead>
 				<tbody>
 					{% for d in data %}
