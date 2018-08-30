@@ -13,20 +13,8 @@
 <script>
 	$(document).ready(function () {
 		$("#processstage").click(function(){
-			Pace.track(function(){
-				$.ajax({
-					url: "/PrepAndMatchprocess?name={{name}}",
-					type: 'GET',
-					data: "",
-					cache: false,
-					success: function(result){
-						window.location.href = "/BundleAdjustment/{{name}}";
-					},
-					error: function(result){
-						alert(result.toString());
-					}
-				});
-			});
+			$('#cover-spin').show(0);
+			window.location.href = "/PrepAndMatchprocess?name={{name}}";
 		});
 	});
 </script>
@@ -40,7 +28,7 @@
 <section class="container" style="text-align:center;">
 	<div class="centercenter">
 		<div id="titleheader" style="margin: 50px auto; max-width: 1005px; height: 150px; display: flex; justify-content: center; align-items: center;">
-			<div id="one"><h3 style="text-align: right; margin-top:0; max-height: 100px;">Stage</h3><h1 style="font-size: 60px; margin:0;">1</h1></div>
+			<div id="one"><h3 style="text-align: right; margin:0; max-height: 100px;">Stage</h3><h1 style="font-size: 60px; margin:0;">1</h1></div>
 			<div id="mid" style="border-left: 1.5px solid silver; height: 130px; max-height: 100%; margin: 10px 20px;"></div>
 			<div id="two" style="text-align:left;"><div><h3 style="margin-top:0;">Preparation of images and feature matching of "{{name}}"</h3>
 				All images will have it's Exif data extracted using Exiv2, an image metadata library. After that, the features in each

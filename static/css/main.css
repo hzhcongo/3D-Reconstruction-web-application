@@ -22,17 +22,50 @@ th{
     margin : 10px;
 }
 .table>tbody>tr:hover{
-    background-color:azure;
+    background-color:#fafafa;
 }
 
 a:hover {
     cursor: pointer;
 }
 
+#cover-spin {
+    position:fixed;
+    width:100%;
+    left:0;right:0;top:0;bottom:0;
+    background-color: rgba(255,255,255,0.7);
+    z-index:9999;
+    display:none;
+}
+
+@-webkit-keyframes spin {
+	from {-webkit-transform:rotate(0deg);}
+	to {-webkit-transform:rotate(360deg);}
+}
+
+@keyframes spin {
+	from {transform:rotate(0deg);}
+	to {transform:rotate(360deg);}
+}
+
+#cover-spin::after {
+    content:'';
+    display:block;
+    position:absolute;
+    left:47%;top:40%;
+    width:100px;height:100px;
+    border-style:solid;
+    border-color:#2299dd;
+    border-top-color:transparent;
+    border-width: 5px;
+    border-radius:50%;
+    -webkit-animation: spin 1s linear infinite;
+    animation: spin 1s linear infinite;
+}
+
 //
 // Buttons
 // --------------------------------------------------
-
 
 // Base styles
 // --------------------------------------------------
@@ -90,7 +123,6 @@ a:hover {
   }
 }
 
-
 // Alternate buttons
 // --------------------------------------------------
 
@@ -116,7 +148,6 @@ a:hover {
 .btn-danger {
   .button-variant(@btn-danger-color; @btn-danger-bg; @btn-danger-border);
 }
-
 
 // Link buttons
 // -------------------------
@@ -157,7 +188,6 @@ a:hover {
   }
 }
 
-
 // Button Sizes
 // --------------------------------------------------
 
@@ -185,7 +215,6 @@ a:hover {
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 }
-
 
 // Block button
 // --------------------------------------------------
@@ -218,40 +247,3 @@ input[type="button"] {
     margin: auto;
     text-align:left;>
 }
-
-/*
-//For loading spinner
-#cover-spin {
-    position:fixed;
-    width:100%;
-    left:0;right:0;top:0;bottom:0;
-    background-color: rgba(255,255,255,0.7);
-    z-index:9999;
-    display:none;
-}
-
-@-webkit-keyframes spin {
-	from {-webkit-transform:rotate(0deg);}
-	to {-webkit-transform:rotate(360deg);}
-}
-
-@keyframes spin {
-	from {transform:rotate(0deg);}
-	to {transform:rotate(360deg);}
-}
-
-#cover-spin::after {
-    content:'';
-    display:none;
-    position:absolute;
-    left:48%;top:40%;
-    width:40px;height:40px;
-    border-style:solid;
-    border-color:black;
-    border-top-color:transparent;
-    border-width: 4px;
-    border-radius:50%;
-    -webkit-animation: spin .8s linear infinite;
-    animation: spin .8s linear infinite;
-}
-*/

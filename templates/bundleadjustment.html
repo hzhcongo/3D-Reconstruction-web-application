@@ -13,20 +13,8 @@
 <script>
 	$(document).ready(function () {
 		$("#processstage").click(function(){
-			Pace.track(function(){
-			$.ajax({
-				url: "/BundleAdjustmentprocess?name={{name}}",
-				type: 'GET',
-				data: "",
-				cache: false,
-				success: function(result){
-					window.location.href = "/PMVS/{{name}}";
-				},
-				error: function(result){
-					alert(result.toString());
-				}
-			});
-			});
+			$('#cover-spin').show(0);
+			window.location.href = "/BundleAdjustmentprocess?name={{name}}";
 		});
 	});
 </script>
@@ -40,7 +28,7 @@
 <section class="container" style="text-align:center;">
 	<div class="centercenter">
 		<div id="titleheader" style="margin: 50px auto; max-width: 1005px; height: 150px; display: flex; justify-content: center; align-items: center;">
-			<div id="one"><h3 style="text-align: right; margin-top:0; max-height: 100px;">Stage</h3><h1 style="font-size: 60px; margin:0;">2</h1></div>
+			<div id="one"><h3 style="text-align: right; margin:0; max-height: 100px;">Stage</h3><h1 style="font-size: 60px; margin:0;">2</h1></div>
 			<div id="mid" style="border-left: 1.5px solid silver; height: 130px; max-height: 100%; margin: 10px 20px;"></div>
 			<div id="two" style="text-align:left;">
 				<div>
@@ -55,4 +43,5 @@
 		<a class="btn btn-primary halfwidth" id="processstage">Begin Stage 2</a>
 	</div>
 </section>
+<div id="cover-spin"></div>
 {% endblock %}

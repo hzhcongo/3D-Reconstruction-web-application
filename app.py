@@ -142,6 +142,14 @@ def prepandmatchprocess():
 		return redirect(url_for('error',
 		                        msg="A model of the same name already exists in the server. Please rename your model or delete the model with the same name"))
 
+	except IndexError as e:
+		print("IndexError", e.message)
+		return redirect(url_for('error', msg="Generation of model might have failed at previous stages. This is more likely due to Virtuaso not being able to detect any features"
+		                        "due to poor image quality."))
+	except:
+		print("GeneralError", error.message)
+		return redirect(url_for('error', msg="A general error occured. Generation of model might have failed at a certain stage. Please reupload better quality images and process them again"))
+
 	return redirect(url_for('bundleadjustment', name=name))
 
 
@@ -207,6 +215,14 @@ def bundleadjustmentprocess():
 		print("WindowsError", e.message)
 		return redirect(url_for('error', msg="A model of the same name already exists in the server. Please rename your model or delete the model with the same name"))
 
+	except IndexError as e:
+		print("IndexError", e.message)
+		return redirect(url_for('error', msg="Generation of model might have failed at previous stages. This is more likely due to Virtuaso not being able to detect any features"
+		                        "due to poor image quality."))
+	except:
+		print("GeneralError", error.message)
+		return redirect(url_for('error', msg="A general error occured. Generation of model might have failed at a certain stage. Please reupload better quality images and process them again"))
+
 	return redirect(url_for('pmvs', name=name))
 
 
@@ -263,6 +279,14 @@ def pmvsprocess():
 	except WindowsError as e:
 		print("WindowsError", e.message)
 		return redirect(url_for('error', msg="A model of the same name already exists in the server. Please rename your model or delete the model with the same name"))
+
+	except IndexError as e:
+		print("IndexError", e.message)
+		return redirect(url_for('error', msg="Generation of model might have failed at previous stages. This is more likely due to Virtuaso not being able to detect any features"
+		                        "due to poor image quality."))
+	except:
+		print("GeneralError", error.message)
+		return redirect(url_for('error', msg="A general error occured. Generation of model might have failed at a certain stage. Please reupload better quality images and process them again"))
 
 	return redirect(url_for('denoise', name=name))
 
@@ -378,6 +402,15 @@ def denoiseprocess():
 		print("WindowsError", e.message)
 		return redirect(url_for('error', msg="A model of the same name already exists in the server. Please rename your model or delete the model with the same name"))
 
+	except IndexError as e:
+		print("IndexError", e.message)
+		return redirect(url_for('error', msg="Generation of model might have failed at previous stages. This is likely due to Virtuaso not being able to detect sufficient features "
+		                        "from the images. Try reuploading better images with good and consistent lighting"))
+	except:
+		print("GeneralError", error.message)
+		return redirect(url_for('error', msg="Generation of model might have failed certain stages. This is likely due to Virtuaso not being able to detect sufficient features "
+		                        "from the images. Try reuploading better images with good and consistent lighting"))
+
 	return redirect(url_for('poisson', name=name))
 
 
@@ -455,6 +488,13 @@ def poissonprocess():
 		print("WindowsError", e.message)
 		return redirect(url_for('error', msg="A model of the same name already exists in the server. Please rename "
 		                                     "your model or delete the model with the same name"))
+	except IndexError as e:
+		print("IndexError", e.message)
+		return redirect(url_for('error', msg="Generation of model might have failed at previous stages. This is more likely due to Virtuaso not being able to detect any features"
+		                        "due to poor image quality."))
+	except:
+		print("GeneralError", error.message)
+		return redirect(url_for('error', msg="A general error occured. Generation of model might have failed at a certain stage. Please reupload better quality images and process them again"))
 
 	return redirect(url_for('trimmer', name=name))
 	##########################################################
@@ -544,6 +584,14 @@ def trimmerprocess():
 		print("WindowsError", e.message)
 		return redirect(url_for('error', msg="A model of the same name already exists in the server. Please rename your model or delete the model with the same name"))
 
+	except IndexError as e:
+		print("IndexError", e.message)
+		return redirect(url_for('error', msg="Generation of model might have failed at previous stages. This is more likely due to Virtuaso not being able to detect any features"
+		                        "due to poor image quality."))
+	except:
+		print("GeneralError", error.message)
+		return redirect(url_for('error', msg="A general error occured. Generation of model might have failed at a certain stage. Please reupload better quality images and process them again"))
+
 	return redirect(url_for('edit', name=name))
 	# return "0"
 	##########################################################
@@ -626,6 +674,14 @@ def osmprocess():
 	except WindowsError as e:
 		print("WindowsError", e.message)
 		return redirect(url_for('error', msg="A model of the same name already exists in the server. Please rename your model or delete the model with the same name"))
+
+	except IndexError as e:
+		print("IndexError", e.message)
+		return redirect(url_for('error', msg="Generation of model might have failed at previous stages. This is more likely due to Virtuaso not being able to detect any features"
+		                        "due to poor image quality."))
+	except:
+		print("GeneralError", error.message)
+		return redirect(url_for('error', msg="A general error occured. Generation of model might have failed at a certain stage. Please reupload better quality images and process them again"))
 
 	return redirect(url_for('denoise', name=name))
 
@@ -769,8 +825,16 @@ def imagesets():
 				            , 'quality' : qualityText, 'stage' : dataread[1]})
 		except IOError:
 			print("IOError: ", path)
+
+		except IndexError as e:
+			print("IndexError", e.message)
+			return redirect(url_for('error', msg="A model of the same name already exists in the server. Please rename "
+			                                     "your model or delete the model with the same name"))
 		except:
-			print("Error: ", path)
+			print("GeneralError", error.message)
+			return redirect(url_for('error',
+			                        msg="A general error occured. Generation of model might have failed at a certain stage. Please reupload better quality images and process them again"))
+
 	print(data)
 	sys.stdout.flush()
 	return render_template("imagesets.html", data = data)

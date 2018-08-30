@@ -17,11 +17,16 @@
 {%block content %}
 <section class="container" style="text-align:center;">
 	<div class="centercenter">
-		<h1>Oops!<h1>
-			<h2>Something happened that is too powerful for Virtuaso to handle!</h2>
-		<p>An error occured during processing.<br>
-			Please consult the error message below and rectify the problem before trying again<br><br>
-			Error message: '{{msg}}'</p>
-	</div>
+	<div id="titleheader" style="margin: 50px auto; max-width: 1005px; height: 150px; display: flex; justify-content: center; align-items: center;">
+			<!--<div id="one"><h2 style="text-align: right; margin-top:0; max-height: 100px;">Oops!</h2><h1 style="font-size: 60px; margin:0;">:(</h1></div>-->
+			<div id="one"><h1 style="font-size: 60px; margin:0;">Oops!</h1></div>
+			<div id="mid" style="border-left: 1.5px solid silver; height: 130px; max-height: 100%; margin: 10px 20px;"></div>
+			<div id="two" style="text-align:left;">
+				<div>
+					<h3 style="margin-top:0;">Something happened that is too powerful for Virtuaso to handle!</h3>
+					An unforseen error has occured.<br>Error message: '{{msg}}'
+				</div>
+			</div>
+		</div>
 </section>
 {% endblock %}

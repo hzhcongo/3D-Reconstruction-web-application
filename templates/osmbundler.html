@@ -7,6 +7,14 @@
 </style>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 <link rel="shortcut icon" href="{{ url_for('static', filename='ui/favicon.ico') }}">
+<script>
+	$(document).ready(function () {
+		$("#processstage").click(function(){
+			$('#cover-spin').show(0);
+			window.location.href = "/TrimAndNoiseRemovalprocess?name={{name}}";
+		});
+	});
+</script>
 {% endblock %}
 {% block navbar %}
 {%include "NavBarTemplate.html" %}
@@ -16,7 +24,7 @@
 <section class="container" style="text-align:center;">
 	<div style="margin:50px auto; width:100%;">
 		<div id="titleheader" style="margin: 50px auto; max-width: 1005px; height: 150px; display: flex; justify-content: center; align-items: center;">
-			<div id="one"><h3 style="text-align: right; margin-top:0; max-height: 100px;">Stage</h3><h1 style="font-size: 60px; margin:0;">-1</h1></div>
+			<div id="one"><h3 style="text-align: right; margin:0; max-height: 100px;">Stage</h3><h1 style="font-size: 60px; margin:0;">-1</h1></div>
 			<div id="mid" style="border-left: 1.5px solid silver; height: 130px; max-height: 100%; margin: 10px 20px;"></div>
 			<div id="two" style="text-align:left;">
 				<div>
@@ -24,7 +32,8 @@
 				</div>
 			</div>
 		</div>
-		<a class="btn btn-primary" href="/osmprocess?name={{name}}">Generate 3D model</a>
+		<a class="btn btn-primary halfwidth" id="processstage">Generate 3D model</a>
 	</div>
 </section>
+<div id="cover-spin"></div>
 {% endblock %}
