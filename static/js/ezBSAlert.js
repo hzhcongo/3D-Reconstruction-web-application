@@ -2,12 +2,12 @@ function ezBSAlert (options) {
 	var deferredObject = $.Deferred();
 	var defaults = {
 		type: "alert", //alert, prompt,confirm
-		modalSize: 'modal-sm', //modal-sm, modal-lg
+		modalSize: 'modal-am', //modal-sm, modal-lg
 		okButtonText: 'Ok',
 		cancelButtonText: 'Cancel',
 		yesButtonText: 'Yes',
 		noButtonText: 'No',
-		headerText: 'Attention',
+		headerText: 'Alert',
 		messageText: 'Message',
 		alertType: 'default', //default, primary, success, info, warning, danger
 		inputFieldType: 'text', //could ask for number,email,etc
@@ -39,8 +39,8 @@ function ezBSAlert (options) {
             'position: absolute; left: 50%; top: 40%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">' +
 			'<div class="modal-content">' +
 			'<div id="ezAlerts-header" class="modal-header ' + headClass + '">' +
+			'<h4 id="ezAlerts-title" class="modal-title" style="float:left;">Modal title</h4>' +
 			'<button id="close-button" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>' +
-			'<h4 id="ezAlerts-title" class="modal-title">Modal title</h4>' +
 			'</div>' +
 			'<div id="ezAlerts-body" class="modal-body">' +
 			'<div id="ezAlerts-message" ></div>' +
@@ -103,7 +103,7 @@ function ezBSAlert (options) {
 		$('#ezAlerts').modal({
           show: false,
           backdrop: backd,
-          keyboard: keyb
+          keyboard: false
         }).on('hidden.bs.modal', function (e) {
 			$('#ezAlerts').remove();
 			deferredObject.resolve(calbackParam);

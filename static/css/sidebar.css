@@ -21,7 +21,7 @@ a:focus {
     transition: all 0.3s;
 }
 
-.navbar {
+.navbar2 {
     padding: 15px 10px;
     background: #fff;
     border: none;
@@ -30,7 +30,7 @@ a:focus {
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.navbar-btn {
+.navbar-btn2 {
     box-shadow: none;
     outline: none !important;
     border: none;
@@ -54,25 +54,26 @@ a:focus {
 }
 
 #sidebar {
-    min-width: 200px;
-    max-width: 200px;
-    background: #7386D5;
-    color: #fff;
+    min-width: 175px;
+    max-width: 175px;
+    background: #080808;
+    color: #9d9d9d;
     transition: all 0.3s;
 }
 
 #sidebar.active {
-    margin-left: -200px;
+    margin-left: -175px;
 }
 
 #sidebar .sidebar-header {
-    padding: 20px;
-    background: #6d7fcc;
+    padding: 10px;
+    background: #222;
 }
 
 #sidebar ul.components {
-    padding: 20px 0;
-    border-bottom: 1px solid #47748b;
+    padding: 10px 0;
+    font-size: 15px;
+    background-color: #2a2a2a;
 }
 
 #sidebar ul p {
@@ -87,14 +88,14 @@ a:focus {
 }
 
 #sidebar ul li a:hover {
-    color: #7386D5;
-    background: #fff;
+    //color: #7386D5;
+    background: #494949;
 }
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
-    color: #fff;
-    background: #6d7fcc;
+    //color: #fff;
+    //background: #434343;
 }
 
 a[data-toggle="collapse"] {
@@ -110,9 +111,9 @@ a[data-toggle="collapse"] {
 }
 
 ul ul a {
-    font-size: 0.9em !important;
-    padding-left: 30px !important;
-    background: #6d7fcc;
+    font-size: 1em !important;
+    padding-left: 20px !important;
+    //background-color: #434343;
 }
 
 ul.CTAs {
@@ -138,15 +139,21 @@ a.article:hover {
     color: #fff !important;
 }
 
+
+#sidebarCollapse:hover{
+    background: #494949 !important;
+}
+
+
 /* ---------------------------------------------------
     CONTENT STYLE
 ----------------------------------------------------- */
 
 #content {
     width: 100%;
-    min-height: 100vh;
+    //min-height: 100vh;
     transition: all 0.3s;
-    background-color: #b7b8b6;
+    background-color: #cee9ff;
 }
 
 /* ---------------------------------------------------
@@ -155,7 +162,7 @@ a.article:hover {
 
 @media (max-width: 768px) {
     #sidebar {
-        margin-left: -200px;
+        margin-left: -175px;
     }
     #sidebar.active {
         margin-left: 0;

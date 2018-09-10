@@ -22,12 +22,6 @@
 	}
 </style>
 <script type="text/javascript">
-	{% if name %}
-	window.onload = function(){
-		window.scrollTo(0,document.body.scrollHeight);
-	};
-	{% endif %}
-
 	function confirm(filename) {
 		ezBSAlert({
 		  type: 'confirm',
@@ -81,7 +75,11 @@
 					{% for d in data %}
 					<tr>
                         <td style="text-align:center;">
-                            <a href="/edit/{{d.filename}}"><img src="../static/ui/view.png" style="max-width:10%; min-width: 20px;" height=auto></a>
+							<!--REMOVE AFTER TESTING-->
+                            <!--<a href="/edit/{{d.filename}}"><img src="../static/ui/view.png" style="max-width:10%; min-width: 20px;" height=auto></a>-->
+							<!--REMOVE AFTER TESTING-->
+
+                            <a href="/display/{{d.filename}}"><img src="../static/ui/view.png" style="max-width:10%; min-width: 20px;" height=auto></a>
                         </td>
 						<td>{{d.filename}}</td>
 						<td>{{d.creation_time}}</td>
@@ -98,17 +96,16 @@
 			</table>
 		</div>
 
-		<div id = "threejs_container" class = "col-4 push-1">
-			{% if name %}
-			<iframe src="/display/{{name}}" scrolling="no" style=" width: 1150px; height: 700px; border: 1px solid #cbcbcb; border-radius: 10px;"></iframe>
-			{% else %}
-			<iframe src="/display/" scrolling="no" style=" width: 1150px; height: 700px; border: 1px solid #cbcbcb; border-radius: 10px;"></iframe>
-			{% endif %}
-<!-- 			<object data="/display/{{name}}" style="min-width: 100%; min-height: 101%;" type="text/html">
-			    Alternative Content
-			</object> -->
-			<!-- <embed src="/display/{{name}}" width=100% /> -->
-		</div>
-	</div> <!-- row -->
-</section> <!-- container -->
+		<!--REMOVE AFTER TESTING-->
+		<!--<div id = "threejs_container" class = "col-4 push-1">-->
+			<!--{% if name %}-->
+			<!--<iframe src="/display/{{name}}" scrolling="no" style=" width: 1150px; height: 700px; border: 1px solid #cbcbcb; border-radius: 10px;"></iframe>-->
+			<!--{% else %}-->
+			<!--<iframe src="/display/" scrolling="no" style=" width: 1150px; height: 700px; border: 1px solid #cbcbcb; border-radius: 10px;"></iframe>-->
+			<!--{% endif %}-->
+		<!--</div>-->
+		<!--REMOVE AFTER TESTING-->
+
+	</div>
+</section>
 {% endblock %}
