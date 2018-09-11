@@ -7,11 +7,13 @@
 </style>
 <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
 <link rel="shortcut icon" href="{{ url_for('static', filename='ui/favicon.ico') }}">
+<script src="{{ url_for('static', filename='js/jquery-3.3.1.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pace-theme-center-circle.css') }}">
 <script>
 	$(document).ready(function () {
 		$("#processstage").click(function(){
 			$('#cover-spin').show(0);
-			window.location.href = "/TrimAndNoiseRemovalprocess?name={{name}}";
+			window.location.href = "/FullReconstructionprocess?name={{name}}";
 		});
 	});
 </script>
@@ -22,17 +24,20 @@
 
 {%block content %}
 <section class="container" style="text-align:center;">
-	<div style="margin:50px auto; width:100%;">
+	<div class="centercenter">
 		<div id="titleheader" style="margin: 50px auto; max-width: 1005px; height: 150px; display: flex; justify-content: center; align-items: center;">
-			<div id="one"><h3 style="text-align: right; margin:0; max-height: 100px;">Stage</h3><h1 style="font-size: 60px; margin:0;">-1</h1></div>
+			<div id="one"><h3 style="text-align: right; margin:0; max-height: 100px;">Stage</h3><h2 style="font-size: 31px; margin:0;">1 - 6</h2></div>
 			<div id="mid" style="border-left: 1.5px solid silver; height: 130px; max-height: 100%; margin: 10px 20px;"></div>
 			<div id="two" style="text-align:left;">
 				<div>
-					<h3 style="margin-top:0;">Photogrammetry processing via osmbundler and point cloud generation via PMVS</h3>
+					<h3 style="margin-top:0;">Full 3D reconstruction process at 1 go</h3>
+					Instead of having to press 1 button for each stage, you can just press 1 button to process all stages.
+					However, doing all in 1 shot will mean some time (about 10-20 minutes depending on the amount of images, image details, and quality of model desired).
+					If you do not have a good chunk of time to leave the application running, please process stage by stage.
 				</div>
 			</div>
 		</div>
-		<a class="btn btn-primary halfwidth" id="processstage">Generate 3D model</a>
+		<a class="btn btn-primary halfwidth" id="processstage">Process all stages</a>
 	</div>
 </section>
 <div id="cover-spin"></div>

@@ -2,12 +2,12 @@ function ezBSAlert (options) {
 	var deferredObject = $.Deferred();
 	var defaults = {
 		type: "alert", //alert, prompt,confirm
-		modalSize: 'modal-am', //modal-sm, modal-lg
+		modalSize: 'modal-sm', //modal-sm, modal-lg
 		okButtonText: 'Ok',
 		cancelButtonText: 'Cancel',
 		yesButtonText: 'Yes',
 		noButtonText: 'No',
-		headerText: 'Alert',
+		headerText: 'Attention',
 		messageText: 'Message',
 		alertType: 'default', //default, primary, success, info, warning, danger
 		inputFieldType: 'text', //could ask for number,email,etc
@@ -35,12 +35,11 @@ function ezBSAlert (options) {
         }
 		$('BODY').append(
 			'<div id="ezAlerts" class="modal fade">' +
-			'<div class="modal-dialog" class="' + defaults.modalSize + '" style=" max-width: 450px; width: 70%; margin: auto;' +
-            'position: absolute; left: 50%; top: 40%; -webkit-transform: translate(-50%, -50%); transform: translate(-50%, -50%);">' +
+			'<div class="modal-dialog" class="' + defaults.modalSize + '">' +
 			'<div class="modal-content">' +
 			'<div id="ezAlerts-header" class="modal-header ' + headClass + '">' +
-			'<h4 id="ezAlerts-title" class="modal-title" style="float:left;">Modal title</h4>' +
 			'<button id="close-button" type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>' +
+			'<h4 id="ezAlerts-title" class="modal-title">Modal title</h4>' +
 			'</div>' +
 			'<div id="ezAlerts-body" class="modal-body">' +
 			'<div id="ezAlerts-message" ></div>' +
@@ -103,7 +102,7 @@ function ezBSAlert (options) {
 		$('#ezAlerts').modal({
           show: false,
           backdrop: backd,
-          keyboard: false
+          keyboard: keyb
         }).on('hidden.bs.modal', function (e) {
 			$('#ezAlerts').remove();
 			deferredObject.resolve(calbackParam);
@@ -123,7 +122,7 @@ function ezBSAlert (options) {
 
 
 $(document).ready(function(){
-  $(".btnAlert").on("click", function(){
+  $("#btnRemove").on("click", function(){
     var prom = ezBSAlert({
       messageText: "hello world",
       alertType: "danger"
@@ -132,7 +131,17 @@ $(document).ready(function(){
     });
   });
 
-  $(".btnPrompt").on("click", function(){
+  $("#btnConfirm").on("click", function(){
+    ezBSAlert({
+      type: "confirm",
+      messageText: "hello world",
+      alertType: "info"
+    }).done(function (e) {
+      $("body").append('<div>Callback from confirm ' + e + '</div>');
+    });
+  });
+
+  $("#btnPrompt").on("click", function(){
     ezBSAlert({
       type: "prompt",
       messageText: "Enter Something",

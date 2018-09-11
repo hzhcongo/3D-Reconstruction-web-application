@@ -4,10 +4,8 @@ Loading images from file 'list.txt'
 [BundlerApp::OnInit] Loading frame...
 [BundlerApp::OnInit] Loading images...
 [SifterApp::ReadGeometricConstraints] Reading 6781 tracks
-[ReadGeometricConstraints] Reading tracks took 0.011s
-[ReadTrackPairs] Error opening file track-pairs.txt for reading
-[ReadGeometricConstraints] Processing track 0...
-[ReadGeometricConstraints] Computing track pairs took 0.007s
+[ReadGeometricConstraints] Reading tracks took 0.013s
+[ReadTrackPairs] Read 2020 track pairs
   Avg. proj error [0 projections] = -1.#IOe+000
 [SifterApp::BundleAdjust] Adjusting cameras 1 and 3 (score = 0.000)
 [GetJPEGDimensions] File 10.jpg: ( 1920 , 1080 )
@@ -610,7 +608,7 @@ Loading images from file 'list.txt'
  tri.error[294] = 0.407
   Adding match 909 ==> 913 [295]
  tri.error[295] = 0.021
-[SifterApp::DumpOutputFile] Wrote file in 0.003s
+[SifterApp::DumpOutputFile] Wrote file in 0.004s
 initial motstr-SBA error 217.62 [0.367602]
 mean reprojection error 0.447765
 
@@ -715,7 +713,7 @@ damping term 9.17521e+010, gain ratio -615.647, errors 0.304994 / 0.306564 = 0.9
 pdp_eL2: 181.486, nvis: 592
 [run_sfm] Number of iterations: 14
 info[6] = 2.000
-[RunSFM] run_sfm took 0.025s
+[RunSFM] run_sfm took 0.026s
 [RunSFM] Mean error cam 0[1] [296 pts]: 4.244e-001 [med: 3.076e-001, 8.000e+000]
    E[2.566e-003--1.983e-001]: 100 [0.338]
    E[1.983e-001--3.940e-001]: 72 [0.243]
@@ -886,7 +884,7 @@ Sum of squares tolerance reached
    E[5.183e+000--5.822e+000]: 0 [0.000]
    E[5.822e+000--6.461e+000]: 0 [0.000]
 [RefineCameraParameters] Exiting after 1 rounds with 233 / 233 points
-[BundleInitializeImage] Initializing took 0.065s
+[BundleInitializeImage] Initializing took 0.070s
 [SifterApp::BundleAdjust[0]] Adjusting camera 4 (parent = -1)
 [GetJPEGDimensions] File 13.jpg: ( 1920 , 1080 )
 [BaseApp::SetTracks] Setting tracks for image 4...
@@ -969,7 +967,7 @@ Sum of squares tolerance reached
    E[5.521e+000--6.202e+000]: 0 [0.000]
    E[6.202e+000--6.883e+000]: 1 [0.004]
 [RefineCameraParameters] Exiting after 1 rounds with 226 / 226 points
-[BundleInitializeImage] Initializing took 0.067s
+[BundleInitializeImage] Initializing took 0.082s
 [SifterApp::BundleAdjust[0]] Adjusting camera 5 (parent = -1)
 [GetJPEGDimensions] File 14.jpg: ( 1920 , 1080 )
 [BaseApp::SetTracks] Setting tracks for image 5...
@@ -1036,7 +1034,7 @@ Sum of squares tolerance reached
    E[5.083e+000--5.710e+000]: 2 [0.010]
    E[5.710e+000--6.336e+000]: 2 [0.010]
 [RefineCameraParameters] Exiting after 1 rounds with 191 / 191 points
-[BundleInitializeImage] Initializing took 0.064s
+[BundleInitializeImage] Initializing took 0.068s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 408 new points
 [AddAllNewPoints] Ill-conditioned tracks: 98
@@ -1301,7 +1299,7 @@ pdp_eL2: 1790.625, nvis: 2263
 max_pct_change: 3.646e-002
 [run_sfm] Number of iterations: 51
 info[6] = 8.000
-[RunSFM] run_sfm took 0.299s
+[RunSFM] run_sfm took 0.410s
 [RunSFM] Mean error cam 0[1] [399 pts]: 7.353e-001 [med: 6.117e-001, 8.000e+000]
    E[1.535e-003--3.971e-001]: 118 [0.296]
    E[3.971e-001--7.927e-001]: 133 [0.333]
@@ -1357,7 +1355,7 @@ info[6] = 8.000
    E[3.505e+000--3.999e+000]: 0 [0.000]
    E[3.999e+000--4.492e+000]: 1 [0.002]
    E[4.492e+000--4.985e+000]: 1 [0.002]
-[RunSFM] outlier removal took 0.000s
+[RunSFM] outlier removal took 0.001s
 [RunSFM] Removing 0 outliers
 [RemoveBadPointsAndCamera] Removing point 87 with angle 0.378
 [RemoveBadPointsAndCamera] Removing point 101 with angle 0.703
@@ -1400,7 +1398,7 @@ info[6] = 8.000
    [002] 1619.378 (1629.448) 11.jpg 2; 9.101e-002 -8.749e-002
    [003] 1626.220 (1629.448) 13.jpg 4; 1.090e-001 -1.591e-001
    [004] 1618.024 (1629.448) 14.jpg 5; 1.049e-001 -1.611e-001
-[SifterApp::DumpOutputFile] Wrote file in 0.007s
+[SifterApp::DumpOutputFile] Wrote file in 0.010s
   existing_matches[6] = 282
   score[6]   = 282.000
   existing_matches[7] = 226
@@ -1604,7 +1602,7 @@ Sum of squares tolerance reached
    E[6.690e+000--7.518e+000]: 0 [0.000]
    E[7.518e+000--8.347e+000]: 1 [0.004]
 [RefineCameraParameters] Exiting after 3 rounds with 278 / 282 points
-[BundleInitializeImage] Initializing took 0.081s
+[BundleInitializeImage] Initializing took 0.078s
 [SifterApp::BundleAdjust[1]] Adjusting camera 7 (parent = -1)
 [GetJPEGDimensions] File 16.jpg: ( 1920 , 1080 )
 [BaseApp::SetTracks] Setting tracks for image 7...
@@ -1702,7 +1700,7 @@ Sum of squares tolerance reached
    E[9.070e+000--1.019e+001]: 0 [0.000]
    E[1.019e+001--1.131e+001]: 0 [0.000]
 [RefineCameraParameters] Exiting after 2 rounds with 225 / 226 points
-[BundleInitializeImage] Initializing took 0.071s
+[BundleInitializeImage] Initializing took 0.072s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 204 new points
 [AddAllNewPoints] Ill-conditioned tracks: 101
@@ -1832,7 +1830,7 @@ damping term 3.03552e+012, gain ratio -79725.9, errors  0.91933 / 0.919398 = 0.9
 pdp_eL2: 2865.763, nvis: 3117
 [run_sfm] Number of iterations: 17
 info[6] = 2.000
-[RunSFM] run_sfm took 0.175s
+[RunSFM] run_sfm took 0.208s
 [RunSFM] Mean error cam 0[1] [365 pts]: 8.266e-001 [med: 6.702e-001, 8.000e+000]
    E[5.286e-003--5.254e-001]: 134 [0.367]
    E[5.254e-001--1.046e+000]: 132 [0.362]
@@ -1922,7 +1920,7 @@ info[6] = 2.000
    [004] 1578.033 (1629.448) 14.jpg 5; 6.916e-002 -1.347e-001
    [005] 1568.205 (1629.448) 15.jpg 6; 5.226e-002 -1.024e-001
    [006] 1570.545 (1629.448) 16.jpg 7; 2.999e-002 -5.009e-002
-[SifterApp::DumpOutputFile] Wrote file in 0.008s
+[SifterApp::DumpOutputFile] Wrote file in 0.013s
   existing_matches[8] = 223
   score[8]   = 223.000
   existing_matches[9] = 202
@@ -2091,7 +2089,7 @@ Sum of squares tolerance reached
    E[5.084e+000--5.689e+000]: 5 [0.023]
    E[5.689e+000--6.295e+000]: 2 [0.009]
 [RefineCameraParameters] Exiting after 2 rounds with 219 / 222 points
-[BundleInitializeImage] Initializing took 0.071s
+[BundleInitializeImage] Initializing took 0.117s
 [SifterApp::BundleAdjust[2]] Adjusting camera 9 (parent = -1)
 [GetJPEGDimensions] File 18.jpg: ( 1920 , 1080 )
 [BaseApp::SetTracks] Setting tracks for image 9...
@@ -2191,7 +2189,7 @@ Sum of squares tolerance reached
    E[8.544e+000--9.604e+000]: 0 [0.000]
    E[9.604e+000--1.066e+001]: 1 [0.005]
 [RefineCameraParameters] Exiting after 2 rounds with 199 / 202 points
-[BundleInitializeImage] Initializing took 0.069s
+[BundleInitializeImage] Initializing took 0.113s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 227 new points
 [AddAllNewPoints] Ill-conditioned tracks: 104
@@ -2367,7 +2365,7 @@ damping term 3.45969e+010, gain ratio -308.491, errors  1.09567 /  1.09568 = 0.9
 pdp_eL2: 4433.134, nvis: 4046
 [run_sfm] Number of iterations: 27
 info[6] = 2.000
-[RunSFM] run_sfm took 0.349s
+[RunSFM] run_sfm took 0.481s
 [RunSFM] Mean error cam 0[1] [364 pts]: 8.795e-001 [med: 7.045e-001, 8.000e+000]
    E[2.135e-003--5.687e-001]: 140 [0.385]
    E[5.687e-001--1.135e+000]: 131 [0.360]
@@ -2643,7 +2641,7 @@ Sum of squares tolerance reached
    E[7.117e+000--7.991e+000]: 0 [0.000]
    E[7.991e+000--8.865e+000]: 1 [0.005]
 [RefineCameraParameters] Exiting after 2 rounds with 221 / 225 points
-[BundleInitializeImage] Initializing took 0.074s
+[BundleInitializeImage] Initializing took 0.089s
 [SifterApp::BundleAdjust[3]] Adjusting camera 12 (parent = -1)
 [GetJPEGDimensions] File 20.jpg: ( 1920 , 1080 )
 [BaseApp::SetTracks] Setting tracks for image 12...
@@ -2755,7 +2753,7 @@ Sum of squares tolerance reached
    E[5.014e+000--5.605e+000]: 1 [0.006]
    E[5.605e+000--6.195e+000]: 2 [0.011]
 [RefineCameraParameters] Exiting after 2 rounds with 179 / 180 points
-[BundleInitializeImage] Initializing took 0.071s
+[BundleInitializeImage] Initializing took 0.083s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 274 new points
 [AddAllNewPoints] Ill-conditioned tracks: 173
@@ -2910,7 +2908,7 @@ damping term 9.85259e+010, gain ratio -1663.03, errors  1.08406 /  1.08407 = 0.9
 pdp_eL2: 5466.990, nvis: 5043
 [run_sfm] Number of iterations: 22
 info[6] = 2.000
-[RunSFM] run_sfm took 0.382s
+[RunSFM] run_sfm took 0.459s
 [RunSFM] Mean error cam 0[1] [364 pts]: 9.165e-001 [med: 7.326e-001, 8.000e+000]
    E[1.723e-003--5.708e-001]: 139 [0.382]
    E[5.708e-001--1.140e+000]: 123 [0.338]
@@ -3032,7 +3030,7 @@ info[6] = 2.000
    E[2.643e+000--3.020e+000]: 5 [0.012]
    E[3.020e+000--3.397e+000]: 2 [0.005]
    E[3.397e+000--3.774e+000]: 2 [0.005]
-[RunSFM] outlier removal took 0.001s
+[RunSFM] outlier removal took 0.002s
 [RunSFM] Removing 0 outliers
 [RemoveBadPointsAndCameras] Pruned 0 points
   focal lengths:
@@ -3047,7 +3045,7 @@ info[6] = 2.000
    [008] 1640.773 (1629.448) 18.jpg 9; 1.017e-001 -2.137e-001
    [009] 1626.270 (1629.448) 19.jpg 10; 7.586e-002 -1.445e-001
    [010] 1626.879 (1629.448) 20.jpg 12; 5.609e-002 -1.945e-002
-[SifterApp::DumpOutputFile] Wrote file in 0.051s
+[SifterApp::DumpOutputFile] Wrote file in 0.016s
   existing_matches[13] = 238
   score[13]   = 238.000
   existing_matches[14] = 203
@@ -3217,7 +3215,7 @@ Sum of squares tolerance reached
    E[7.746e+000--8.701e+000]: 0 [0.000]
    E[8.701e+000--9.656e+000]: 2 [0.009]
 [RefineCameraParameters] Exiting after 2 rounds with 235 / 237 points
-[BundleInitializeImage] Initializing took 0.082s
+[BundleInitializeImage] Initializing took 0.101s
 [SifterApp::BundleAdjust[4]] Adjusting camera 14 (parent = -1)
 [GetJPEGDimensions] File 22.jpg: ( 1920 , 1080 )
 [BaseApp::SetTracks] Setting tracks for image 14...
@@ -3353,7 +3351,7 @@ Sum of squares tolerance reached
    E[6.034e+000--6.780e+000]: 2 [0.010]
    E[6.780e+000--7.527e+000]: 2 [0.010]
 [RefineCameraParameters] Exiting after 3 rounds with 199 / 202 points
-[BundleInitializeImage] Initializing took 0.072s
+[BundleInitializeImage] Initializing took 0.078s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 140 new points
 [AddAllNewPoints] Ill-conditioned tracks: 344
@@ -3464,7 +3462,7 @@ damping term 1.91159e+011, gain ratio  -544960, errors  1.15858 /  1.15871 = 0.9
 pdp_eL2: 6729.779, nvis: 5808
 [run_sfm] Number of iterations: 14
 info[6] = 2.000
-[RunSFM] run_sfm took 0.308s
+[RunSFM] run_sfm took 0.366s
 [RunSFM] Mean error cam 0[1] [364 pts]: 9.374e-001 [med: 7.613e-001, 8.000e+000]
    E[5.553e-003--5.743e-001]: 134 [0.368]
    E[5.743e-001--1.143e+000]: 127 [0.349]
@@ -3608,7 +3606,7 @@ info[6] = 2.000
    E[3.597e+000--4.109e+000]: 0 [0.000]
    E[4.109e+000--4.621e+000]: 1 [0.004]
    E[4.621e+000--5.133e+000]: 1 [0.004]
-[RunSFM] outlier removal took 0.003s
+[RunSFM] outlier removal took 0.002s
 [RunSFM] Removing 0 outliers
 [RemoveBadPointsAndCameras] Pruned 0 points
   focal lengths:
@@ -3625,7 +3623,7 @@ info[6] = 2.000
    [010] 1626.834 (1629.448) 20.jpg 12; 7.484e-002 -1.291e-001
    [011] 1625.016 (1629.448) 21.jpg 13; 5.973e-002 -6.834e-002
    [012] 1615.998 (1629.448) 22.jpg 14; 3.291e-002 5.076e-003
-[SifterApp::DumpOutputFile] Wrote file in 0.015s
+[SifterApp::DumpOutputFile] Wrote file in 0.014s
   existing_matches[15] = 204
   score[15]   = 204.000
   existing_matches[16] = 169
@@ -3779,7 +3777,7 @@ Sum of squares tolerance reached
    E[6.319e+000--7.095e+000]: 3 [0.015]
    E[7.095e+000--7.871e+000]: 0 [0.000]
 [RefineCameraParameters] Exiting after 2 rounds with 203 / 204 points
-[BundleInitializeImage] Initializing took 0.070s
+[BundleInitializeImage] Initializing took 0.072s
 [SifterApp::BundleAdjust[5]] Adjusting camera 16 (parent = -1)
 [GetJPEGDimensions] File 24.jpg: ( 1920 , 1080 )
 [BaseApp::SetTracks] Setting tracks for image 16...
@@ -3972,7 +3970,7 @@ pdp_eL2: 8170.287, nvis: 6894
 max_pct_change: 2.953e-002
 [run_sfm] Number of iterations: 17
 info[6] = 8.000
-[RunSFM] run_sfm took 0.367s
+[RunSFM] run_sfm took 0.462s
 [RunSFM] Mean error cam 0[1] [364 pts]: 9.531e-001 [med: 7.662e-001, 8.000e+000]
    E[3.811e-003--6.211e-001]: 152 [0.418]
    E[6.211e-001--1.238e+000]: 122 [0.335]
@@ -4138,7 +4136,7 @@ info[6] = 8.000
    E[3.427e+000--3.917e+000]: 5 [0.013]
    E[3.917e+000--4.406e+000]: 2 [0.005]
    E[4.406e+000--4.896e+000]: 2 [0.005]
-[RunSFM] outlier removal took 0.001s
+[RunSFM] outlier removal took 0.002s
 [RunSFM] Removing 0 outliers
 [RemoveBadPointsAndCameras] Pruned 0 points
   focal lengths:
@@ -4304,7 +4302,7 @@ Sum of squares tolerance reached
    E[7.892e+000--8.869e+000]: 0 [0.000]
    E[8.869e+000--9.846e+000]: 2 [0.008]
 [RefineCameraParameters] Exiting after 2 rounds with 257 / 258 points
-[BundleInitializeImage] Initializing took 0.074s
+[BundleInitializeImage] Initializing took 0.076s
 [SifterApp::BundleAdjust[6]] Adjusting camera 18 (parent = -1)
 [GetJPEGDimensions] File 26.jpg: ( 1920 , 1080 )
 [BaseApp::SetTracks] Setting tracks for image 18...
@@ -4372,7 +4370,7 @@ Sum of squares tolerance reached
    E[1.253e+001--1.408e+001]: 0 [0.000]
    E[1.408e+001--1.563e+001]: 2 [0.010]
 [RefineCameraParameters] Exiting after 1 rounds with 208 / 208 points
-[BundleInitializeImage] Initializing took 0.066s
+[BundleInitializeImage] Initializing took 0.068s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 231 new points
 [AddAllNewPoints] Ill-conditioned tracks: 310
@@ -4503,7 +4501,7 @@ damping term 2.31364e+010, gain ratio  -93.598, errors  1.35281 /  1.35282 = 0.9
 pdp_eL2: 10658.842, nvis: 7879
 [run_sfm] Number of iterations: 18
 info[6] = 2.000
-[RunSFM] run_sfm took 0.543s
+[RunSFM] run_sfm took 0.559s
 [RunSFM] Mean error cam 0[1] [364 pts]: 9.720e-001 [med: 7.677e-001, 8.000e+000]
    E[1.893e-003--6.627e-001]: 160 [0.440]
    E[6.627e-001--1.324e+000]: 121 [0.332]
@@ -4798,7 +4796,7 @@ damping term 6.59941e+010, gain ratio -1.1182e+007, errors  1.27468 /  1.27484 =
 pdp_eL2: 10040.671, nvis: 7876
 [run_sfm] Number of iterations: 14
 info[6] = 2.000
-[RunSFM] run_sfm took 0.445s
+[RunSFM] run_sfm took 0.436s
 [RunSFM] Mean error cam 0[1] [364 pts]: 9.734e-001 [med: 7.583e-001, 8.000e+000]
    E[2.031e-003--6.633e-001]: 159 [0.437]
    E[6.633e-001--1.324e+000]: 122 [0.335]
@@ -5007,7 +5005,7 @@ info[6] = 2.000
    [014] 1620.131 (1629.448) 24.jpg 16; 4.346e-002 -1.199e-001
    [015] 1607.475 (1629.448) 25.jpg 17; 2.470e-002 -2.556e-002
    [016] 1619.233 (1629.448) 26.jpg 18; 1.991e-002 -3.072e-002
-[SifterApp::DumpOutputFile] Wrote file in 0.021s
+[SifterApp::DumpOutputFile] Wrote file in 0.018s
   existing_matches[19] = 278
   score[19]   = 278.000
   existing_matches[20] = 174
@@ -5156,7 +5154,7 @@ Sum of squares tolerance reached
    E[5.579e+000--6.270e+000]: 1 [0.004]
    E[6.270e+000--6.961e+000]: 1 [0.004]
 [RefineCameraParameters] Exiting after 2 rounds with 277 / 278 points
-[BundleInitializeImage] Initializing took 0.077s
+[BundleInitializeImage] Initializing took 0.083s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 42 new points
 [AddAllNewPoints] Ill-conditioned tracks: 521
@@ -5277,7 +5275,7 @@ damping term 7.40436e+009, gain ratio -5514.09, errors   1.2973 /   1.2973 = 1
 pdp_eL2: 10691.063, nvis: 8241
 [run_sfm] Number of iterations: 16
 info[6] = 2.000
-[RunSFM] run_sfm took 0.527s
+[RunSFM] run_sfm took 0.549s
 [RunSFM] Mean error cam 0[1] [364 pts]: 9.775e-001 [med: 7.558e-001, 8.000e+000]
    E[1.003e-003--6.771e-001]: 162 [0.445]
    E[6.771e-001--1.353e+000]: 122 [0.335]
@@ -5476,7 +5474,7 @@ info[6] = 2.000
    E[3.466e+000--3.959e+000]: 2 [0.006]
    E[3.959e+000--4.453e+000]: 0 [0.000]
    E[4.453e+000--4.947e+000]: 2 [0.006]
-[RunSFM] outlier removal took 0.003s
+[RunSFM] outlier removal took 0.002s
 [RunSFM] Removing 0 outliers
 [RemoveBadPointsAndCameras] Pruned 0 points
   focal lengths:
@@ -5498,7 +5496,7 @@ info[6] = 2.000
    [015] 1605.545 (1629.448) 25.jpg 17; 2.611e-002 -1.825e-002
    [016] 1614.935 (1629.448) 26.jpg 18; 2.435e-002 -2.617e-002
    [017] 1621.221 (1629.448) 27.jpg 19; 2.321e-002 -4.709e-002
-[SifterApp::DumpOutputFile] Wrote file in 0.061s
+[SifterApp::DumpOutputFile] Wrote file in 0.017s
   existing_matches[20] = 186
   score[20]   = 186.000
   existing_matches[21] = 93
@@ -5645,7 +5643,7 @@ Sum of squares tolerance reached
    E[1.055e+001--1.186e+001]: 0 [0.000]
    E[1.186e+001--1.317e+001]: 1 [0.005]
 [RefineCameraParameters] Exiting after 2 rounds with 184 / 186 points
-[BundleInitializeImage] Initializing took 0.072s
+[BundleInitializeImage] Initializing took 0.069s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 105 new points
 [AddAllNewPoints] Ill-conditioned tracks: 477
@@ -5740,7 +5738,7 @@ pdp_eL2: 11460.324, nvis: 8680
 max_pct_change: 9.722e-003
 [run_sfm] Number of iterations: 17
 info[6] = 8.000
-[RunSFM] run_sfm took 0.482s
+[RunSFM] run_sfm took 0.479s
 [RunSFM] Mean error cam 0[1] [364 pts]: 9.824e-001 [med: 7.498e-001, 8.000e+000]
    E[4.675e-004--6.879e-001]: 166 [0.456]
    E[6.879e-001--1.375e+000]: 123 [0.338]
@@ -5950,7 +5948,7 @@ info[6] = 8.000
    E[4.919e+000--5.619e+000]: 0 [0.000]
    E[5.619e+000--6.318e+000]: 1 [0.003]
    E[6.318e+000--7.018e+000]: 1 [0.003]
-[RunSFM] outlier removal took 0.002s
+[RunSFM] outlier removal took 0.003s
 [RunSFM] Removing 0 outliers
 [RemoveBadPointsAndCameras] Pruned 0 points
   focal lengths:
@@ -6120,7 +6118,7 @@ Sum of squares tolerance reached
    E[8.457e+000--9.503e+000]: 0 [0.000]
    E[9.503e+000--1.055e+001]: 2 [0.016]
 [RefineCameraParameters] Exiting after 2 rounds with 129 / 130 points
-[BundleInitializeImage] Initializing took 0.057s
+[BundleInitializeImage] Initializing took 0.060s
 [SifterApp::BundleAdjust[9]] Adjusting camera 23 (parent = -1)
 [GetJPEGDimensions] File 30.jpg: ( 1920 , 1080 )
 [BaseApp::SetTracks] Setting tracks for image 23...
@@ -6187,7 +6185,7 @@ Sum of squares tolerance reached
    E[6.613e+000--7.420e+000]: 1 [0.007]
    E[7.420e+000--8.228e+000]: 2 [0.014]
 [RefineCameraParameters] Exiting after 1 rounds with 146 / 146 points
-[BundleInitializeImage] Initializing took 0.063s
+[BundleInitializeImage] Initializing took 0.065s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 172 new points
 [AddAllNewPoints] Ill-conditioned tracks: 480
@@ -6298,7 +6296,7 @@ damping term 1.95359e+011, gain ratio -1429.23, errors  1.36981 /  1.36994 = 0.9
 pdp_eL2: 12804.804, nvis: 9347
 [run_sfm] Number of iterations: 14
 info[6] = 2.000
-[RunSFM] run_sfm took 0.570s
+[RunSFM] run_sfm took 0.561s
 [RunSFM] Mean error cam 0[1] [364 pts]: 9.893e-001 [med: 7.520e-001, 8.000e+000]
    E[2.412e-003--7.064e-001]: 169 [0.464]
    E[7.064e-001--1.410e+000]: 121 [0.332]
@@ -6530,7 +6528,7 @@ info[6] = 2.000
    E[4.738e+000--5.414e+000]: 0 [0.000]
    E[5.414e+000--6.090e+000]: 0 [0.000]
    E[6.090e+000--6.766e+000]: 1 [0.004]
-[RunSFM] outlier removal took 0.003s
+[RunSFM] outlier removal took 0.002s
 [RunSFM] Removing 0 outliers
 [RemoveBadPointsAndCameras] Pruned 0 points
   focal lengths:
@@ -6555,7 +6553,7 @@ info[6] = 2.000
    [018] 1622.106 (1629.448) 28.jpg 20; 5.054e-002 -1.382e-001
    [019] 1589.216 (1629.448) 29.jpg 21; 1.480e-002 -8.105e-003
    [020] 1626.906 (1629.448) 30.jpg 23; 1.830e-002 -1.116e-001
-[SifterApp::DumpOutputFile] Wrote file in 0.023s
+[SifterApp::DumpOutputFile] Wrote file in 0.020s
   existing_matches[24] = 172
   score[24]   = 172.000
   existing_matches[25] = 171
@@ -6665,7 +6663,7 @@ Sum of squares tolerance reached
    E[7.783e+000--8.741e+000]: 1 [0.006]
    E[8.741e+000--9.700e+000]: 1 [0.006]
 [RefineCameraParameters] Exiting after 1 rounds with 172 / 172 points
-[BundleInitializeImage] Initializing took 0.065s
+[BundleInitializeImage] Initializing took 0.069s
 [SifterApp::BundleAdjust[10]] Adjusting camera 25 (parent = -1)
 [GetJPEGDimensions] File 32.jpg: ( 1920 , 1080 )
 [BaseApp::SetTracks] Setting tracks for image 25...
@@ -6736,7 +6734,7 @@ Sum of squares tolerance reached
    E[1.148e+001--1.289e+001]: 0 [0.000]
    E[1.289e+001--1.430e+001]: 1 [0.006]
 [RefineCameraParameters] Exiting after 1 rounds with 171 / 171 points
-[BundleInitializeImage] Initializing took 0.072s
+[BundleInitializeImage] Initializing took 0.078s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 159 new points
 [AddAllNewPoints] Ill-conditioned tracks: 606
@@ -6836,7 +6834,7 @@ pdp_eL2: 14535.881, nvis: 10056
 max_pct_change: 1.744e-002
 [run_sfm] Number of iterations: 18
 info[6] = 8.000
-[RunSFM] run_sfm took 0.608s
+[RunSFM] run_sfm took 0.610s
 [RunSFM] Mean error cam 0[1] [364 pts]: 9.986e-001 [med: 7.470e-001, 8.000e+000]
    E[6.552e-004--7.035e-001]: 171 [0.470]
    E[7.035e-001--1.406e+000]: 119 [0.327]
@@ -7091,7 +7089,7 @@ info[6] = 8.000
    E[9.075e+000--1.021e+001]: 0 [0.000]
    E[1.021e+001--1.134e+001]: 1 [0.003]
 [RunSFM] Removing outlier 1120 (reproj error: 11.343)
-[RunSFM] outlier removal took 0.003s
+[RunSFM] outlier removal took 0.004s
 [RunSFM] Removing 1 outliers
 initial motstr-SBA error 14029.5 [1.39723]
 mean reprojection error 0.896549
@@ -7207,7 +7205,7 @@ damping term 2.30826e+010, gain ratio -74.0499, errors   1.3956 /   1.3956 = 0.9
 pdp_eL2: 14013.222, nvis: 10041
 [run_sfm] Number of iterations: 16
 info[6] = 2.000
-[RunSFM] run_sfm took 0.696s
+[RunSFM] run_sfm took 0.687s
 [RunSFM] Mean error cam 0[1] [364 pts]: 1.000e+000 [med: 7.451e-001, 8.000e+000]
    E[1.711e-003--7.078e-001]: 171 [0.470]
    E[7.078e-001--1.414e+000]: 119 [0.327]
@@ -7461,7 +7459,7 @@ info[6] = 2.000
    E[4.686e+000--5.353e+000]: 0 [0.000]
    E[5.353e+000--6.019e+000]: 3 [0.010]
    E[6.019e+000--6.686e+000]: 1 [0.003]
-[RunSFM] outlier removal took 0.002s
+[RunSFM] outlier removal took 0.004s
 [RunSFM] Removing 0 outliers
 [RemoveBadPointsAndCameras] Pruned 0 points
   focal lengths:
@@ -7488,7 +7486,7 @@ info[6] = 2.000
    [020] 1652.017 (1629.448) 30.jpg 23; 1.842e-002 -1.205e-001
    [021] 1626.280 (1629.448) 31.jpg 24; 3.590e-002 -1.569e-001
    [022] 1680.934 (1629.448) 32.jpg 25; 4.640e-002 4.898e-003
-[SifterApp::DumpOutputFile] Wrote file in 0.023s
+[SifterApp::DumpOutputFile] Wrote file in 0.021s
   existing_matches[26] = 143
   score[26]   = 143.000
   existing_matches[27] = 103
@@ -7634,7 +7632,7 @@ x is within tolerance
    E[8.170e+000--9.173e+000]: 1 [0.007]
    E[9.173e+000--1.017e+001]: 3 [0.021]
 [RefineCameraParameters] Exiting after 2 rounds with 141 / 143 points
-[BundleInitializeImage] Initializing took 0.070s
+[BundleInitializeImage] Initializing took 0.066s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 91 new points
 [AddAllNewPoints] Ill-conditioned tracks: 578
@@ -7750,7 +7748,7 @@ damping term 4.64767e+010, gain ratio -571.517, errors  1.39627 /  1.39627 = 0.9
 pdp_eL2: 14512.875, nvis: 10394
 [run_sfm] Number of iterations: 15
 info[6] = 2.000
-[RunSFM] run_sfm took 0.677s
+[RunSFM] run_sfm took 0.686s
 [RunSFM] Mean error cam 0[1] [364 pts]: 1.003e+000 [med: 7.475e-001, 8.000e+000]
    E[3.125e-003--7.151e-001]: 173 [0.475]
    E[7.151e-001--1.427e+000]: 117 [0.321]
@@ -8181,7 +8179,7 @@ Sum of squares tolerance reached
    E[7.654e+000--8.589e+000]: 2 [0.014]
    E[8.589e+000--9.524e+000]: 2 [0.014]
 [RefineCameraParameters] Exiting after 2 rounds with 141 / 142 points
-[BundleInitializeImage] Initializing took 0.065s
+[BundleInitializeImage] Initializing took 0.067s
 [SifterApp::BundleAdjust[12]] Adjusting camera 28 (parent = -1)
 [GetJPEGDimensions] File 35.jpg: ( 1920 , 1080 )
 [BaseApp::SetTracks] Setting tracks for image 28...
@@ -8281,7 +8279,7 @@ Sum of squares tolerance reached
    E[7.139e+000--8.016e+000]: 0 [0.000]
    E[8.016e+000--8.894e+000]: 1 [0.008]
 [RefineCameraParameters] Exiting after 2 rounds with 120 / 121 points
-[BundleInitializeImage] Initializing took 0.064s
+[BundleInitializeImage] Initializing took 0.061s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 304 new points
 [AddAllNewPoints] Ill-conditioned tracks: 573
@@ -8392,7 +8390,7 @@ damping term 6.86538e+010, gain ratio -13686.8, errors  1.38805 /  1.38806 = 0.9
 pdp_eL2: 15758.688, nvis: 11353
 [run_sfm] Number of iterations: 14
 info[6] = 2.000
-[RunSFM] run_sfm took 0.713s
+[RunSFM] run_sfm took 0.707s
 [RunSFM] Mean error cam 0[1] [364 pts]: 1.005e+000 [med: 7.491e-001, 8.000e+000]
    E[3.712e-003--7.195e-001]: 173 [0.475]
    E[7.195e-001--1.435e+000]: 117 [0.321]
@@ -8709,7 +8707,7 @@ info[6] = 2.000
    [023] 1656.928 (1629.448) 33.jpg 26; 4.348e-002 3.495e-002
    [024] 1653.102 (1629.448) 34.jpg 27; 6.886e-002 -2.933e-002
    [025] 1682.357 (1629.448) 35.jpg 28; 3.555e-002 -1.006e-002
-[SifterApp::DumpOutputFile] Wrote file in 0.041s
+[SifterApp::DumpOutputFile] Wrote file in 0.025s
   existing_matches[29] = 183
   score[29]   = 183.000
   existing_matches[30] = 129
@@ -8826,7 +8824,7 @@ Sum of squares tolerance reached
    E[5.700e+000--6.401e+000]: 2 [0.011]
    E[6.401e+000--7.103e+000]: 3 [0.016]
 [RefineCameraParameters] Exiting after 1 rounds with 183 / 183 points
-[BundleInitializeImage] Initializing took 0.064s
+[BundleInitializeImage] Initializing took 0.065s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 79 new points
 [AddAllNewPoints] Ill-conditioned tracks: 575
@@ -8942,7 +8940,7 @@ damping term 7.09389e+010, gain ratio -3488.47, errors  1.39973 /  1.39973 = 0.9
 pdp_eL2: 16369.845, nvis: 11695
 [run_sfm] Number of iterations: 15
 info[6] = 2.000
-[RunSFM] run_sfm took 0.783s
+[RunSFM] run_sfm took 0.775s
 [RunSFM] Mean error cam 0[1] [364 pts]: 1.007e+000 [med: 7.506e-001, 8.000e+000]
    E[3.681e-003--7.173e-001]: 173 [0.475]
    E[7.173e-001--1.431e+000]: 117 [0.321]
@@ -9271,7 +9269,7 @@ info[6] = 2.000
    [024] 1656.438 (1629.448) 34.jpg 27; 6.671e-002 -2.952e-002
    [025] 1685.986 (1629.448) 35.jpg 28; 4.411e-002 2.394e-002
    [026] 1690.392 (1629.448) 36.jpg 29; 6.838e-002 -7.010e-002
-[SifterApp::DumpOutputFile] Wrote file in 0.033s
+[SifterApp::DumpOutputFile] Wrote file in 0.026s
   existing_matches[30] = 148
   score[30]   = 148.000
   existing_matches[31] = 87
@@ -9410,7 +9408,7 @@ Sum of squares tolerance reached
    E[5.602e+000--6.286e+000]: 0 [0.000]
    E[6.286e+000--6.970e+000]: 3 [0.020]
 [RefineCameraParameters] Exiting after 2 rounds with 147 / 148 points
-[BundleInitializeImage] Initializing took 0.063s
+[BundleInitializeImage] Initializing took 0.062s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 42 new points
 [AddAllNewPoints] Ill-conditioned tracks: 575
@@ -9521,7 +9519,7 @@ damping term 6.90602e+010, gain ratio  -510010, errors  1.41299 /    1.413 = 0.9
 pdp_eL2: 16851.421, nvis: 11926
 [run_sfm] Number of iterations: 14
 info[6] = 2.000
-[RunSFM] run_sfm took 0.768s
+[RunSFM] run_sfm took 0.794s
 [RunSFM] Mean error cam 0[1] [364 pts]: 1.008e+000 [med: 7.517e-001, 8.000e+000]
    E[3.433e-003--7.148e-001]: 173 [0.475]
    E[7.148e-001--1.426e+000]: 117 [0.321]
@@ -9830,7 +9828,7 @@ info[6] = 2.000
    E[4.411e+000--5.040e+000]: 0 [0.000]
    E[5.040e+000--5.670e+000]: 0 [0.000]
    E[5.670e+000--6.300e+000]: 2 [0.011]
-[RunSFM] outlier removal took 0.003s
+[RunSFM] outlier removal took 0.004s
 [RunSFM] Removing 0 outliers
 [RemoveBadPointsAndCameras] Pruned 0 points
   focal lengths:
@@ -9862,7 +9860,7 @@ info[6] = 2.000
    [025] 1689.027 (1629.448) 35.jpg 28; 4.708e-002 1.604e-002
    [026] 1693.632 (1629.448) 36.jpg 29; 6.939e-002 -8.668e-002
    [027] 1669.500 (1629.448) 37.jpg 30; 5.881e-002 5.407e-003
-[SifterApp::DumpOutputFile] Wrote file in 0.026s
+[SifterApp::DumpOutputFile] Wrote file in 0.027s
   existing_matches[31] = 94
   score[31]   = 94.000
   existing_matches[32] = 93
@@ -10083,7 +10081,7 @@ Sum of squares tolerance reached
    E[7.587e+000--8.515e+000]: 0 [0.000]
    E[8.515e+000--9.442e+000]: 3 [0.033]
 [RefineCameraParameters] Exiting after 2 rounds with 92 / 93 points
-[BundleInitializeImage] Initializing took 0.057s
+[BundleInitializeImage] Initializing took 0.056s
 [SifterApp::BundleAdjust[15]] Adjusting camera 34 (parent = -1)
 [GetJPEGDimensions] File 40.jpg: ( 1920 , 1080 )
 [BaseApp::SetTracks] Setting tracks for image 34...
@@ -10152,7 +10150,7 @@ Sum of squares tolerance reached
    E[8.397e+000--9.423e+000]: 0 [0.000]
    E[9.423e+000--1.045e+001]: 3 [0.041]
 [RefineCameraParameters] Exiting after 1 rounds with 74 / 74 points
-[BundleInitializeImage] Initializing took 0.052s
+[BundleInitializeImage] Initializing took 0.055s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 299 new points
 [AddAllNewPoints] Ill-conditioned tracks: 587
@@ -10247,7 +10245,7 @@ pdp_eL2: 18429.815, nvis: 12911
 max_pct_change: 9.177e-003
 [run_sfm] Number of iterations: 17
 info[6] = 8.000
-[RunSFM] run_sfm took 0.789s
+[RunSFM] run_sfm took 0.815s
 [RunSFM] Mean error cam 0[1] [364 pts]: 1.009e+000 [med: 7.521e-001, 8.000e+000]
    E[2.892e-003--7.079e-001]: 172 [0.473]
    E[7.079e-001--1.413e+000]: 118 [0.324]
@@ -10624,7 +10622,7 @@ info[6] = 8.000
    [028] 1653.499 (1629.448) 38.jpg 31; 3.564e-002 1.180e-001
    [029] 1676.465 (1629.448) 39.jpg 32; 5.232e-002 -3.207e-002
    [030] 1683.518 (1629.448) 40.jpg 34; 5.925e-002 2.019e-002
-[SifterApp::DumpOutputFile] Wrote file in 0.027s
+[SifterApp::DumpOutputFile] Wrote file in 0.028s
   existing_matches[35] = 167
   score[35]   = 167.000
   existing_matches[36] = 86
@@ -10751,7 +10749,7 @@ Sum of squares tolerance reached
    E[6.599e+000--7.414e+000]: 3 [0.018]
    E[7.414e+000--8.229e+000]: 1 [0.006]
 [RefineCameraParameters] Exiting after 2 rounds with 166 / 167 points
-[BundleInitializeImage] Initializing took 0.064s
+[BundleInitializeImage] Initializing took 0.066s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 92 new points
 [AddAllNewPoints] Ill-conditioned tracks: 588
@@ -10862,7 +10860,7 @@ damping term 6.91981e+010, gain ratio  -407571, errors   1.4423 /  1.44236 = 0.9
 pdp_eL2: 19132.860, nvis: 13265
 [run_sfm] Number of iterations: 14
 info[6] = 2.000
-[RunSFM] run_sfm took 0.900s
+[RunSFM] run_sfm took 0.895s
 [RunSFM] Mean error cam 0[1] [364 pts]: 1.009e+000 [med: 7.538e-001, 8.000e+000]
    E[2.523e-003--7.074e-001]: 172 [0.473]
    E[7.074e-001--1.412e+000]: 118 [0.324]
@@ -11215,7 +11213,7 @@ info[6] = 2.000
    E[5.271e+000--6.023e+000]: 0 [0.000]
    E[6.023e+000--6.775e+000]: 1 [0.004]
    E[6.775e+000--7.528e+000]: 1 [0.004]
-[RunSFM] outlier removal took 0.004s
+[RunSFM] outlier removal took 0.003s
 [RunSFM] Removing 0 outliers
 [RemoveBadPointsAndCameras] Pruned 0 points
   focal lengths:
@@ -11450,7 +11448,7 @@ Sum of squares tolerance reached
    E[8.458e+000--9.453e+000]: 1 [0.013]
    E[9.453e+000--1.045e+001]: 3 [0.039]
 [RefineCameraParameters] Exiting after 2 rounds with 77 / 80 points
-[BundleInitializeImage] Initializing took 0.055s
+[BundleInitializeImage] Initializing took 0.054s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 141 new points
 [AddAllNewPoints] Ill-conditioned tracks: 598
@@ -11561,7 +11559,7 @@ damping term 6.92296e+010, gain ratio -1.35089e+006, errors  1.45646 /  1.45665 
 pdp_eL2: 20031.879, nvis: 13752
 [run_sfm] Number of iterations: 14
 info[6] = 2.000
-[RunSFM] run_sfm took 0.945s
+[RunSFM] run_sfm took 0.955s
 [RunSFM] Mean error cam 0[1] [364 pts]: 1.009e+000 [med: 7.562e-001, 8.000e+000]
    E[2.501e-003--7.075e-001]: 172 [0.473]
    E[7.075e-001--1.413e+000]: 118 [0.324]
@@ -11936,7 +11934,7 @@ info[6] = 2.000
    E[3.229e+000--3.689e+000]: 2 [0.011]
    E[3.689e+000--4.150e+000]: 4 [0.021]
    E[4.150e+000--4.610e+000]: 1 [0.005]
-[RunSFM] outlier removal took 0.004s
+[RunSFM] outlier removal took 0.003s
 [RunSFM] Removing 0 outliers
 [RemoveBadPointsAndCameras] Pruned 0 points
   focal lengths:
@@ -11974,7 +11972,7 @@ info[6] = 2.000
    [031] 1671.671 (1629.448) 41.jpg 35; 7.842e-002 -2.158e-001
    [032] 1669.025 (1629.448) 42.jpg 36; 6.180e-002 -1.074e-001
    [033] 1652.293 (1629.448) 43.jpg 37; 5.056e-002 -4.753e-003
-[SifterApp::DumpOutputFile] Wrote file in 0.031s
+[SifterApp::DumpOutputFile] Wrote file in 0.029s
   existing_matches[38] = 145
   score[38]   = 145.000
   existing_matches[39] = 92
@@ -12075,7 +12073,7 @@ Sum of squares tolerance reached
    E[9.890e+000--1.110e+001]: 0 [0.000]
    E[1.110e+001--1.231e+001]: 0 [0.000]
 [RefineCameraParameters] Exiting after 1 rounds with 145 / 145 points
-[BundleInitializeImage] Initializing took 0.066s
+[BundleInitializeImage] Initializing took 0.067s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 147 new points
 [AddAllNewPoints] Ill-conditioned tracks: 602
@@ -12170,7 +12168,7 @@ pdp_eL2: 20554.353, nvis: 14193
 max_pct_change: 2.868e-002
 [run_sfm] Number of iterations: 17
 info[6] = 8.000
-[RunSFM] run_sfm took 0.896s
+[RunSFM] run_sfm took 0.898s
 [RunSFM] Mean error cam 0[1] [364 pts]: 1.009e+000 [med: 7.558e-001, 8.000e+000]
    E[2.681e-003--7.079e-001]: 172 [0.473]
    E[7.079e-001--1.413e+000]: 118 [0.324]
@@ -12556,7 +12554,7 @@ info[6] = 8.000
    E[3.917e+000--4.476e+000]: 0 [0.000]
    E[4.476e+000--5.035e+000]: 2 [0.007]
    E[5.035e+000--5.595e+000]: 1 [0.003]
-[RunSFM] outlier removal took 0.003s
+[RunSFM] outlier removal took 0.004s
 [RunSFM] Removing 0 outliers
 [RemoveBadPointsAndCameras] Pruned 0 points
   focal lengths:
@@ -12595,7 +12593,7 @@ info[6] = 8.000
    [032] 1662.806 (1629.448) 42.jpg 36; 5.729e-002 -7.199e-002
    [033] 1652.457 (1629.448) 43.jpg 37; 5.656e-002 -1.848e-002
    [034] 1667.255 (1629.448) 44.jpg 38; 3.163e-002 4.185e-002
-[SifterApp::DumpOutputFile] Wrote file in 0.049s
+[SifterApp::DumpOutputFile] Wrote file in 0.029s
   existing_matches[39] = 135
   score[39]   = 135.000
   existing_matches[40] = 106
@@ -12727,7 +12725,7 @@ Sum of squares tolerance reached
    E[9.329e+000--1.046e+001]: 0 [0.000]
    E[1.046e+001--1.160e+001]: 0 [0.000]
 [RefineCameraParameters] Exiting after 2 rounds with 134 / 135 points
-[BundleInitializeImage] Initializing took 0.060s
+[BundleInitializeImage] Initializing took 0.058s
 [SifterApp::BundleAdjust[19]] Adjusting camera 40 (parent = -1)
 [GetJPEGDimensions] File 46.jpg: ( 1920 , 1080 )
 [BaseApp::SetTracks] Setting tracks for image 40...
@@ -12791,7 +12789,7 @@ Sum of squares tolerance reached
    E[6.477e+000--7.275e+000]: 1 [0.009]
    E[7.275e+000--8.072e+000]: 2 [0.019]
 [RefineCameraParameters] Exiting after 1 rounds with 106 / 106 points
-[BundleInitializeImage] Initializing took 0.055s
+[BundleInitializeImage] Initializing took 0.056s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 197 new points
 [AddAllNewPoints] Ill-conditioned tracks: 604
@@ -12907,7 +12905,7 @@ damping term 6.26197e+010, gain ratio -60405.3, errors  1.44972 /  1.44974 = 0.9
 pdp_eL2: 21551.860, nvis: 14866
 [run_sfm] Number of iterations: 15
 info[6] = 2.000
-[RunSFM] run_sfm took 1.115s
+[RunSFM] run_sfm took 1.134s
 [RunSFM] Mean error cam 0[1] [364 pts]: 1.008e+000 [med: 7.582e-001, 8.000e+000]
    E[2.730e-003--7.101e-001]: 173 [0.475]
    E[7.101e-001--1.418e+000]: 117 [0.321]
@@ -13315,7 +13313,7 @@ info[6] = 2.000
    E[4.488e+000--5.129e+000]: 0 [0.000]
    E[5.129e+000--5.770e+000]: 0 [0.000]
    E[5.770e+000--6.411e+000]: 1 [0.004]
-[RunSFM] outlier removal took 0.003s
+[RunSFM] outlier removal took 0.004s
 [RunSFM] Removing 0 outliers
 [RemoveBadPointsAndCameras] Pruned 0 points
   focal lengths:
@@ -13356,7 +13354,7 @@ info[6] = 2.000
    [034] 1652.391 (1629.448) 44.jpg 38; 5.357e-002 -2.657e-002
    [035] 1619.428 (1629.448) 45.jpg 39; -5.833e-003 1.690e-001
    [036] 1606.812 (1629.448) 46.jpg 40; -2.021e-002 -2.338e-002
-[SifterApp::DumpOutputFile] Wrote file in 0.032s
+[SifterApp::DumpOutputFile] Wrote file in 0.031s
   existing_matches[41] = 145
   score[41]   = 145.000
   existing_matches[42] = 92
@@ -13596,7 +13594,7 @@ damping term 3.01178e+012, gain ratio -6786.98, errors  1.44678 /  1.44679 = 0.9
 pdp_eL2: 22004.287, nvis: 15209
 [run_sfm] Number of iterations: 20
 info[6] = 2.000
-[RunSFM] run_sfm took 1.483s
+[RunSFM] run_sfm took 1.551s
 [RunSFM] Mean error cam 0[1] [364 pts]: 1.009e+000 [med: 7.593e-001, 8.000e+000]
    E[3.506e-003--7.112e-001]: 174 [0.478]
    E[7.112e-001--1.419e+000]: 116 [0.319]
@@ -14015,7 +14013,7 @@ info[6] = 2.000
    E[2.782e+000--3.180e+000]: 6 [0.025]
    E[3.180e+000--3.577e+000]: 3 [0.012]
    E[3.577e+000--3.974e+000]: 3 [0.012]
-[RunSFM] outlier removal took 0.003s
+[RunSFM] outlier removal took 0.004s
 [RunSFM] Removing 0 outliers
 [RemoveBadPointsAndCameras] Pruned 0 points
   focal lengths:
@@ -14057,7 +14055,7 @@ info[6] = 2.000
    [035] 1627.689 (1629.448) 45.jpg 39; 7.775e-003 1.097e-001
    [036] 1619.741 (1629.448) 46.jpg 40; -4.751e-003 -1.392e-002
    [037] 1611.224 (1629.448) 47.jpg 41; -2.011e-003 3.986e-002
-[SifterApp::DumpOutputFile] Wrote file in 0.032s
+[SifterApp::DumpOutputFile] Wrote file in 0.033s
   existing_matches[42] = 142
   score[42]   = 142.000
   existing_matches[43] = 111
@@ -14164,7 +14162,7 @@ Sum of squares tolerance reached
    E[7.308e+000--8.202e+000]: 1 [0.007]
    E[8.202e+000--9.096e+000]: 1 [0.007]
 [RefineCameraParameters] Exiting after 1 rounds with 142 / 142 points
-[BundleInitializeImage] Initializing took 0.058s
+[BundleInitializeImage] Initializing took 0.062s
 [SifterApp::BundleAdjust[21]] Adjusting camera 43 (parent = -1)
 [GetJPEGDimensions] File 49.jpg: ( 1920 , 1080 )
 [BaseApp::SetTracks] Setting tracks for image 43...
@@ -14359,7 +14357,7 @@ damping term 3.38618e+012, gain ratio -12644.3, errors  1.44343 /  1.44347 = 0.9
 pdp_eL2: 23086.807, nvis: 15994
 [run_sfm] Number of iterations: 17
 info[6] = 2.000
-[RunSFM] run_sfm took 1.393s
+[RunSFM] run_sfm took 1.397s
 [RunSFM] Mean error cam 0[1] [364 pts]: 1.008e+000 [med: 7.603e-001, 8.000e+000]
    E[3.310e-003--7.113e-001]: 174 [0.478]
    E[7.113e-001--1.419e+000]: 116 [0.319]
@@ -14800,7 +14798,7 @@ info[6] = 2.000
    E[4.343e+000--4.963e+000]: 1 [0.003]
    E[4.963e+000--5.583e+000]: 0 [0.000]
    E[5.583e+000--6.203e+000]: 1 [0.003]
-[RunSFM] outlier removal took 0.005s
+[RunSFM] outlier removal took 0.004s
 [RunSFM] Removing 0 outliers
 [RemoveBadPointsAndCameras] Pruned 0 points
   focal lengths:
@@ -14844,7 +14842,7 @@ info[6] = 2.000
    [037] 1623.632 (1629.448) 47.jpg 41; 2.140e-002 -1.785e-002
    [038] 1635.578 (1629.448) 48.jpg 42; 3.213e-002 -5.763e-002
    [039] 1650.071 (1629.448) 49.jpg 43; 2.712e-002 1.220e-001
-[SifterApp::DumpOutputFile] Wrote file in 0.035s
+[SifterApp::DumpOutputFile] Wrote file in 0.034s
   existing_matches[45] = 158
   score[45]   = 158.000
   existing_matches[46] = 126
@@ -14942,7 +14940,7 @@ Sum of squares tolerance reached
    E[8.496e+000--9.541e+000]: 0 [0.000]
    E[9.541e+000--1.059e+001]: 2 [0.013]
 [RefineCameraParameters] Exiting after 1 rounds with 158 / 158 points
-[BundleInitializeImage] Initializing took 0.061s
+[BundleInitializeImage] Initializing took 0.059s
 [SifterApp::BundleAdjust[22]] Adjusting camera 46 (parent = -1)
 [GetJPEGDimensions] File 51.jpg: ( 1920 , 1080 )
 [BaseApp::SetTracks] Setting tracks for image 46...
@@ -15019,7 +15017,7 @@ Sum of squares tolerance reached
    E[1.165e+001--1.306e+001]: 0 [0.000]
    E[1.306e+001--1.448e+001]: 1 [0.008]
 [RefineCameraParameters] Exiting after 1 rounds with 126 / 126 points
-[BundleInitializeImage] Initializing took 0.058s
+[BundleInitializeImage] Initializing took 0.060s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 236 new points
 [AddAllNewPoints] Ill-conditioned tracks: 660
@@ -15154,7 +15152,7 @@ damping term 1.82542e+012, gain ratio -76620.1, errors  1.42684 /  1.42686 = 0.9
 pdp_eL2: 23944.108, nvis: 16781
 [run_sfm] Number of iterations: 18
 info[6] = 2.000
-[RunSFM] run_sfm took 1.549s
+[RunSFM] run_sfm took 1.538s
 [RunSFM] Mean error cam 0[1] [364 pts]: 1.008e+000 [med: 7.606e-001, 8.000e+000]
    E[1.927e-003--7.105e-001]: 175 [0.481]
    E[7.105e-001--1.419e+000]: 115 [0.316]
@@ -15617,7 +15615,7 @@ info[6] = 2.000
    E[3.006e+000--3.435e+000]: 2 [0.006]
    E[3.435e+000--3.864e+000]: 2 [0.006]
    E[3.864e+000--4.293e+000]: 1 [0.003]
-[RunSFM] outlier removal took 0.004s
+[RunSFM] outlier removal took 0.005s
 [RunSFM] Removing 0 outliers
 [RemoveBadPointsAndCameras] Pruned 0 points
   focal lengths:
@@ -15663,7 +15661,7 @@ info[6] = 2.000
    [039] 1658.719 (1629.448) 49.jpg 43; 4.703e-002 1.015e-001
    [040] 1632.645 (1629.448) 50.jpg 45; -1.377e-002 -7.339e-003
    [041] 1631.671 (1629.448) 51.jpg 46; -7.727e-003 5.406e-002
-[SifterApp::DumpOutputFile] Wrote file in 0.038s
+[SifterApp::DumpOutputFile] Wrote file in 0.036s
   existing_matches[47] = 95
   score[47]   = 95.000
   existing_matches[48] = 78
@@ -15836,7 +15834,7 @@ Sum of squares tolerance reached
    E[6.492e+000--7.280e+000]: 0 [0.000]
    E[7.280e+000--8.067e+000]: 2 [0.026]
 [RefineCameraParameters] Exiting after 1 rounds with 78 / 78 points
-[BundleInitializeImage] Initializing took 0.056s
+[BundleInitializeImage] Initializing took 0.054s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 212 new points
 [AddAllNewPoints] Ill-conditioned tracks: 705
@@ -15941,7 +15939,7 @@ pdp_eL2: 24729.801, nvis: 17418
 max_pct_change: 3.443e-002
 [run_sfm] Number of iterations: 19
 info[6] = 8.000
-[RunSFM] run_sfm took 1.333s
+[RunSFM] run_sfm took 1.329s
 [RunSFM] Mean error cam 0[1] [364 pts]: 1.008e+000 [med: 7.606e-001, 8.000e+000]
    E[1.646e-003--7.106e-001]: 175 [0.481]
    E[7.106e-001--1.420e+000]: 115 [0.316]
@@ -16474,7 +16472,7 @@ info[6] = 8.000
    [041] 1612.206 (1629.448) 51.jpg 46; 3.678e-003 -2.089e-002
    [042] 1635.990 (1629.448) 52.jpg 47; 6.899e-006 9.674e-002
    [043] 1636.828 (1629.448) 53.jpg 48; 4.954e-003 8.028e-002
-[SifterApp::DumpOutputFile] Wrote file in 0.044s
+[SifterApp::DumpOutputFile] Wrote file in 0.036s
   existing_matches[49] = 163
   score[49]   = 163.000
   existing_matches[50] = 125
@@ -16741,7 +16739,7 @@ pdp_eL2: 26562.767, nvis: 18273
 max_pct_change: 2.433e-002
 [run_sfm] Number of iterations: 17
 info[6] = 8.000
-[RunSFM] run_sfm took 1.286s
+[RunSFM] run_sfm took 1.284s
 [RunSFM] Mean error cam 0[1] [364 pts]: 1.008e+000 [med: 7.610e-001, 8.000e+000]
    E[1.510e-003--7.107e-001]: 175 [0.481]
    E[7.107e-001--1.420e+000]: 115 [0.316]
@@ -17249,7 +17247,7 @@ info[6] = 8.000
    E[4.429e+000--4.981e+000]: 2 [0.007]
    E[4.981e+000--5.532e+000]: 1 [0.003]
 [RunSFM] Removing outlier 4755 (reproj error: 11.574)
-[RunSFM] outlier removal took 0.005s
+[RunSFM] outlier removal took 0.004s
 [RunSFM] Removing 1 outliers
 initial motstr-SBA error 26132.5 [1.43035]
 mean reprojection error 0.891888
@@ -17378,7 +17376,7 @@ pdp_eL2: 26117.440, nvis: 18270
 max_pct_change: 3.035e-002
 [run_sfm] Number of iterations: 20
 info[6] = 8.000
-[RunSFM] run_sfm took 1.750s
+[RunSFM] run_sfm took 1.727s
 [RunSFM] Mean error cam 0[1] [364 pts]: 1.008e+000 [med: 7.610e-001, 8.000e+000]
    E[1.512e-003--7.107e-001]: 175 [0.481]
    E[7.107e-001--1.420e+000]: 115 [0.316]
@@ -17885,7 +17883,7 @@ info[6] = 8.000
    E[3.472e+000--3.966e+000]: 3 [0.010]
    E[3.966e+000--4.459e+000]: 3 [0.010]
    E[4.459e+000--4.953e+000]: 2 [0.007]
-[RunSFM] outlier removal took 0.005s
+[RunSFM] outlier removal took 0.004s
 [RunSFM] Removing 0 outliers
 [RemoveBadPointsAndCameras] Pruned 0 points
   focal lengths:
@@ -17935,7 +17933,7 @@ info[6] = 8.000
    [043] 1654.446 (1629.448) 53.jpg 48; 2.110e-002 4.163e-002
    [044] 1622.266 (1629.448) 54.jpg 49; -3.787e-002 1.693e-001
    [045] 1622.653 (1629.448) 55.jpg 50; -1.304e-002 1.407e-001
-[SifterApp::DumpOutputFile] Wrote file in 0.044s
+[SifterApp::DumpOutputFile] Wrote file in 0.038s
   existing_matches[51] = 160
   score[51]   = 160.000
   existing_matches[52] = 140
@@ -18065,7 +18063,7 @@ Sum of squares tolerance reached
    E[7.225e+000--8.114e+000]: 0 [0.000]
    E[8.114e+000--9.002e+000]: 1 [0.006]
 [RefineCameraParameters] Exiting after 2 rounds with 159 / 160 points
-[BundleInitializeImage] Initializing took 0.065s
+[BundleInitializeImage] Initializing took 0.064s
 [SifterApp::BundleAdjust[25]] Adjusting camera 52 (parent = -1)
 [GetJPEGDimensions] File 57.jpg: ( 1920 , 1080 )
 [BaseApp::SetTracks] Setting tracks for image 52...
@@ -18133,7 +18131,7 @@ Sum of squares tolerance reached
    E[6.830e+000--7.667e+000]: 0 [0.000]
    E[7.667e+000--8.503e+000]: 1 [0.007]
 [RefineCameraParameters] Exiting after 1 rounds with 140 / 140 points
-[BundleInitializeImage] Initializing took 0.060s
+[BundleInitializeImage] Initializing took 0.059s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 231 new points
 [AddAllNewPoints] Ill-conditioned tracks: 701
@@ -18763,7 +18761,7 @@ info[6] = 8.000
    E[3.403e+000--3.827e+000]: 1 [0.003]
    E[3.827e+000--4.251e+000]: 4 [0.013]
 [RunSFM] Removing outlier 3915 (reproj error: 8.338)
-[RunSFM] outlier removal took 0.005s
+[RunSFM] outlier removal took 0.004s
 [RunSFM] Removing 1 outliers
 initial motstr-SBA error 26919.3 [1.41175]
 mean reprojection error 0.885352
@@ -18864,7 +18862,7 @@ damping term 2.09177e+011, gain ratio  -960359, errors  1.41084 /  1.41085 = 0.9
 pdp_eL2: 26902.143, nvis: 19068
 [run_sfm] Number of iterations: 13
 info[6] = 2.000
-[RunSFM] run_sfm took 1.434s
+[RunSFM] run_sfm took 1.422s
 [RunSFM] Mean error cam 0[1] [364 pts]: 1.008e+000 [med: 7.612e-001, 8.000e+000]
    E[1.439e-003--7.108e-001]: 175 [0.481]
    E[7.108e-001--1.420e+000]: 115 [0.316]
@@ -19393,7 +19391,7 @@ info[6] = 2.000
    E[3.073e+000--3.511e+000]: 1 [0.003]
    E[3.511e+000--3.949e+000]: 1 [0.003]
    E[3.949e+000--4.388e+000]: 3 [0.010]
-[RunSFM] outlier removal took 0.005s
+[RunSFM] outlier removal took 0.006s
 [RunSFM] Removing 0 outliers
 [RemoveBadPointsAndCameras] Pruned 0 points
   focal lengths:
@@ -19527,7 +19525,7 @@ Sum of squares tolerance reached
    E[8.047e+000--9.029e+000]: 1 [0.007]
    E[9.029e+000--1.001e+001]: 1 [0.007]
 [RefineCameraParameters] Exiting after 1 rounds with 150 / 150 points
-[BundleInitializeImage] Initializing took 0.061s
+[BundleInitializeImage] Initializing took 0.060s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 78 new points
 [AddAllNewPoints] Ill-conditioned tracks: 714
@@ -19632,7 +19630,7 @@ pdp_eL2: 27360.417, nvis: 19378
 max_pct_change: 3.199e-002
 [run_sfm] Number of iterations: 19
 info[6] = 8.000
-[RunSFM] run_sfm took 1.565s
+[RunSFM] run_sfm took 1.554s
 [RunSFM] Mean error cam 0[1] [364 pts]: 1.009e+000 [med: 7.613e-001, 8.000e+000]
    E[1.435e-003--7.108e-001]: 175 [0.481]
    E[7.108e-001--1.420e+000]: 115 [0.316]
@@ -20172,7 +20170,7 @@ info[6] = 8.000
    E[2.785e+000--3.182e+000]: 3 [0.013]
    E[3.182e+000--3.579e+000]: 4 [0.018]
    E[3.579e+000--3.975e+000]: 3 [0.013]
-[RunSFM] outlier removal took 0.005s
+[RunSFM] outlier removal took 0.006s
 [RunSFM] Removing 0 outliers
 [RemoveBadPointsAndCameras] Pruned 0 points
   focal lengths:
@@ -20225,7 +20223,7 @@ info[6] = 8.000
    [046] 1608.390 (1629.448) 56.jpg 51; 1.631e-002 3.313e-002
    [047] 1637.222 (1629.448) 57.jpg 52; 2.504e-002 4.032e-002
    [048] 1630.737 (1629.448) 58.jpg 53; -1.123e-002 6.947e-002
-[SifterApp::DumpOutputFile] Wrote file in 0.042s
+[SifterApp::DumpOutputFile] Wrote file in 0.041s
   existing_matches[54] = 97
   score[54]   = 97.000
   existing_matches[55] = 17
@@ -20307,7 +20305,7 @@ Sum of squares tolerance reached
    E[6.661e+000--7.489e+000]: 2 [0.021]
    E[7.489e+000--8.318e+000]: 2 [0.021]
 [RefineCameraParameters] Exiting after 1 rounds with 97 / 97 points
-[BundleInitializeImage] Initializing took 0.057s
+[BundleInitializeImage] Initializing took 0.056s
 [SifterApp::BundleAdjust[27]] Adjusting camera 56 (parent = -1)
 [GetJPEGDimensions] File 60.jpg: ( 1920 , 1080 )
 [BaseApp::SetTracks] Setting tracks for image 56...
@@ -20377,7 +20375,7 @@ Sum of squares tolerance reached
    E[6.756e+000--7.572e+000]: 0 [0.000]
    E[7.572e+000--8.387e+000]: 1 [0.013]
 [RefineCameraParameters] Exiting after 1 rounds with 76 / 76 points
-[BundleInitializeImage] Initializing took 0.053s
+[BundleInitializeImage] Initializing took 0.054s
 [SifterApp::BundleAdjust] Adding new matches
 [AddAllNewPoints] Added 85 new points
 [AddAllNewPoints] Ill-conditioned tracks: 978
@@ -20482,7 +20480,7 @@ pdp_eL2: 28032.894, nvis: 19762
 max_pct_change: 3.890e-002
 [run_sfm] Number of iterations: 19
 info[6] = 8.000
-[RunSFM] run_sfm took 1.637s
+[RunSFM] run_sfm took 1.608s
 [RunSFM] Mean error cam 0[1] [364 pts]: 1.009e+000 [med: 7.612e-001, 8.000e+000]
    E[1.394e-003--7.108e-001]: 175 [0.481]
    E[7.108e-001--1.420e+000]: 115 [0.316]
@@ -21044,7 +21042,7 @@ info[6] = 8.000
    E[2.466e+000--2.808e+000]: 2 [0.016]
    E[2.808e+000--3.151e+000]: 1 [0.008]
    E[3.151e+000--3.493e+000]: 3 [0.023]
-[RunSFM] outlier removal took 0.005s
+[RunSFM] outlier removal took 0.006s
 [RunSFM] Removing 0 outliers
 [RemoveBadPointsAndCameras] Pruned 0 points
   focal lengths:
@@ -21099,7 +21097,7 @@ info[6] = 8.000
    [048] 1637.301 (1629.448) 58.jpg 53; -1.937e-002 1.087e-001
    [049] 1625.034 (1629.448) 59.jpg 54; -2.738e-002 1.319e-001
    [050] 1625.556 (1629.448) 60.jpg 56; -1.006e-002 2.845e-002
-[SifterApp::DumpOutputFile] Wrote file in 0.041s
+[SifterApp::DumpOutputFile] Wrote file in 0.046s
   existing_matches[55] = 20
   score[55]   = 20.000
   existing_matches[57] = 14
@@ -21301,7 +21299,7 @@ damping term 6.89327e+010, gain ratio -17387.2, errors  1.42055 /  1.42061 = 0.9
 pdp_eL2: 28129.501, nvis: 19801
 [run_sfm] Number of iterations: 14
 info[6] = 2.000
-[RunSFM] run_sfm took 1.677s
+[RunSFM] run_sfm took 1.656s
 [RunSFM] Mean error cam 0[1] [364 pts]: 1.008e+000 [med: 7.612e-001, 8.000e+000]
    E[1.360e-003--7.109e-001]: 175 [0.481]
    E[7.109e-001--1.421e+000]: 115 [0.316]
@@ -21874,7 +21872,7 @@ info[6] = 2.000
    E[1.823e+000--2.080e+000]: 2 [0.074]
    E[2.080e+000--2.337e+000]: 0 [0.000]
    E[2.337e+000--2.594e+000]: 5 [0.185]
-[RunSFM] outlier removal took 0.005s
+[RunSFM] outlier removal took 0.007s
 [RunSFM] Removing 0 outliers
 [RemoveBadPointsAndCameras] Pruned 0 points
   focal lengths:
@@ -21930,7 +21928,7 @@ info[6] = 2.000
    [049] 1624.542 (1629.448) 59.jpg 54; -2.682e-002 1.357e-001
    [050] 1626.615 (1629.448) 60.jpg 56; -7.766e-003 4.032e-002
    [051] 1782.285 (1629.448) 6.jpg 55; 1.837e-001 3.733e-002
-[SifterApp::DumpOutputFile] Wrote file in 0.041s
+[SifterApp::DumpOutputFile] Wrote file in 0.042s
   existing_matches[57] = 16
   score[57]   = 16.000
   existing_matches[58] = 16
@@ -22022,7 +22020,7 @@ Sum of squares tolerance reached
    E[2.443e+000--2.734e+000]: 1 [0.063]
    E[2.734e+000--3.024e+000]: 4 [0.250]
 [RefineCameraParameters] Exiting after 1 rounds with 16 / 16 points
-[BundleInitializeImage] Initializing took 0.049s
+[BundleInitializeImage] Initializing took 0.048s
 [SifterApp::BundleAdjust[29]] Adjusting camera 58 (parent = -1)
 [GetJPEGDimensions] File 8.jpg: ( 1920 , 1080 )
 [BaseApp::SetTracks] Setting tracks for image 58...
@@ -22101,7 +22099,7 @@ Sum of squares tolerance reached
    E[1.362e+000--1.513e+000]: 0 [0.000]
    E[1.513e+000--1.663e+000]: 4 [0.250]
 [RefineCameraParameters] Exiting after 1 rounds with 16 / 16 points
-[BundleInitializeImage] Initializing took 0.051s
+[BundleInitializeImage] Initializing took 0.048s
 [SifterApp::BundleAdjust[29]] Adjusting camera 59 (parent = -1)
 [GetJPEGDimensions] File 9.jpg: ( 1920 , 1080 )
 [BaseApp::SetTracks] Setting tracks for image 59...
@@ -22213,7 +22211,7 @@ pdp_eL2: 28833.885, nvis: 20645
 max_pct_change: 3.363e-002
 [run_sfm] Number of iterations: 19
 info[6] = 8.000
-[RunSFM] run_sfm took 1.778s
+[RunSFM] run_sfm took 1.756s
 [RunSFM] Mean error cam 0[1] [364 pts]: 1.008e+000 [med: 7.612e-001, 8.000e+000]
    E[1.368e-003--7.110e-001]: 175 [0.481]
    E[7.110e-001--1.421e+000]: 115 [0.316]
@@ -22808,7 +22806,7 @@ info[6] = 8.000
    E[2.622e+000--2.997e+000]: 1 [0.003]
    E[2.997e+000--3.371e+000]: 2 [0.007]
    E[3.371e+000--3.745e+000]: 2 [0.007]
-[RunSFM] outlier removal took 0.007s
+[RunSFM] outlier removal took 0.006s
 [RunSFM] Removing 0 outliers
 [RemoveBadPointsAndCameras] Pruned 0 points
   focal lengths:
@@ -22866,11 +22864,11 @@ info[6] = 8.000
    [051] 1745.406 (1629.448) 6.jpg 55; 1.094e-001 -3.074e-002
    [052] 1767.802 (1629.448) 7.jpg 57; 9.162e-002 2.968e-002
    [053] 1757.127 (1629.448) 8.jpg 58; 9.746e-002 4.185e-002
-[SifterApp::DumpOutputFile] Wrote file in 0.053s
+[SifterApp::DumpOutputFile] Wrote file in 0.044s
 Error: parent not found
 [SifterApp::BundleAdjust] max_matches = 0
-[BundleAdjust] Bundle adjustment took 40.292s
-[SifterApp::DumpOutputFile] Wrote file in 0.043s
+[BundleAdjust] Bundle adjustment took 40.354s
+[SifterApp::DumpOutputFile] Wrote file in 0.044s
 [BaseApp::SetMatchesFromPoints] Setting up matches...
 [BaseApp::SetMatchesFromPoints] Done!
 [FixReflectionBug] Reflecting scene...

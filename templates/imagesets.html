@@ -56,45 +56,46 @@
 		<div id = "mesh_table" class = "col-4" style="margin: auto; text-align:left; width:100%;">
 			<table id="myTable" class="table table-hover">
 				<thead>
-					<th style="width:15%; text-align:center;">Process image set</th>
-					<th style="width:42%;">Image set name</th>
-					<th style="width:12%;">Uploaded time</th>
-					<th style="width:15%;">Model quality</th>
-					<th style="width:11%;">Current stage</th>
-					<th style="width:5%; text-align:center;">Delete</th>
+					<th style="width:33%;">Image set name</th>
+					<th style="width:11%;">Uploaded time</th>
+					<th style="width:14%">Model quality</th>
+					<th style="width:10%;">Current stage</th>
+					<th style="width:13%; text-align:center;"></th>
+					<th style="width:14%; text-align:center;"></th>
+					<th style="width:5%; text-align:center;"></th>
 				</thead>
 				<tbody>
 					{% for d in data %}
 					<tr>
-						<td style="text-align:center;">
+						<td style="vertical-align: middle;">{{d.filename}}</td>
+						<td style="vertical-align: middle;">{{d.quality}}</td>
+						<td style="vertical-align: middle;">{{d.creation_time}}</td>
+						<td style="vertical-align: middle;">{{d.stage}} / 6</td>
+						<td style="text-align:center; vertical-align: middle; padding:5px;">
         					{% if d.stage == '6' %}
-                            <a href="/TrimAndNoiseRemoval/{{d.filename}}"><img src="../static/ui/gears.png" style="max-width:10%; min-width: 20px;" height=auto></a>
+                            <a class="btn btn-primary" href="/Stage6/{{d.filename}}">Process Stage 6</a>
         					{% elif d.stage == '5' %}
-                            <a href="/TrimAndNoiseRemoval/{{d.filename}}"><img src="../static/ui/gears.png" style="max-width:10%; min-width: 20px;" height=auto></a>
+                            <a class="btn btn-primary" href="/Stage6/{{d.filename}}">Process Stage 6</a>
         					{% elif d.stage == '4' %}
-                            <a href="/PoissonReconstruction/{{d.filename}}"><img src="../static/ui/gears.png" style="max-width:10%; min-width: 20px;" height=auto></a>
+                            <a class="btn btn-primary" href="/Stage5/{{d.filename}}">Process Stage 5</a>
         					{% elif d.stage == '3' %}
-                            <a href="/PointCloudDenoise/{{d.filename}}"><img src="../static/ui/gears.png" style="max-width:10%; min-width: 20px;" height=auto></a>
+                            <a class="btn btn-primary" href="/Stage4/{{d.filename}}">Process Stage 4</a>
         					{% elif d.stage == '2' %}
-                            <a href="/PMVS/{{d.filename}}">Process</a>
+                            <a class="btn btn-primary" href="/Stage3/{{d.filename}}">Process Stage 3</a>
         					{% elif d.stage == '1' %}
-                            <a href="/BundleAdjustment/{{d.filename}}"><img src="../static/ui/gears.png" style="max-width:10%; min-width: 20px;" height=auto></a>
-        					{% elif d.stage == '0' %}
-                            <a href="/PrepAndMatch/{{d.filename}}"><img src="../static/ui/gears.png" style="max-width:10%; min-width: 20px;" height=auto></a>
+                            <a class="btn btn-primary" href="/Stage2/{{d.filename}}">Process Stage 2</a>
         					{% else %}
-                            <a href="/OSM/{{d.filename}}"><img src="../static/ui/gears.png" style="max-width:10%; min-width: 20px;" height=auto></a>
+                            <a class="btn btn-primary" href="/Stage1/{{d.filename}}">Process Stage 1</a>
 							{% endif %}
 						</td>
-						<td>{{d.filename}}</td>
-						<td>{{d.quality}}</td>
-						<td>{{d.creation_time}}</td>
-						<td>{{d.stage}} / 6</td>
-						<td style="text-align:center;">
+						<td style="text-align:center; vertical-align: middle; padding:5px;">
+                            <a class="btn btn-info" href="/FullReconstruction/{{d.filename}}">Process all Stages</a>
+						</td>
+						<td style="text-align:center; vertical-align: middle; padding:5px;">
                             <!--<a href="/deleteImages/{{d.filename}}"><img src="../static/ui/delete.png" style="max-width:10%; min-width: 20px;" height=auto></a>-->
-							<a class="delete btnConfirm" id="{{d.filename}}" onclick="confirm('{{d.filename}}')">
-							<img src="../static/ui/delete.png" style="max-width:10%; min-width: 20px;" height=auto></a>
+							<a class="btn btn-danger" id="{{d.filename}}" onclick="confirm('{{d.filename}}')">
+							Delete</a>
                         </td>
-
 					</tr>
 					{% endfor %}
 				</tbody>

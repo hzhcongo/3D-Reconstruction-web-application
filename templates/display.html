@@ -601,13 +601,21 @@
 
             <ul class="list-unstyled components">
                 <li>
-                    <a href="javascript:void(0);" id="switchControl">Switch control</a>
+                    <div class="tooltiphelp">
+                        <a href="javascript:void(0);" id="switchControl">Switch control</a>
+                        <span class="tooltiptexthelp" style="margin-top:-98px;">Switch between rotational and translational control.
+                            Move left or right while holding on to the left mouse button over the control lines to manipulate the model</span>
+                    </div>
                 </li>
                 <li>
                     <a href="#editmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Edit model</a>
                     <ul class="collapse list-unstyled" id="editmenu" style="background-color:#393939;">
                         <li>
-                            <a href="javascript:void(0);" id="cutBase">Delete parts below blue square</a>
+                            <div class="tooltiphelp">
+                                <a href="javascript:void(0);" id="cutBase">Delete parts below blue square</a>
+                                <span class="tooltiptexthelp">Move unwanted parts of the model below the horizontal
+                                blue square before proceeding</span>
+                            </div>
                         </li>
                     </ul>
                 </li>
@@ -959,47 +967,50 @@
         }
 
         function generateModelLink(i){
-            ezBSAlert({
-              type: "prompt",
-              headerText: 'Name of exported file',
-              messageText: "Do not use special characters!",
-              okButtonText: 'Export',
-              alertType: "primary"
-            }).done(function (e) {
-              if (e === "") {
-                ezBSAlert({
-                  type: 'alert',
-                  headerText: 'No name entered',
-                  messageText: "Please enter a name.",
-                  alertType: 'danger'
-                }).done(function (e) {
-                    return false;
-                });
-              }
-              else{
-                var exp = new THREE.PLYExporter();
-                var endingFile = "_Binary.ply";
+            var exp = new THREE.PLYExporter();
+            var endingFile = "_Binary.ply";
 
-                var a = document.getElementById("linker");
-                //$('#cover-spin').show();
-                if (i == 1) {
-                    var data = exp.parse(mesh, { binary: true });
-                }
-                else {
-                    var data = exp.parse(mesh);
-                    endingFile = "_ASCII.ply";
-                }
+            var a = document.getElementById("linker");
+            //$('#cover-spin').show();
+            if (i == 1) {
+                var data = exp.parse(mesh, { binary: true });
                 var file = new File([data], "generated.ply");
                 a.href = URL.createObjectURL(file);
 
-                a.download = e + endingFile;
+                //a.download = e + endingFile;
+                var currURL = window.location.href.split("/");
+                a.download = currURL[currURL.length - 1] + endingFile;
                 a.click();
 
                 //a.click(function() {
                 //    $('#cover-spin').hide();
                 //});
-              }
-            });
+            }
+            else {
+                ezBSAlert({
+                  type: "confirm",
+                  headerText: 'Warning',
+                  messageText: "Generating model in ASCII format may not work for big-sized models. Proceed?",
+                  okButtonText: 'Proceed',
+                  alertType: "primary"
+                }).done(function (e) {
+                    if(e){
+                        var data = exp.parse(mesh);
+                        endingFile = "_ASCII.ply";
+                        var file = new File([data], "generated.ply");
+                        a.href = URL.createObjectURL(file);
+
+                        //a.download = e + endingFile;
+                        var currURL = window.location.href.split("/");
+                        a.download = currURL[currURL.length - 1] + endingFile;
+                        a.click();
+
+                        //a.click(function() {
+                        //    $('#cover-spin').hide();
+                        //});
+                    }
+                });
+            }
 
             return false;
         }
@@ -1009,49 +1020,46 @@
             var endingFile = "_Binary.stl";
 
             var a = document.getElementById("linker");
-            ezBSAlert({
-              type: "prompt",
-              headerText: 'Name of exported file',
-              messageText: "Do not use special characters!",
-              okButtonText: 'Export',
-              alertType: "primary"
-            }).done(function (e) {
-              if (e === "") {
-                ezBSAlert({
-                  type: 'alert',
-                  headerText: 'No name entered',
-                  messageText: "Please enter a name.",
-                  alertType: 'danger'
-                }).done(function (e) {
-                    return false;
-                });
-              }
-              else{
-                var exp = new THREE.STLExporter();
-                var endingFile = "_Binary.stl";
-
-                var a = document.getElementById("linker");
-                //$('#cover-spin').show();
-                if (i == 1) {
-                    var data = exp.parse(mesh, { binary: true });
-                }
-                else {
-                    var data = exp.parse(mesh);
-                    endingFile = "_ASCII.stl";
-                }
+            //$('#cover-spin').show();
+            if (i == 1) {
+                var data = exp.parse(mesh, { binary: true });
                 var file = new File([data], "generated.stl");
                 a.href = URL.createObjectURL(file);
 
-                a.download = e + endingFile;
+                //a.download = e + endingFile;
+                var currURL = window.location.href.split("/");
+                a.download = currURL[currURL.length - 1] + endingFile;
                 a.click();
 
                 //a.click(function() {
                 //    $('#cover-spin').hide();
                 //});
-              }
+            }
+            else {
+                ezBSAlert({
+                  type: "confirm",
+                  headerText: 'Warning',
+                  messageText: "Generating model in ASCII format may not work for big-sized models. Proceed?",
+                  okButtonText: 'Proceed',
+                  alertType: "primary"
+                }).done(function (e) {
+                    if(e){
+                        var data = exp.parse(mesh);
+                        endingFile = "_ASCII.stl";
+                        var file = new File([data], "generated.stl");
+                        a.href = URL.createObjectURL(file);
 
-                return false;
-            });
+                        //a.download = e + endingFile;
+                        var currURL = window.location.href.split("/");
+                        a.download = currURL[currURL.length - 1] + endingFile;
+                        a.click();
+
+                        //a.click(function() {
+                        //    $('#cover-spin').hide();
+                        //});
+                    }
+                });
+            }
         }
 
         function generateModelLinkOBJ(i){
@@ -1059,50 +1067,46 @@
             var endingFile = "_Binary.obj";
 
             var a = document.getElementById("linker");
-            ezBSAlert({
-              type: "prompt",
-              headerText: 'Name of exported file',
-              messageText: "Do not use special characters!",
-              okButtonText: 'Export',
-              alertType: "primary"
-            }).done(function (e) {
-              // Process into the ASCII/binary file format
-              if (e === "") {
-                ezBSAlert({
-                  type: 'alert',
-                  headerText: 'No name entered',
-                  messageText: "Please enter a name.",
-                  alertType: 'danger'
-                }).done(function (e) {
-                    return false;
-                });
-              }
-              else{
-                var exp = new THREE.OBJExporter();
-                var endingFile = "_Binary.obj";
-
-                var a = document.getElementById("linker");
-                //$('#cover-spin').show();
-                if (i == 1) {
-                    var data = exp.parse(mesh, { binary: true });
-                }
-                else {
-                    var data = exp.parse(mesh);
-                    endingFile = "_ASCII.obj";
-                }
-                var file = new File([data], "generated.obj");
+            //$('#cover-spin').show();
+            if (i == 1) {
+                var data = exp.parse(mesh, { binary: true });
+                var file = new File([data], "generated.stl");
                 a.href = URL.createObjectURL(file);
 
-                a.download = e + endingFile;
+                //a.download = e + endingFile;
+                var currURL = window.location.href.split("/");
+                a.download = currURL[currURL.length - 1] + endingFile;
                 a.click();
 
                 //a.click(function() {
                 //    $('#cover-spin').hide();
                 //});
-              }
+            }
+            else {
+                ezBSAlert({
+                  type: "confirm",
+                  headerText: 'Warning',
+                  messageText: "Generating model in ASCII format may not work for big-sized models. Proceed?",
+                  okButtonText: 'Proceed',
+                  alertType: "primary"
+                }).done(function (e) {
+                    if(e){
+                        var data = exp.parse(mesh);
+                        endingFile = "_ASCII.obj";
+                        var file = new File([data], "generated.obj");
+                        a.href = URL.createObjectURL(file);
 
-                return false;
-            });
+                        //a.download = e + endingFile;
+                        var currURL = window.location.href.split("/");
+                        a.download = currURL[currURL.length - 1] + endingFile;
+                        a.click();
+
+                        //a.click(function() {
+                        //    $('#cover-spin').hide();
+                        //});
+                    }
+                });
+            }
         }
 
         function contains(arr, element) {

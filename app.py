@@ -85,12 +85,12 @@ def upload():
 	return redirect(url_for('imagesets'))
 
 
-@app.route("/PrepAndMatch/<name>")
+@app.route("/Stage1/<name>")
 def prepandmatch(name=None):
 	return render_template("prepandmatch.html", name=name)
 
 
-@app.route("/PrepAndMatchprocess" , methods=['GET'])
+@app.route("/Stage1process" , methods=['GET'])
 def prepandmatchprocess():
 	_time = datetime.now()
 	name = request.args.get('name')
@@ -154,12 +154,12 @@ def prepandmatchprocess():
 	return redirect(url_for('bundleadjustment', name=name))
 
 
-@app.route("/BundleAdjustment/<name>")
+@app.route("/Stage2/<name>")
 def bundleadjustment(name=None):
 	return render_template("bundleadjustment.html", name=name)
 
 
-@app.route("/BundleAdjustmentprocess" , methods=['GET'])
+@app.route("/Stage2process" , methods=['GET'])
 def bundleadjustmentprocess():
 	_time = datetime.now()
 	name = request.args.get('name')
@@ -228,12 +228,12 @@ def bundleadjustmentprocess():
 	return redirect(url_for('pmvs', name=name))
 
 
-@app.route("/PMVS/<name>")
+@app.route("/Stage3/<name>")
 def pmvs(name=None):
 	return render_template("pmvs.html", name=name)
 
 
-@app.route("/PMVSprocess" , methods=['GET'])
+@app.route("/Stage3process" , methods=['GET'])
 def pmvsprocess():
 	_time = datetime.now()
 	name = request.args.get('name')
@@ -294,12 +294,12 @@ def pmvsprocess():
 	return redirect(url_for('denoise', name=name))
 
 
-@app.route("/PointCloudDenoise/<name>")
+@app.route("/Stage4/<name>")
 def denoise(name=None):
 	return render_template("denoise.html", name=name)
 
 
-@app.route("/PointCloudDenoiseprocess" , methods=['GET'])
+@app.route("/Stage4process" , methods=['GET'])
 def denoiseprocess():
 	##########################################
 	_time = datetime.now()
@@ -417,12 +417,12 @@ def denoiseprocess():
 	return redirect(url_for('poisson', name=name))
 
 
-@app.route("/PoissonReconstruction/<name>")
+@app.route("/Stage5/<name>")
 def poisson(name=None):
 	return render_template("poisson.html", name=name)
 
 
-@app.route("/PoissonReconstructionprocess" , methods=['GET'])
+@app.route("/Stage5process" , methods=['GET'])
 def poissonprocess():
 	#################################################
 	_time = datetime.now()
@@ -503,11 +503,11 @@ def poissonprocess():
 	return redirect(url_for('trimmer', name=name))
 	##########################################################
 
-@app.route("/TrimAndNoiseRemoval/<name>")
+@app.route("/Stage6/<name>")
 def trimmer(name=None):
 	return render_template("trimmer.html", name=name)
 
-@app.route("/TrimAndNoiseRemovalprocess", methods=['GET'])
+@app.route("/Stage6process", methods=['GET'])
 def trimmerprocess():
 	#################################################
 	_time = datetime.now()
@@ -597,17 +597,17 @@ def trimmerprocess():
 		return redirect(url_for('error', msg="A general error has occured. Generation of model might have failed at previous stages. This is likely due to Virtuaso not being able to detect any features "
 		                        "due to poor image or model quality. Please reupload better images with good and consistent lighting or the model appropiate for the selected stage, and process them again."))
 
-	return redirect(url_for('edit', name=name))
+	return redirect(url_for('display', name=name))
 	# return "0"
 	##########################################################
 
 
-@app.route("/OSM/<name>")
+@app.route("/FullReconstruction/<name>")
 def osm(name=None):
 	return render_template("osmbundler.html", name=name)
 
 
-@app.route("/OSMprocess" , methods=['GET'])
+@app.route("/FullReconstructionprocess" , methods=['GET'])
 def osmprocess():
 	_time = datetime.now()
 	name = request.args.get('name')
@@ -618,52 +618,202 @@ def osmprocess():
 	manager = osmbundler.OsmBundler(target,workaddress)
 
 	try:
-		manager.preparePhotos()
-		print("Finish preparing photos, time taken ", (datetime.now() -_time).total_seconds())
-		sys.stdout.flush()
-		_time = datetime.now()
-
-		manager.matchFeatures()
-		print("Finish matching features, time taken ", (datetime.now() -_time).total_seconds())
-		sys.stdout.flush()
-		_time = datetime.now()
-
-		manager.doBundleAdjustment()
-		print("Finish bundleadjustment, time taken ",  (datetime.now() -_time).total_seconds())
-		sys.stdout.flush()
-		_time = datetime.now()
-
-		# manager.openResult()
-
-		# initialize OsmPMVS manager class
-		pmvsmanager = osmpmvs.OsmPmvs(workaddress)
-		# initialize PMVS input from Bundler output
-		pmvsmanager.doBundle2PMVS()
-
-		print("Finish bundle2PMVS, time taken ", (datetime.now() -_time).total_seconds())
-		sys.stdout.flush()
-		_time = datetime.now()
-
-		# call PMVS
-		pmvsmanager.doPMVS()
-
-		print("Finish doPMVS, time taken ", (datetime.now() -_time).total_seconds())
-		sys.stdout.flush()
-
 		# update quality and processing stage in .txt file (1st digit = quality, 2nd digit = stage)
 		completeName = os.path.join(target, "data.txt")
 		saver = open(completeName, "r")
 		savedData = saver.read()
 		saver.close()
 		sys.stdout.flush()
+		#
+
+		###################################
+		manager.preparePhotos()
+		print("Finish preparing photos, time taken ", (datetime.now() -_time).total_seconds())
+		sys.stdout.flush()
+		_time = datetime.now()
+
+		###################################
+		manager.matchFeatures()
+		print("Finish matching features, time taken ", (datetime.now() -_time).total_seconds())
+		sys.stdout.flush()
+		_time = datetime.now()
+
+		###################################
+		manager.doBundleAdjustment()
+		print("Finish bundleadjustment, time taken ",  (datetime.now() -_time).total_seconds())
+		sys.stdout.flush()
+		_time = datetime.now()
+
+		###################################
+		# initialize OsmPMVS manager class
+		pmvsmanager = osmpmvs.OsmPmvs(workaddress)
+		# cmvsmanager = osmcmvs.OsmCmvs(workaddress)
+		# initialize PMVS input from Bundler output
+		pmvsmanager.doBundle2PMVS()
+		# cmvsmanager.doBundle2PMVS()
+		print("Finish bundle2PMVS, time taken ", (datetime.now() - _time).total_seconds())
+		sys.stdout.flush()
+		_time = datetime.now()
+
+		###################################
+		# call PMVS
+		pmvsmanager.doPMVS()
+
+		print("Finish doPMVS, time taken ", (datetime.now() -_time).total_seconds())
+		sys.stdout.flush()
+
+		###################################
+		def isfloat(value):
+			try:
+				float(value)
+				return True
+			except:
+				return False
+
+		f = open(workaddress + "pmvs/models/pmvs_options.txt.ply", "r")
+		points = []
+
+		for line in f:
+			words = line.split()
+			if (isfloat(words[0])):
+				points.append([float(words[0]), float(words[1]), float(words[2])])  # store x y z of points
+		f.close()
+
+		points = np.array(points)
+		tree = KDTree(points, leaf_size=50)
+		# find leaf with most neighbours?
+		# add into leaf as long as
+		distance = []
+		for x in points:
+			dist, ind = tree.query([x], k=200)
+			# np.median(dist)
+			distance.append(np.average(dist))
+		distance = np.array(distance)
+		upper = np.percentile(distance, 70)
+
+		indToRemove = []
+		for x in range(len(distance)):
+			if (distance[x] > upper):
+				indToRemove.append(x)
+
+		nf = open(workaddress + "pmvs/models/trim.ply", "w+")
+		f = open(workaddress + "pmvs/models/pmvs_options.txt.ply", "r")
+		newLen = len(distance) - len(indToRemove)
+		removeCount = 0
+		lineCount = -1
+		for line in f:
+			words = line.split()
+			if (words[0] == "element"):
+				nf.write(words[0] + " " + words[1] + " " + str(newLen) + "\n")
+				continue
+			if (words[0] == "property" and words[1] == "uchar" and words[2] == "diffuse_red"):
+				nf.write(words[0] + " " + words[1] + " " + "red\n")
+				continue
+			if (words[0] == "property" and words[1] == "uchar" and words[2] == "diffuse_green"):
+				nf.write(words[0] + " " + words[1] + " " + "green\n")
+				continue
+			if (words[0] == "property" and words[1] == "uchar" and words[2] == "diffuse_blue"):
+				nf.write(words[0] + " " + words[1] + " " + "blue\n")
+				continue
+			if (isfloat(words[0])):
+				lineCount += 1
+				if (removeCount < len(indToRemove) and lineCount == indToRemove[removeCount]):
+					removeCount += 1  # Removed by skipping nf.write(line) below. continue to skip to next for loop
+					# print("trim point")
+					# TTD: COMMENTED CONTINUE TO SKIP REMOVAL OF POINTS VIA STATISTICAL APPROACH
+					continue
+			nf.write(line)
+		nf.close()
+		f.close()
+
+		finish = datetime.now()
+		print("Finish denoising, time taken ", (finish - _time).total_seconds())
+		sys.stdout.flush()
+
+		##################################################################
+		# distrPath = os.path.dirname( os.path.abspath(sys.argv[0]) )
+		possoinExecutable = os.path.join(APP_ROOT, "software/PoissonRecon.exe")
+
+		# Quality settings to depth
+		if savedData[0] == '2':
+			depth = 12
+		elif savedData[0] == '1':
+			depth = 9
+		else:
+			depth = 8
+
+		# depth = 8 + (int(quality) * 2)
+		print("--depth: ", depth)
+
+		currentTime = datetime.now()
+		subprocess.call([possoinExecutable, "--in", workaddress + "pmvs/models/trim.ply", "--out",
+		                 workaddress + "pmvs/models/mesh.ply", "--depth", str(depth), "--colors", "100",
+		                 "--pointWeight", "0",
+		                 "--density"])
+		print("Untrimmed: ", (datetime.now() - currentTime).total_seconds())
+
+		# # VERY LOW QUALITY
+		# currentTime = datetime.now()
+		# subprocess.call([possoinExecutable, "--in", workaddress+"pmvs/models/trim.ply", "--out", workaddress+"pmvs/models/mesh.ply", "--depth", "7", "--color", "100", "--pointWeight","0", "--density"])
+		# print("d7 ", (datetime.now() - currentTime).total_seconds())
 
 		saver = open(completeName, "w")
 		saver.write(str(savedData[0]))
-		saver.write("1")
+		saver.write("5")
 		saver.close()
 		sys.stdout.flush()
 		#
 
+		finish = datetime.now()
+		print("Finish denoising, time taken ", (finish - _time).total_seconds())
+		sys.stdout.flush()
+
+		###################### STAGE 4 (Trims non-meaningful surfaces that may come from floors)
+		surfaceTrimmer = os.path.join(APP_ROOT, "software/SurfaceTrimmer.exe")
+		currentTime = datetime.now()
+		subprocess.call([surfaceTrimmer, "--in", workaddress + "pmvs/models/mesh.ply", "--out",
+		                 workaddress + "pmvs/models/trimmed_mesh.ply", "--trim", "6", "--smooth", "7"])
+		print("Trimmed: ", (datetime.now() - _time).total_seconds())
+		sys.stdout.flush()
+		######################
+
+		############################ TRIMESH
+		# load a file by name or from a buffer
+		_time = datetime.now()
+		mesh = trimesh.load(workaddress + "pmvs/models/trimmed_mesh.ply")
+
+		# Splits up seperated meshes from mesh in .PLY
+		meshes = mesh.split(only_watertight=False)
+		mesh.visual.vertex_colors = mesh.visual.vertex_colors
+		currentMeshIndex = -1
+		largestMeshIndex = -1
+		mesharea = []
+		largestMeshArea = 0
+
+		# Find largest mesh among split meshes
+		for eachmesh in meshes:
+			currentMeshIndex = currentMeshIndex + 1
+			mesharea.append(eachmesh.area)
+			if (eachmesh.area > largestMeshArea):
+				largestMeshIndex = currentMeshIndex
+				largestMeshArea = eachmesh.area
+
+		# Save largest mesh
+		meshes[largestMeshIndex].visual.vertex_colors = meshes[largestMeshIndex].visual.vertex_colors
+		meshes[largestMeshIndex].export(APP_ROOT + '/static/model/' + str(name) + '.ply')
+		print("Trimmed: ", (datetime.now() - _time).total_seconds())
+		sys.stdout.flush()
+		############################ TRIMESH
+
+		print("mesh.visual.kind = " + mesh.visual.kind)
+		print("meshes[largestMeshIndex].visual.kind = " + meshes[largestMeshIndex].visual.kind)
+
+		saver = open(completeName, "w")
+		saver.write(str(savedData[0]))
+		saver.write("6")
+		saver.close()
+		sys.stdout.flush()
+		#
 	except AttributeError as e:
 		print("AttributeError", e.message)
 		return redirect(url_for('error', msg=e.message))
@@ -689,7 +839,7 @@ def osmprocess():
 		return redirect(url_for('error', msg="A general error has occured. Generation of model might have failed at previous stages. This is likely due to Virtuaso not being able to detect any features "
 		                        "due to poor image or model quality. Please reupload better images with good and consistent lighting or the model appropiate for the selected stage, and process them again."))
 
-	return redirect(url_for('denoise', name=name))
+	return redirect(url_for('display', name=name))
 
 
 @app.route("/fileUpload")
