@@ -630,19 +630,16 @@ def osmprocess():
 		manager.preparePhotos()
 		print("Finish preparing photos, time taken ", (datetime.now() -_time).total_seconds())
 		sys.stdout.flush()
-		_time = datetime.now()
 
 		###################################
 		manager.matchFeatures()
 		print("Finish matching features, time taken ", (datetime.now() -_time).total_seconds())
 		sys.stdout.flush()
-		_time = datetime.now()
 
 		###################################
 		manager.doBundleAdjustment()
 		print("Finish bundleadjustment, time taken ",  (datetime.now() -_time).total_seconds())
 		sys.stdout.flush()
-		_time = datetime.now()
 
 		###################################
 		# initialize OsmPMVS manager class
@@ -653,7 +650,6 @@ def osmprocess():
 		# cmvsmanager.doBundle2PMVS()
 		print("Finish bundle2PMVS, time taken ", (datetime.now() - _time).total_seconds())
 		sys.stdout.flush()
-		_time = datetime.now()
 
 		###################################
 		# call PMVS
@@ -726,8 +722,7 @@ def osmprocess():
 		nf.close()
 		f.close()
 
-		finish = datetime.now()
-		print("Finish denoising, time taken ", (finish - _time).total_seconds())
+		print("Finish denoising, time taken ", (datetime.now() - _time).total_seconds())
 		sys.stdout.flush()
 
 		##################################################################
@@ -741,16 +736,16 @@ def osmprocess():
 			depth = 9
 		else:
 			depth = 8
+		# depth = 7
 
 		# depth = 8 + (int(quality) * 2)
 		print("--depth: ", depth)
 
-		currentTime = datetime.now()
 		subprocess.call([possoinExecutable, "--in", workaddress + "pmvs/models/trim.ply", "--out",
 		                 workaddress + "pmvs/models/mesh.ply", "--depth", str(depth), "--colors", "100",
 		                 "--pointWeight", "0",
 		                 "--density"])
-		print("Untrimmed: ", (datetime.now() - currentTime).total_seconds())
+		print("Untrimmed: ", (datetime.now() - _time).total_seconds())
 
 		# # VERY LOW QUALITY
 		# currentTime = datetime.now()
@@ -764,13 +759,11 @@ def osmprocess():
 		sys.stdout.flush()
 		#
 
-		finish = datetime.now()
-		print("Finish denoising, time taken ", (finish - _time).total_seconds())
+		print("Finish denoising, time taken ", (datetime.now() - _time).total_seconds())
 		sys.stdout.flush()
 
 		###################### STAGE 4 (Trims non-meaningful surfaces that may come from floors)
 		surfaceTrimmer = os.path.join(APP_ROOT, "software/SurfaceTrimmer.exe")
-		currentTime = datetime.now()
 		subprocess.call([surfaceTrimmer, "--in", workaddress + "pmvs/models/mesh.ply", "--out",
 		                 workaddress + "pmvs/models/trimmed_mesh.ply", "--trim", "6", "--smooth", "7"])
 		print("Trimmed: ", (datetime.now() - _time).total_seconds())
@@ -779,7 +772,6 @@ def osmprocess():
 
 		############################ TRIMESH
 		# load a file by name or from a buffer
-		_time = datetime.now()
 		mesh = trimesh.load(workaddress + "pmvs/models/trimmed_mesh.ply")
 
 		# Splits up seperated meshes from mesh in .PLY
@@ -812,6 +804,9 @@ def osmprocess():
 		saver.write(str(savedData[0]))
 		saver.write("6")
 		saver.close()
+		sys.stdout.flush()
+
+		print("Finish everything, time taken ", (datetime.now() - _time).total_seconds())
 		sys.stdout.flush()
 		#
 	except AttributeError as e:
