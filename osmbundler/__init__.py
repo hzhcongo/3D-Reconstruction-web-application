@@ -340,11 +340,16 @@ class OsmBundler():
 
     def extractFeatures(self, photo):
         # let self.featureExtractor do its job
-        os.chdir(self.workDir)
-        self.featureExtractor.extract(photo, self.photoDict[photo])
-        self.featuresListFile.write("%s.%s\n" % (photo, self.featureExtractor.fileExtension))
-        os.chdir(self.currentDir)
-    
+
+        try:
+            os.chdir(self.workDir)
+            self.featureExtractor.extract(photo, self.photoDict[photo])
+            self.featuresListFile.write("%s.%s\n" % (photo, self.featureExtractor.fileExtension))
+            os.chdir(self.currentDir)
+        except:
+            print("error when extracting features")
+
+
     def matchFeatures(self):
         # let self.matchingEngine do its job
         os.chdir(self.workDir)
@@ -358,7 +363,7 @@ class OsmBundler():
         os.chdir(self.workDir)
         if not os.path.isdir(self.workDir+"/bundle"):
             os.mkdir("bundle")
-        
+
         # create options.txt
         optionsFile = open("options.txt", "w")
         optionsFile.writelines(defaults.bundlerOptions)
@@ -369,16 +374,16 @@ class OsmBundler():
         bundlerOutputFile.close()
         os.chdir(self.currentDir)
         logging.info("Finished! See the results in the '%s' directory" % self.workDir)
-    
+
     def printHelpExit(self):
         self.printHelp()
         sys.exit(2)
-    
+
     def openResult(self):
         if sys.platform == "win32": subprocess.call(["explorer", self.workDir])
 	if sys.platform == "linux2": subprocess.call(["xdg-open", self.workDir])
         else: print "Thanks"
-    
+
     def printHelp(self):
         helpFile = open(os.path.join(distrPath, "osmbundler/help.txt"), "r")
         print helpFile.read()
