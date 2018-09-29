@@ -8,5 +8,5 @@ setEdge 0
 useBound 0
 useVisData 1
 sequence -1
-timages -1 0 56
+timages -1 0 55
 oimages -3
