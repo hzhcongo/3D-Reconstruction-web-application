@@ -35,12 +35,12 @@ def upload():
 		modelname = datetime.now().strftime('%d_%m_%Y_%H_%M_%S')
 	print("Model name: " + modelname)
 
-	modelFolder = os.path.join(APP_ROOT, 'static/model/')
+	modelFolder = os.path.join(APP_ROOT, 'static/images/')
 	for f in listdir(modelFolder):
 		# path = os.path.join(modelFolder, f)
 		filename = f[:-4]
 		if(filename == modelname):
-			return redirect(url_for('error', msg="Model name already exists in server. Please choose a different name or delete the old model."))
+			return redirect(url_for('error', msg="Image set of the name already exists in server. Please choose a different name or delete the old model."))
 
 	quality = request.form['quality']
 	# print("Quality: " + quality)
