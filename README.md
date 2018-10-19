@@ -9,8 +9,9 @@ Virtuaso consists of a web application that integrates and enhances Tan Jiasheng
 <br><br>
 Various improvements include:
 - Stage-by-stage reconstruction
-- Definable quality when generating models
+- Definable quality when generating models via mesh simplification
 - Better noise reduction via mesh splitting using Trimesh
+- Better feature-matching processing via conducting of 
 - Multi-file and multi-format exporting of generated models
 <br><br>
 ## Main features:
@@ -21,6 +22,6 @@ Various improvements include:
 - Free exporting of 3D models into .ply / .stl / .obj files in either binary or ASCII format
 <br><br>
 ### Credits
-Virtuaso integrates the following open-sourced tools and software: 
+Virtuaso's web application integrates the following open-sourced tools and software: 
 - Tan Jiasheng 3D reconstruction pipeline prototype (https://bitbucket.org/teejs/3d-recon.git)
 - Trimesh (https://github.com/mikedh/trimesh)
