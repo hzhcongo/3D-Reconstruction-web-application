@@ -1,0 +1,3 @@
+# Go to directory with the package-list.txt
+# Create an environment using:
+# $ conda create --name <name_of_new_env> --file package-list.txt

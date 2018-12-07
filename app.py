@@ -446,6 +446,7 @@ def poissonprocess():
 		if savedData[0] == '2':
 			depth = 12
 		elif savedData[0] == '1':
+		elif savedData[0] == '1':
 			depth = 9
 		else:
 			depth = 8
@@ -593,7 +594,7 @@ def trimmerprocess():
 		return redirect(url_for('error', msg="Generation of model might have failed at previous stages. This is likely due to Virtuaso not being able to detect any features "
 		                        "due to poor image or model quality. Please reupload better images with good and consistent lighting or the model appropiate for the selected stage, and process them again."))
 	except:
-		print("GeneralError", error.message)
+		print("GeneralError")
 		return redirect(url_for('error', msg="A general error has occured. Generation of model might have failed at previous stages. This is likely due to Virtuaso not being able to detect any features "
 		                        "due to poor image or model quality. Please reupload better images with good and consistent lighting or the model appropiate for the selected stage, and process them again."))
 
@@ -830,7 +831,7 @@ def osmprocess():
 		return redirect(url_for('error', msg="Generation of model might have failed at previous stages. This is likely due to Virtuaso not being able to detect any features "
 		                        "due to poor image or model quality. Please reupload better images with good and consistent lighting or the model appropiate for the selected stage, and process them again."))
 	except:
-		print("GeneralError", error.message)
+		print("GeneralError")
 		return redirect(url_for('error', msg="A general error has occured. Generation of model might have failed at previous stages. This is likely due to Virtuaso not being able to detect any features "
 		                        "due to poor image or model quality. Please reupload better images with good and consistent lighting or the model appropiate for the selected stage, and process them again."))
 
